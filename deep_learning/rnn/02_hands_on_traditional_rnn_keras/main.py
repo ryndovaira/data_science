@@ -1,10 +1,9 @@
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+
 from config import Config
 from data_preprocessing import load_and_preprocess_data
 from model import build_rnn_model
 from utils import setup_logger, save_artifacts, checkpoint_path, plot_history
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-from datetime import datetime
-import os
 
 
 def main():
@@ -27,9 +26,11 @@ def main():
         batch_size=Config.BATCH_SIZE,
         validation_data=(x_val, y_val),  # Use the validation set here
         callbacks=[
-            EarlyStopping(patience=2, restore_best_weights=True),
+            EarlyStopping(
+                patience=2, restore_best_weights=True
+            ),  # Early stopping to prevent overfitting
             ModelCheckpoint(
-                filepath=checkpoint_path(),
+                filepath=checkpoint_path(),  # Save model checkpoints
                 monitor="val_loss",
                 save_best_only=False,  # Set to True to only save the best model
                 verbose=1,
@@ -42,11 +43,12 @@ def main():
     save_artifacts(history, model, "artifacts/")
     logger.info("Artifacts saved.")
 
+    # Log training and validation performance
     logger.info(
-        f"Training Loss: {history.history["loss"][-1]:.4f}, Training Accuracy: {history.history["accuracy"][-1]:.4f}"
+        f"Training Loss: {history.history['loss'][-1]:.4f}, Training Accuracy: {history.history['accuracy'][-1]:.4f}"
     )
     logger.info(
-        f"Validation Loss: {history.history["val_loss"][-1]:.4f}, Validation Accuracy: {history.history["val_accuracy"][-1]:.4f}"
+        f"Validation Loss: {history.history['val_loss'][-1]:.4f}, Validation Accuracy: {history.history['val_accuracy'][-1]:.4f}"
     )
 
     # Evaluate the model on the test data
