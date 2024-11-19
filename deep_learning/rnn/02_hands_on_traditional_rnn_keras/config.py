@@ -1,0 +1,8 @@
+class Config:
+    MAX_FEATURES = 10000
+    MAX_LEN = 500
+    SHORT_MAX_LEN = 50
+    EPOCHS = 2
+    BATCH_SIZE = 2
+    EMBEDDING_DIM = 32
+    RNN_UNITS = 16
