@@ -1,6 +1,7 @@
 import logging
 import os
 
+
 def setup_logger(log_path):
     """Sets up a logger that writes to a specified log file."""
     logger = logging.getLogger('training_logger')
@@ -12,6 +13,7 @@ def setup_logger(log_path):
     if not logger.handlers:
         logger.addHandler(handler)
     return logger
+
 
 def save_artifacts(history, model, output_dir):
     """Saves training history and model artifacts."""
