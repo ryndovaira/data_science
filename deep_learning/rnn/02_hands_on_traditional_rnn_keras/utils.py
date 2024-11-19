@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 from datetime import datetime
@@ -107,3 +108,17 @@ def plot_history(history):
     # Save the plot to the specified file
     plt.savefig(save_file_path)
     plt.close()
+
+
+def save_history(history):
+    """Saves the training history as a JSON file."""
+    # Define the save directory path
+    save_dir = os.path.join(os.getcwd(), Config.HISTORY_DIR, Config.MODE)
+    # Create the save directory if it doesn't exist
+    os.makedirs(save_dir, exist_ok=True)
+    # Define the save file path with a timestamp
+    save_file_path = os.path.join(save_dir, f"history_{get_timestamp()}.json")
+
+    # Save the history dictionary as a JSON file
+    with open(save_file_path, "w") as file:
+        json.dump(history.history, file)

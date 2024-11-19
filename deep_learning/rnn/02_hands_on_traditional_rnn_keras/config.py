@@ -12,3 +12,4 @@ class Config:
     LOG_DIR = "logs"  # Directory for log files
     ARTIFACTS_DIR = "artifacts"  # Directory for saving model artifacts
     PLOT_DIR = "plots"  # Directory for saving plots
+    HISTORY_DIR = "history"  # Directory for saving training history
