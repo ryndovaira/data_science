@@ -9,7 +9,7 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 def main():
     # Setup logger
-    logger = setup_logger('logs/training.log')
+    logger = setup_logger('training')
 
     # Load and preprocess data
     (x_train, y_train), (x_test, y_test) = load_and_preprocess_data()
