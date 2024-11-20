@@ -1,8 +1,18 @@
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+
 from config import Config
 from data_preprocessing import load_and_preprocess_data
 from model import build_rnn_model
-from utils import setup_logger, save_artifacts, checkpoint_path, plot_history, save_history
+from utils import (
+    setup_logger,
+    save_model,
+    checkpoint_path,
+    plot_history,
+    save_history,
+)
+
+# Setup logger
+logger = setup_logger()
 
 
 def train_model(model, x_train, y_train, x_val, y_val):
@@ -25,7 +35,7 @@ def train_model(model, x_train, y_train, x_val, y_val):
     )
 
 
-def log_performance(logger, history, test_loss, test_accuracy):
+def log_performance(history, test_loss, test_accuracy):
     """Logs the training, validation, and test performance."""
     logger.info(
         f"Training Loss: {history.history['loss'][-1]:.4f}, Training Accuracy: {history.history['accuracy'][-1]:.4f}"
@@ -41,16 +51,15 @@ def evaluate_model(model, x_test, y_test):
     return model.evaluate(x_test, y_test, verbose=1)
 
 
-def main():
-    # Setup logger
-    logger = setup_logger()
-
+def run_experiment(min_length=Config.MIN_LEN, max_length=Config.MAX_LEN):
     # Load and preprocess data
-    (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data()
+    (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
+        min_length=min_length, max_length=max_length
+    )
     logger.info("Data loaded and preprocessed.")
 
     # Build and compile model
-    model = build_rnn_model(Config.MAX_LEN)
+    model = build_rnn_model(max_length)
     logger.info("Model built.")
 
     # Train the model
@@ -58,14 +67,14 @@ def main():
     logger.info("Model training completed.")
 
     # Save artifacts and results
-    save_artifacts(history, model, "artifacts/")
+    save_model(model)
     logger.info("Artifacts saved.")
 
     # Evaluate the model on the test data
     test_loss, test_accuracy = evaluate_model(model, x_test, y_test)
 
     # Log training, validation, and test performance
-    log_performance(logger, history, test_loss, test_accuracy)
+    log_performance(history, test_loss, test_accuracy)
 
     # Update history to include test performance for plotting
     history.history["test_loss"] = [test_loss]
@@ -76,6 +85,10 @@ def main():
 
     # Save history as a JSON file
     save_history(history)
+
+
+def main():
+    run_experiment()
 
 
 if __name__ == "__main__":

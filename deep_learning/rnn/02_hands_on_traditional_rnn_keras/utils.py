@@ -6,20 +6,20 @@ import matplotlib.pyplot as plt
 from config import Config
 
 
-def get_timestamp() -> str:
-    """Returns the current timestamp as a string."""
-    return datetime.now().strftime("%y%m%d_%H%M%S")
+def get_dir_path(base_dir: str, *sub_dirs: str) -> str:
+    dir_path = os.path.join(os.getcwd(), base_dir, Config.name(), *sub_dirs)
+    os.makedirs(dir_path, exist_ok=True)
+    return dir_path
 
 
 def setup_logger():
     """Sets up a logger that writes to a specified log file with a unique timestamp."""
+
     # Define the log directory path
-    log_dir = os.path.join(os.getcwd(), Config.LOG_DIR, Config.MODE)
-    # Create the log directory if it doesn't exist
-    os.makedirs(log_dir, exist_ok=True)
+    save_dir = get_dir_path(Config.LOG_DIR)
 
     # Define the log file path with a timestamp
-    log_file_path = os.path.join(log_dir, f"log_{get_timestamp()}.log")
+    log_file_path = os.path.join(save_dir, f"log_{Config.TIMESTAMP}.txt")
 
     # Create and configure the logger
     logger = logging.getLogger()
@@ -36,39 +36,32 @@ def setup_logger():
     return logger
 
 
-def save_artifacts(history, model, output_dir):
-    """Saves training history and model artifacts with unique timestamps."""
-    # Create the output directory if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
+def get_artifacts_dir(*sub_dirs: str) -> str:
+    """Returns the directory path for saving model artifacts."""
+    return get_dir_path(Config.ARTIFACTS_DIR, *sub_dirs)
 
-    # Define the model filename with a timestamp
-    model_filename = f"model_{get_timestamp()}.keras"
-    # Save the model to the specified directory
-    model.save(os.path.join(output_dir, Config.MODE, model_filename))
+
+def save_model(model: "tf.keras.Model"):
+    """Saves the model to a file."""
+    save_dir = get_artifacts_dir(Config.MODEL_DIR)
+    model.save(os.path.join(save_dir, f"model_{Config.TIMESTAMP}.keras"))
 
 
 def checkpoint_path():
-    """Generates a unique checkpoint path with a timestamp."""
-    # Define the checkpoint directory path
-    checkpoint_dir = os.path.join(Config.ARTIFACTS_DIR, Config.MODE)
-    # Create the checkpoint directory if it doesn't exist
-    os.makedirs(checkpoint_dir, exist_ok=True)
+    """Returns the file path for saving model checkpoints."""
+    save_dir = get_artifacts_dir("checkpoints")
 
-    # Define the checkpoint file path with placeholders for epoch and validation loss
+    # Use a custom file path with placeholders for epoch and validation loss
     return os.path.join(
-        checkpoint_dir,
-        f"model_checkpoint_{get_timestamp()}_epoch-{{epoch:02d}}_val-loss-{{val_loss:.4f}}.keras",
+        save_dir,
+        f"model_checkpoint_{Config.TIMESTAMP}_epoch-{{epoch:02d}}_val-loss-{{val_loss:.4f}}.keras",
     )
 
 
 def plot_history(history):
-    """Plots and saves the training history as an image file."""
-    # Define the save directory path
-    save_dir = os.path.join(os.getcwd(), Config.PLOT_DIR, Config.MODE)
-    # Create the save directory if it doesn't exist
-    os.makedirs(save_dir, exist_ok=True)
-    # Define the save file path with a timestamp
-    save_file_path = os.path.join(save_dir, f"plot_{get_timestamp()}.png")
+    """Plots the training history and saves the plot to a file."""
+    save_dir = get_artifacts_dir(Config.PLOT_DIR)
+    save_file_path = os.path.join(save_dir, f"plot_{Config.TIMESTAMP}.png")
 
     # Create a new figure for the plot
     plt.figure(figsize=(10, 6))
@@ -105,20 +98,18 @@ def plot_history(history):
     plt.legend()
     plt.grid(True)
 
-    # Save the plot to the specified file
+    # Save the plot to a file
     plt.savefig(save_file_path)
+
+    # Close the plot to free up memory
     plt.close()
 
 
 def save_history(history):
     """Saves the training history as a JSON file."""
-    # Define the save directory path
-    save_dir = os.path.join(os.getcwd(), Config.HISTORY_DIR, Config.MODE)
-    # Create the save directory if it doesn't exist
-    os.makedirs(save_dir, exist_ok=True)
-    # Define the save file path with a timestamp
-    save_file_path = os.path.join(save_dir, f"history_{get_timestamp()}.json")
+    save_dir = get_artifacts_dir(Config.HISTORY_DIR)
+    save_file_path = os.path.join(save_dir, f"history_{Config.TIMESTAMP}.json")
 
-    # Save the history dictionary as a JSON file
+    # Save the history dictionary to a JSON file
     with open(save_file_path, "w") as file:
         json.dump(history.history, file)
