@@ -5,7 +5,8 @@ class Config:
     MAX_FEATURES = 10000  # Maximum number of words to keep in the vocabulary
     MIN_LEN = 0  # Minimum length of input sequences
     MAX_LEN = 15  # Maximum length of input sequences
-    EPOCHS = 2  # Number of training epochs
+    EPOCHS = 25  # Number of training epochs
+    TUNER_MAX_EPOCHS = 5  # Number of epochs for hyperparameter tuning
     BATCH_SIZE = 2  # Number of samples per training batch
     EMBEDDING_DIM = 32  # Dimensionality of the embedding layer
     RNN_UNITS = 16  # Number of units in the RNN layer
