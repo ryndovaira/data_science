@@ -1,2 +1,4 @@
-tensorflow~=2.16.0
+tensorflow~=2.18.0
 matplotlib~=3.9.2
+keras_tuner~=1.4.7
+scikit-learn~=2.0.2
