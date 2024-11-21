@@ -1,13 +1,21 @@
 import json
 import logging
 import os
-from datetime import datetime
+
 import matplotlib.pyplot as plt
+
 from config import Config
 
 
-def get_dir_path(base_dir: str, *sub_dirs: str) -> str:
-    dir_path = os.path.join(os.getcwd(), base_dir, Config.name(), *sub_dirs)
+# def get_dir_path(base_dir: str, *sub_dirs: str) -> str:
+#     dir_path = os.path.join(os.getcwd(), base_dir, Config.name(), *sub_dirs)
+#     os.makedirs(dir_path, exist_ok=True)
+#     return dir_path
+
+
+def get_artifacts_dir(base_dir: str, *sub_dirs: str) -> str:
+    """Returns the directory path for saving artifacts, ensuring it exists."""
+    dir_path = os.path.join(os.getcwd(), Config.ARTIFACTS_DIR, base_dir, Config.name(), *sub_dirs)
     os.makedirs(dir_path, exist_ok=True)
     return dir_path
 
@@ -16,7 +24,7 @@ def setup_logger():
     """Sets up a logger that writes to a specified log file with a unique timestamp."""
 
     # Define the log directory path
-    save_dir = get_dir_path(Config.LOG_DIR)
+    save_dir = get_artifacts_dir(Config.LOG_DIR)
 
     # Define the log file path with a timestamp
     log_file_path = os.path.join(save_dir, f"log_{Config.TIMESTAMP}.txt")
@@ -36,11 +44,6 @@ def setup_logger():
     return logger
 
 
-def get_artifacts_dir(*sub_dirs: str) -> str:
-    """Returns the directory path for saving model artifacts."""
-    return get_dir_path(Config.ARTIFACTS_DIR, *sub_dirs)
-
-
 def save_model(model: "tf.keras.Model"):
     """Saves the model to a file."""
     save_dir = get_artifacts_dir(Config.MODEL_DIR)
@@ -49,7 +52,7 @@ def save_model(model: "tf.keras.Model"):
 
 def checkpoint_path():
     """Returns the file path for saving model checkpoints."""
-    save_dir = get_artifacts_dir("checkpoints")
+    save_dir = get_artifacts_dir(Config.CHECKPOINT_DIR)
 
     # Use a custom file path with placeholders for epoch and validation loss
     return os.path.join(
@@ -61,7 +64,7 @@ def checkpoint_path():
 def plot_history(history):
     """Plots the training history and saves the plot to a file."""
     save_dir = get_artifacts_dir(Config.PLOT_DIR)
-    save_file_path = os.path.join(save_dir, f"plot_{Config.TIMESTAMP}.png")
+    save_file_path = os.path.join(save_dir, f"history_{Config.TIMESTAMP}.png")
 
     # Create a new figure for the plot
     plt.figure(figsize=(10, 6))
