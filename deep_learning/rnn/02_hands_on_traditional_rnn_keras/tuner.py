@@ -1,7 +1,7 @@
 import keras_tuner as kt
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, SimpleRNN, Dense
+from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, Dropout
 from data_preprocessing import load_and_preprocess_data
 from config import Config
 from utils import setup_logger, save_model, checkpoint_path, plot_history, save_history, get_artifacts_dir
@@ -19,6 +19,7 @@ def model_builder(hp):
     """Builds the model for hyperparameter tuning."""
     embedding_dim = hp.Choice("embedding_dim", values=[32, 64, 128])
     rnn_units = hp.Int("rnn_units", min_value=16, max_value=128, step=16)
+    dropout_rate = hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
 
     model = Sequential(
         [
@@ -26,6 +27,7 @@ def model_builder(hp):
                 input_dim=Config.MAX_FEATURES, output_dim=embedding_dim
             ),
             SimpleRNN(rnn_units),
+            Dropout(dropout_rate),
             Dense(1, activation="sigmoid"),
         ]
     )
@@ -147,32 +149,3 @@ def plot_tuner_trials(tuner):
     plt.savefig(save_file_path)
     plt.close()
     logger.info(f"Saved heatmap of all trials to {save_file_path}")
-
-
-def retrain_with_best_hps(best_hps):
-    """Retrains the model using the best hyperparameters."""
-    logger.info("Retraining model with best hyperparameters.")
-
-    (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
-        Config.MIN_LEN, Config.MAX_LEN, Config.MAX_FEATURES
-    )
-
-    model = model_builder(best_hps)
-    history = model.fit(
-        x_train,
-        y_train,
-        epochs=Config.EPOCHS,
-        validation_data=(x_val, y_val),
-        batch_size=Config.BATCH_SIZE,
-        callbacks=[
-            EarlyStopping(monitor="val_loss", patience=2, restore_best_weights=True),
-            ModelCheckpoint(filepath=checkpoint_path(), monitor="val_loss", save_best_only=True),
-        ],
-    )
-
-    save_model(model)
-    plot_history(history)
-    save_history(history)
-
-    test_loss, test_accuracy = model.evaluate(x_test, y_test)
-    logger.info(f"Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.4f}")
