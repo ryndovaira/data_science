@@ -8,7 +8,7 @@ class Config:
     MAX_LEN = 15  # Maximum length of input sequences
     EPOCHS = 50  # Number of training epochs
     TUNER_MAX_EPOCHS = 10  # Number of epochs for hyperparameter tuning
-    BATCH_SIZE = 2  # Number of samples per training batch
+    BATCH_SIZE = 32  # Number of samples per training batch
     DEV_MODE = False  # Toggle for development mode (using fewer samples)
     DEV_SAMPLES = 100  # Number of samples to use when in development mode
 
