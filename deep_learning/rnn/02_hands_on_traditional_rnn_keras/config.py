@@ -14,6 +14,10 @@ class Config:
 
     RANDOM_SEED = 42  # Random seed for reproducibility
 
+    HYPERBAND_FACTOR = 3  # Factor for Hyperband tuning
+    HYPERBAND_ITERATIONS = 1  # Number of Hyperband iterations
+    HYPERBAND_PROJ_NAME = "trials"  # Project name for Hyperband tuner
+
     # Artifact directories
     LOG_DIR = "logs"
     ARTIFACTS_DIR = "artifacts"

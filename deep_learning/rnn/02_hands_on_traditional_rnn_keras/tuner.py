@@ -48,9 +48,10 @@ def tune_hyperparameters():
         model_builder,
         objective="val_accuracy",
         max_epochs=Config.TUNER_MAX_EPOCHS,
-        factor=3,
+        factor=Config.HYPERBAND_FACTOR,
         directory=get_artifacts_dir(Config.TUNER_DIR),
-        project_name="trials",
+        project_name=Config.HYPERBAND_PROJ_NAME,
+        hyperband_iterations=Config.HYPERBAND_ITERATIONS,
     )
     try:
         tuner.search(
