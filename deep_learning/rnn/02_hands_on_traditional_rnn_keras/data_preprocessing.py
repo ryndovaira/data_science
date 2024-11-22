@@ -11,7 +11,7 @@ logger = logging.getLogger()
 
 def load_and_preprocess_data(min_length: int, max_length: int, max_features: int) -> tuple:
     """Loads and preprocesses the IMDB dataset with splits for train, val, and test."""
-    (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=None)  # No truncation here
+    (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=Config.MAX_FEATURES)
 
     logger.info(f"Filtering and preprocessing data with max_features={max_features}.")
     x_train, y_train = filter_by_length(x_train, y_train, min_length, max_length)
