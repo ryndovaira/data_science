@@ -77,6 +77,34 @@ def tune_hyperparameters():
     return best_hps
 
 
+def retrain_with_best_hps(best_hps):
+    logger.info("Retraining model with the best hyperparameters.")
+
+    (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
+        Config.MIN_LEN, Config.MAX_LEN, Config.MAX_FEATURES
+    )
+
+    model = model_builder(best_hps)
+    history = model.fit(
+        x_train,
+        y_train,
+        epochs=Config.EPOCHS,
+        validation_data=(x_val, y_val),
+        batch_size=Config.BATCH_SIZE,
+        callbacks=[
+            EarlyStopping(monitor="val_loss", patience=2, restore_best_weights=True),
+            ModelCheckpoint(filepath=checkpoint_path(), monitor="val_loss", save_best_only=True),
+        ],
+    )
+
+    save_model(model)
+    plot_history(history)
+    save_history(history)
+
+    test_loss, test_accuracy = model.evaluate(x_test, y_test)
+    logger.info(f"Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.4f}")
+
+
 def save_tuner_results(tuner, num_trials=10):
     """Saves tuner trial results as a CSV file."""
     results = []
