@@ -17,7 +17,7 @@ def main():
         best_hps = tune_hyperparameters()  # Tune hyperparameters
         logger.info("Hyperparameter tuning completed.")
 
-        logger.info("Retraining the model with the best hyperparameters.")
+        logger.info(f"Retraining the model with the best hyperparameters:\n{best_hps}.")
         retrain_with_best_hps(best_hps)  # Retrain with the best hyperparameters
     except Exception as e:
         logger.error(f"An error occurred: {e}", exc_info=True)
