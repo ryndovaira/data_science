@@ -43,6 +43,11 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
         lambda x: sequence.pad_sequences(x, maxlen=Config.MAX_LEN), (x_train, x_val, x_test)
     )
 
+    logger.info(
+        f"Data loaded and preprocessed: train={len(x_train)}, "
+        f"val={len(x_val)}, test={len(x_test)}."
+    )
+
     return (
         (np.array(x_train), np.array(y_train)),
         (np.array(x_val), np.array(y_val)),
