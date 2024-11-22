@@ -22,7 +22,11 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
 
     # Split training data into training and validation sets
     x_train, x_val, y_train, y_val = train_test_split(
-        x_train, y_train, test_size=0.2, random_state=Config.RANDOM_SEED
+        x_train,
+        y_train,
+        test_size=0.35,
+        random_state=Config.RANDOM_SEED,
+        stratify=y_train
     )
 
     if Config.DEV_MODE:
