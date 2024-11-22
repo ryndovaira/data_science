@@ -4,8 +4,12 @@ from datetime import datetime
 class Config:
     """Configuration for the project"""
     MAX_FEATURES = 5000  # Maximum number of words to keep in the vocabulary
-    MIN_LEN = 0  # Minimum length of input sequences
-    MAX_LEN = 15  # Maximum length of input sequences
+
+    # Sequence length buckets
+    # 0-130, 130-175, 175-285, 285-590, 590-1000
+    MIN_LEN = 130
+    MAX_LEN = 175
+
     EPOCHS = 50  # Number of training epochs
     TUNER_MAX_EPOCHS = 10  # Number of epochs for hyperparameter tuning
     BATCH_SIZE = 32  # Number of samples per training batch
@@ -14,9 +18,10 @@ class Config:
 
     RANDOM_SEED = 42  # Random seed for reproducibility
 
-    HYPERBAND_FACTOR = 3  # Factor for Hyperband tuning
-    HYPERBAND_ITERATIONS = 1  # Number of Hyperband iterations
-    HYPERBAND_PROJ_NAME = "trials"  # Project name for Hyperband tuner
+    # Hyperband parameters
+    HYPERBAND_FACTOR = 3
+    HYPERBAND_ITERATIONS = 4
+    HYPERBAND_PROJ_NAME = "trials"
 
     # Artifact directories
     LOG_DIR = "logs"
@@ -31,4 +36,4 @@ class Config:
 
     @classmethod
     def name(cls) -> str:
-        return f"{cls.MIN_LEN}_{cls.MAX_LEN}"
+        return f"{cls.MIN_LEN}_{cls.MAX_LEN}_{cls.HYPERBAND_FACTOR}_{cls.HYPERBAND_ITERATIONS}"
