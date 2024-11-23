@@ -135,3 +135,12 @@ def plot_all_results(results_df):
     plt.close()
 
     logger.info(f"Comparison plot saved to {save_file_path}.")
+
+
+def save_all_results(df):
+    """Save all results to a CSV file."""
+    save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
+    save_file_path = os.path.join(save_dir, f"length_bucket_results_{Config.TIMESTAMP}.csv")
+    df.to_csv(save_file_path, index=False)
+
+    logger.info(f"Results saved to {save_file_path}.")

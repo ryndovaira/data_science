@@ -4,7 +4,7 @@ model tuning, training, and evaluation.
 """
 import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
-from utils import setup_logger, plot_all_results
+from utils import setup_logger, plot_all_results, save_all_results
 from config import Config
 
 # Setup logger
@@ -17,7 +17,6 @@ LENGTH_BUCKETS = [
     (175, 285),
     (285, 590),
     (590, 1000),
-    (0, 1000),
 ]
 
 
@@ -54,14 +53,10 @@ def main():
         except Exception as e:
             logger.error(f"Experiment failed for length bucket {min_len}-{max_len}: {e}", exc_info=True)
 
-    # Convert results to DataFrame for analysis
+    # Save and plot results
     results_df = pd.DataFrame(results)
-    results_df.to_csv("length_bucket_results.csv", index=False)
-    logger.info("Results saved to length_bucket_results.csv.")
-
-    # Visualization
+    save_all_results(results_df)
     plot_all_results(results_df)
-    logger.info("Comparison plot saved.")
 
 
 if __name__ == "__main__":
