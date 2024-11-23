@@ -123,11 +123,15 @@ def save_history(history):
 def plot_all_results(results_df):
     """Generate plots to compare accuracy across length buckets."""
     plt.figure(figsize=(10, 6))
-    plt.plot(results_df["min_len"], results_df["test_accuracy"], marker='o', label="Accuracy")
-    plt.title("Test Accuracy vs Sequence Length")
-    plt.xlabel("Minimum Sequence Length")
+    plt.plot(results_df["max_len"], results_df["test_accuracy"], marker='o', label="Accuracy")
+    plt.title("Test Accuracy vs. Sequence Length")
+    plt.xlabel("Max Sequence Length")
     plt.ylabel("Test Accuracy")
     plt.grid(True)
     plt.legend()
-    plt.savefig("accuracy_vs_length.png")
+    save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
+    save_file_path = os.path.join(save_dir, "accuracy_vs_length.png")
+    plt.savefig(save_file_path)
     plt.close()
+
+    logger.info(f"Comparison plot saved to {save_file_path}.")
