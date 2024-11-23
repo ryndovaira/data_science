@@ -1,5 +1,6 @@
 name: tensorflow_keras
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - anyio=4.6.2
@@ -13,9 +14,10 @@ dependencies:
   - bleach=4.1.0
   - brotli-python=1.0.9
   - bzip2=1.0.8
-  - ca-certificates=2024.9.24
+  - ca-certificates=2024.8.30
   - certifi=2024.8.30
   - cffi=1.17.1
+  - charset-normalizer=3.4.0
   - colorama=0.4.6
   - comm=0.2.1
   - debugpy=1.6.7
@@ -26,6 +28,7 @@ dependencies:
   - h11=0.14.0
   - httpcore=1.0.2
   - httpx=0.27.0
+  - idna=3.10
   - ipykernel=6.29.5
   - ipython=8.27.0
   - jedi=0.19.1
@@ -46,6 +49,7 @@ dependencies:
   - libsodium=1.0.18
   - matplotlib-inline=0.1.6
   - mistune=2.0.4
+  - nb_conda_kernels=2.5.1
   - nbclient=0.8.0
   - nbconvert=7.16.4
   - nbformat=5.10.4
@@ -54,6 +58,7 @@ dependencies:
   - notebook-shim=0.2.3
   - openssl=3.0.15
   - overrides=7.4.0
+  - packaging=24.2
   - pandocfilters=1.5.0
   - parso=0.8.3
   - pip=24.2
@@ -64,11 +69,13 @@ dependencies:
   - psutil=5.9.0
   - pure_eval=0.2.2
   - pycparser=2.21
+  - pygments=2.18.0
   - pysocks=1.7.1
   - python=3.12.7
   - python-dateutil=2.9.0post0
   - python-fastjsonschema=2.20.0
   - python-json-logger=2.0.7
+  - pytz=2024.2
   - pywin32=305
   - pywinpty=2.0.10
   - pyyaml=6.0.2
@@ -107,7 +114,6 @@ dependencies:
   - pip:
       - absl-py==2.1.0
       - astunparse==1.6.3
-      - charset-normalizer==3.4.0
       - contourpy==1.3.1
       - cycler==0.12.1
       - flatbuffers==24.3.25
@@ -116,7 +122,6 @@ dependencies:
       - google-pasta==0.2.0
       - grpcio==1.68.0
       - h5py==3.12.1
-      - idna==3.10
       - joblib==1.4.2
       - keras==3.6.0
       - keras-tuner==1.4.7
@@ -133,17 +138,16 @@ dependencies:
       - numpy==2.0.2
       - opt-einsum==3.4.0
       - optree==0.13.1
-      - packaging==24.2
       - pandas==2.2.3
       - pillow==11.0.0
+      - plotly==5.24.1
       - protobuf==5.28.3
-      - pygments==2.18.0
       - pyparsing==3.2.0
-      - pytz==2024.2
       - rich==13.9.4
       - scikit-learn==1.5.2
       - scipy==1.14.1
       - seaborn==0.13.2
+      - tenacity==9.0.0
       - tensorboard==2.18.0
       - tensorboard-data-server==0.7.2
       - tensorflow==2.18.0
@@ -154,4 +158,4 @@ dependencies:
       - tzdata==2024.2
       - werkzeug==3.1.3
       - wrapt==1.16.0
-prefix: C:\Users\Mi\.conda\envs\data_science
+prefix: C:\Users\Mi\.conda\envs\tensorflow_keras
