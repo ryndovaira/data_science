@@ -45,6 +45,7 @@ def save_model(model: "tf.keras.Model"):
     """Saves the model to a file."""
     save_dir = get_artifacts_dir(Config.MODEL_DIR)
     model.save(os.path.join(save_dir, f"model_{Config.TIMESTAMP}.keras"))
+    logger.info(f"Model saved to {save_dir}.")
 
 
 def checkpoint_path():
@@ -104,6 +105,8 @@ def plot_history(history):
     # Close the plot to free up memory
     plt.close()
 
+    logger.info(f"History plot saved to {save_file_path}.")
+
 
 def save_history(history):
     """Saves the training history as a JSON file."""
@@ -113,6 +116,8 @@ def save_history(history):
     # Save the history dictionary to a JSON file
     with open(save_file_path, "w") as file:
         json.dump(history.history, file)
+
+    logger.info(f"History saved to {save_file_path}.")
 
 
 def plot_all_results(results_df):
