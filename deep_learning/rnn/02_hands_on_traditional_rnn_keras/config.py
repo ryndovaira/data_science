@@ -32,6 +32,7 @@ class Config:
     HISTORY_DIR = "history"
     TUNER_DIR = "tuner_results"
     CHECKPOINT_DIR = "checkpoints"
+    FINAL_STAT_DIR = "final_stats"
 
     TIMESTAMP = datetime.now().strftime("%y%m%d_%H%M%S")  # Timestamp for filenames
 
