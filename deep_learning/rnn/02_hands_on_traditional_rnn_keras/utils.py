@@ -116,3 +116,16 @@ def save_history(history):
     # Save the history dictionary to a JSON file
     with open(save_file_path, "w") as file:
         json.dump(history.history, file)
+
+
+def plot_all_results(results_df):
+    """Generate plots to compare accuracy across length buckets."""
+    plt.figure(figsize=(10, 6))
+    plt.plot(results_df["min_len"], results_df["test_accuracy"], marker='o', label="Accuracy")
+    plt.title("Test Accuracy vs Sequence Length")
+    plt.xlabel("Minimum Sequence Length")
+    plt.ylabel("Test Accuracy")
+    plt.grid(True)
+    plt.legend()
+    plt.savefig("accuracy_vs_length.png")
+    plt.close()

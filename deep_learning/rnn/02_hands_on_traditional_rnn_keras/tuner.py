@@ -104,6 +104,8 @@ def retrain_with_best_hps(best_hps):
     test_loss, test_accuracy = model.evaluate(x_test, y_test)
     logger.info(f"Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.4f}")
 
+    return test_loss, test_accuracy
+
 
 def save_tuner_results(tuner, num_trials=10):
     """Saves tuner trial results as a CSV file."""
