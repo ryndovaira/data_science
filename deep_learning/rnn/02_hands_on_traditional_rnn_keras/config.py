@@ -11,7 +11,7 @@ class Config:
     MAX_LEN = 175
 
     EPOCHS = 50  # Number of training epochs
-    TUNER_MAX_EPOCHS = 10  # Number of epochs for hyperparameter tuning
+
     BATCH_SIZE = 32  # Number of samples per training batch
     DEV_MODE = False  # Toggle for development mode (using fewer samples)
     DEV_SAMPLES = 100  # Number of samples to use when in development mode
@@ -19,8 +19,9 @@ class Config:
     RANDOM_SEED = 42  # Random seed for reproducibility
 
     # Hyperband parameters
+    TUNER_MAX_EPOCHS = 2  # Number of epochs for hyperparameter tuning
     HYPERBAND_FACTOR = 3
-    HYPERBAND_ITERATIONS = 4
+    HYPERBAND_ITERATIONS = 1
     HYPERBAND_PROJ_NAME = "trials"
 
     # Artifact directories
