@@ -18,6 +18,7 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
     x_test, y_test = filter_by_length(x_test, y_test, min_length, max_length)
 
     unique, counts = np.unique(y_train, return_counts=True)
+    unique, counts = unique.tolist(), counts.tolist()
     logger.info(f"Classes distribution: {dict(zip(unique, counts))}")
 
     # Split training data into training and validation sets
