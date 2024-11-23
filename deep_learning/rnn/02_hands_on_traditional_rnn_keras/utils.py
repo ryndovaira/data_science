@@ -64,20 +64,102 @@ def plot_history(history):
     save_dir = get_artifacts_dir(Config.PLOT_DIR)
     save_file_path = os.path.join(save_dir, f"history_{Config.TIMESTAMP}.html")
 
-    # Create traces for loss
-    loss_trace = go.Scatter(y=history.history["loss"], mode="lines", name="Training Loss")
-    val_loss_trace = go.Scatter(y=history.history["val_loss"], mode="lines", name="Validation Loss")
+    # Create the epochs list
+    epochs = list(range(1, len(history.history["loss"]) + 1))
 
-    # Create traces for accuracy
-    accuracy_trace = go.Scatter(
-        y=history.history["accuracy"], mode="lines", name="Training Accuracy"
+    # Create the figure
+    fig = go.Figure()
+
+    # Add training loss
+    fig.add_trace(
+        go.Scatter(
+            x=epochs,
+            y=history.history["loss"],
+            mode="markers+lines",
+            name="Training Loss",
+            marker=dict(color="blue"),
+        )
     )
-    val_accuracy_trace = go.Scatter(
-        y=history.history["val_accuracy"], mode="lines", name="Validation Accuracy"
+    # Add validation loss
+    fig.add_trace(
+        go.Scatter(
+            x=epochs,
+            y=history.history["val_loss"],
+            mode="markers+lines",
+            name="Validation Loss",
+            marker=dict(color="orange"),
+        )
+    )
+    # Add training accuracy
+    fig.add_trace(
+        go.Scatter(
+            x=epochs,
+            y=history.history["accuracy"],
+            mode="markers+lines",
+            name="Training Accuracy",
+            marker=dict(color="green"),
+        )
+    )
+    # Add validation accuracy
+    fig.add_trace(
+        go.Scatter(
+            x=epochs,
+            y=history.history["val_accuracy"],
+            mode="markers+lines",
+            name="Validation Accuracy",
+            marker=dict(color="red"),
+        )
     )
 
-    # Combine traces into a figure
-    fig = go.Figure(data=[loss_trace, val_loss_trace, accuracy_trace, val_accuracy_trace])
+    # Add vertical and horizontal traces for each epoch
+    for epoch, train_loss, val_loss, train_acc, val_acc in zip(
+        epochs,
+        history.history["loss"],
+        history.history["val_loss"],
+        history.history["accuracy"],
+        history.history["val_accuracy"],
+    ):
+        # Add numeric annotations near each point
+        fig.add_trace(
+            go.Scatter(
+                x=[epoch],
+                y=[train_loss],
+                mode="text",
+                text=[f"{train_loss:.3f}"],
+                textposition="top center",
+                showlegend=False,
+            )
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=[epoch],
+                y=[val_loss],
+                mode="text",
+                text=[f"{val_loss:.3f}"],
+                textposition="top center",
+                showlegend=False,
+            )
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=[epoch],
+                y=[train_acc],
+                mode="text",
+                text=[f"{train_acc:.3f}"],
+                textposition="bottom center",
+                showlegend=False,
+            )
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=[epoch],
+                y=[val_acc],
+                mode="text",
+                text=[f"{val_acc:.3f}"],
+                textposition="bottom center",
+                showlegend=False,
+            )
+        )
 
     # Add layout details
     fig.update_layout(
@@ -85,6 +167,7 @@ def plot_history(history):
         xaxis_title="Epoch",
         yaxis_title="Metric Value",
         template="plotly_dark",
+        showlegend=True,
         legend=dict(orientation="h", yanchor="bottom", y=-0.2),
     )
 
