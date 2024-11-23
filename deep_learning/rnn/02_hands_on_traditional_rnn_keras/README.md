@@ -91,6 +91,10 @@ Results will be saved in the `artifacts/` directory, including:
 
 ## Features
 
+- **Automatic GPU/CPU Detection**:
+  - TensorFlow automatically detects and utilizes available GPUs for training.
+  - If no GPU is available, the pipeline falls back to CPU.
+  - Memory on GPUs is dynamically allocated to avoid overcommitment and conflicts with other applications.
 - **Vanilla RNN Implementation**:
   - A Simple RNN architecture with an embedding layer, RNN units, and a dense output layer.
 

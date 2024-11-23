@@ -1,4 +1,5 @@
 import keras_tuner as kt
+import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, Dropout
@@ -13,6 +14,20 @@ import numpy as np
 
 # Setup logger
 logger = setup_logger()
+
+
+def configure_tf_device():
+    """Configure TensorFlow to use GPU if available."""
+    gpus = tf.config.list_physical_devices("GPU")
+    if gpus:
+        try:
+            for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, True)
+            logger.info(f"GPUs detected and configured: {gpus}")
+        except RuntimeError as e:
+            logger.error(f"Error configuring GPU: {e}")
+    else:
+        logger.info("No GPU detected, using CPU.")
 
 
 def model_builder(hp):
@@ -37,6 +52,7 @@ def model_builder(hp):
 
 def tune_hyperparameters():
     """Tunes hyperparameters using Keras Tuner and generates trial plots."""
+    configure_tf_device()  # Ensure TensorFlow is set up for GPUs
     logger.info("Starting hyperparameter tuning.")
 
     # Pass dummy max features for initial data loading (updated dynamically during tuning)
@@ -78,6 +94,8 @@ def tune_hyperparameters():
 
 
 def retrain_with_best_hps(best_hps):
+    """Retrains the model using the best hyperparameters."""
+    configure_tf_device()  # Ensure TensorFlow is set up for GPUs
     logger.info("Retraining model with the best hyperparameters.")
 
     (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
