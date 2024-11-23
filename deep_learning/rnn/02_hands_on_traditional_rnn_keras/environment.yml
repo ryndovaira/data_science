@@ -1,4 +1,4 @@
-name: data_science
+name: tensorflow_keras
 channels:
   - defaults
 dependencies:
