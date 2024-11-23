@@ -1,8 +1,8 @@
 import json
 import logging
 import os
-
-import matplotlib.pyplot as plt
+import pandas as pd
+import plotly.graph_objects as go
 
 from config import Config
 
@@ -60,50 +60,36 @@ def checkpoint_path():
 
 
 def plot_history(history):
-    """Plots the training history and saves the plot to a file."""
+    """Plots the training history and saves the plot to a file using Plotly."""
     save_dir = get_artifacts_dir(Config.PLOT_DIR)
-    save_file_path = os.path.join(save_dir, f"history_{Config.TIMESTAMP}.png")
+    save_file_path = os.path.join(save_dir, f"history_{Config.TIMESTAMP}.html")
 
-    # Create a new figure for the plot
-    plt.figure(figsize=(10, 6))
-    # Plot training and validation loss
-    plt.plot(history.history["loss"], label="Training Loss")
-    plt.plot(history.history["val_loss"], label="Validation Loss")
+    # Create traces for loss
+    loss_trace = go.Scatter(y=history.history["loss"], mode="lines", name="Training Loss")
+    val_loss_trace = go.Scatter(y=history.history["val_loss"], mode="lines", name="Validation Loss")
 
-    # If test data is available, plot it as a single point at the end
-    if "test_loss" in history.history:
-        plt.scatter(
-            len(history.history["loss"]) - 1,
-            history.history["test_loss"][0],
-            color="red",
-            label="Test Loss",
-        )
+    # Create traces for accuracy
+    accuracy_trace = go.Scatter(
+        y=history.history["accuracy"], mode="lines", name="Training Accuracy"
+    )
+    val_accuracy_trace = go.Scatter(
+        y=history.history["val_accuracy"], mode="lines", name="Validation Accuracy"
+    )
 
-    # Plot training and validation accuracy
-    plt.plot(history.history["accuracy"], label="Training Accuracy")
-    plt.plot(history.history["val_accuracy"], label="Validation Accuracy")
+    # Combine traces into a figure
+    fig = go.Figure(data=[loss_trace, val_loss_trace, accuracy_trace, val_accuracy_trace])
 
-    # If test data is available, plot it as a single point at the end
-    if "test_accuracy" in history.history:
-        plt.scatter(
-            len(history.history["accuracy"]) - 1,
-            history.history["test_accuracy"][0],
-            color="blue",
-            label="Test Accuracy",
-        )
+    # Add layout details
+    fig.update_layout(
+        title="Training and Validation Metrics Over Epochs",
+        xaxis_title="Epoch",
+        yaxis_title="Metric Value",
+        template="plotly_dark",
+        legend=dict(orientation="h", yanchor="bottom", y=-0.2),
+    )
 
-    # Add title and labels to the plot
-    plt.title("Training, Validation, and Test Loss/Accuracy")
-    plt.xlabel("Epoch")
-    plt.ylabel("Loss/Accuracy")
-    plt.legend()
-    plt.grid(True)
-
-    # Save the plot to a file
-    plt.savefig(save_file_path)
-
-    # Close the plot to free up memory
-    plt.close()
+    # Save a plot as an HTML file
+    fig.write_html(save_file_path)
 
     logger.info(f"History plot saved to {save_file_path}.")
 
@@ -121,18 +107,80 @@ def save_history(history):
 
 
 def plot_all_results(results_df):
-    """Generate plots to compare accuracy across length buckets."""
-    plt.figure(figsize=(10, 6))
-    plt.plot(results_df["max_len"], results_df["test_accuracy"], marker='o', label="Accuracy")
-    plt.title("Test Accuracy vs. Sequence Length")
-    plt.xlabel("Max Sequence Length")
-    plt.ylabel("Test Accuracy")
-    plt.grid(True)
-    plt.legend()
+    """Generate an interactive plot to compare accuracy across length buckets using Plotly."""
     save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
-    save_file_path = os.path.join(save_dir, "accuracy_vs_length.png")
-    plt.savefig(save_file_path)
-    plt.close()
+    save_file_path = os.path.join(save_dir, "accuracy_vs_length.html")
+
+    # Create a scatter plot for accuracy vs. sequence length
+    fig = go.Figure()
+
+    # Add the main scatter plot
+    fig.add_trace(
+        go.Scatter(
+            x=results_df["max_len"],
+            y=results_df["test_accuracy"],
+            mode="markers+lines+text",
+            marker=dict(size=10, color="blue"),
+            name="Test Accuracy",
+            text=results_df["test_accuracy"].round(3),  # Display accuracy rounded to 3 decimals
+            textposition="top center",  # Position text above markers
+        )
+    )
+
+    # Add vertical and horizontal reference lines (traces to X and Y axes) and value annotations
+    for i, row in results_df.iterrows():
+        # Vertical line to X-axis
+        fig.add_shape(
+            type="line",
+            x0=row["max_len"],
+            x1=row["max_len"],
+            y0=0,
+            y1=row["test_accuracy"],
+            line=dict(color="gray", dash="dot"),
+        )
+        # Horizontal line to Y-axis
+        fig.add_shape(
+            type="line",
+            x0=0,
+            x1=row["max_len"],
+            y0=row["test_accuracy"],
+            y1=row["test_accuracy"],
+            line=dict(color="gray", dash="dot"),
+        )
+        # Add X-axis value annotation
+        fig.add_trace(
+            go.Scatter(
+                x=[row["max_len"]],
+                y=[0],
+                mode="text",
+                text=[str(row["max_len"])],
+                textposition="bottom center",
+                showlegend=False,
+            )
+        )
+        # Add Y-axis value annotation
+        fig.add_trace(
+            go.Scatter(
+                x=[0],
+                y=[row["test_accuracy"]],
+                mode="text",
+                text=[f"{row['test_accuracy']:.3f}"],
+                textposition="middle right",
+                showlegend=False,
+            )
+        )
+
+    # Add layout details
+    fig.update_layout(
+        title="Test Accuracy vs. Sequence Length",
+        xaxis_title="Max Sequence Length",
+        yaxis_title="Test Accuracy",
+        template="plotly_dark",
+        showlegend=True,
+    )
+
+    # Save a plot as an HTML file
+    fig.write_html(save_file_path)
 
     logger.info(f"Comparison plot saved to {save_file_path}.")
 
@@ -144,3 +192,82 @@ def save_all_results(df):
     df.to_csv(save_file_path, index=False)
 
     logger.info(f"Results saved to {save_file_path}.")
+
+
+def save_tuner_results(tuner, num_trials=10):
+    """Saves tuner trial results as a CSV file."""
+    results = []
+    trials = tuner.oracle.get_best_trials(
+        num_trials=num_trials
+    )  # Specify an integer for num_trials
+    for trial in trials:
+        trial_data = trial.hyperparameters.values
+        trial_data["val_accuracy"] = trial.score
+        results.append(trial_data)
+
+    results_df = pd.DataFrame(results)
+    save_dir = get_artifacts_dir(Config.TUNER_DIR)
+    save_file_path = os.path.join(save_dir, f"tuner_results_{Config.TIMESTAMP}.csv")
+    results_df.to_csv(save_file_path, index=False)
+    logger.info(f"Tuner results saved to {save_file_path}")
+
+
+def plot_tuner_trials(tuner):
+    """Generates an interactive heatmap to compare validation accuracy across trials using Plotly."""
+    trials = list(tuner.oracle.trials.values())  # Retrieve all trials
+    best_trial = tuner.oracle.get_best_trials(num_trials=1)[0]  # Get the best trial
+
+    save_dir = get_artifacts_dir(Config.PLOT_DIR)
+    save_file_path = os.path.join(save_dir, f"trial_comparison_heatmap_{Config.TIMESTAMP}.html")
+
+    # Consolidate all trial data into a DataFrame for easier plotting
+    trial_data = []
+    for trial in trials:
+        trial_info = trial.hyperparameters.values.copy()
+        trial_info["val_accuracy"] = trial.score
+        trial_info["trial_id"] = trial.trial_id
+        trial_data.append(trial_info)
+
+    df_trials = pd.DataFrame(trial_data)
+
+    # Add a column to indicate the best trial
+    df_trials["is_best"] = df_trials["trial_id"] == best_trial.trial_id
+
+    # Generate a heatmap using Plotly
+    heatmap_data = df_trials.pivot(index="trial_id", values="val_accuracy", columns="rnn_units")
+
+    fig = go.Figure(
+        data=go.Heatmap(
+            z=heatmap_data.values,
+            x=heatmap_data.columns,
+            y=heatmap_data.index,
+            colorscale="Viridis",
+            colorbar=dict(title="Validation Accuracy"),
+        )
+    )
+
+    # Highlight the best trial and add text annotations for values
+    fig.add_trace(
+        go.Scatter(
+            x=[best_trial.hyperparameters.get("rnn_units")],
+            y=[best_trial.trial_id],
+            mode="markers+text",
+            marker=dict(size=12, color="red"),
+            name="Best Trial",
+            text=[f"Best: {best_trial.score:.3f}"],  # Show the best score
+            textposition="bottom right",
+        )
+    )
+
+    # Add layout details
+    fig.update_layout(
+        title="Validation Accuracy Across Trials",
+        xaxis_title="RNN Units",
+        yaxis_title="Trial ID",
+        template="plotly_dark",
+    )
+
+    # Save the heatmap as an HTML file
+    fig.write_html(save_file_path)
+
+    logger.info(f"Saved heatmap of all trials to {save_file_path}.")
