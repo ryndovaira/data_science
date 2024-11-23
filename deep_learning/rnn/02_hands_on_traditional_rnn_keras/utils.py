@@ -6,11 +6,8 @@ import matplotlib.pyplot as plt
 
 from config import Config
 
-
-# def get_dir_path(base_dir: str, *sub_dirs: str) -> str:
-#     dir_path = os.path.join(os.getcwd(), base_dir, Config.name(), *sub_dirs)
-#     os.makedirs(dir_path, exist_ok=True)
-#     return dir_path
+# Get the existing logger configured in main.py
+logger = logging.getLogger()
 
 
 def get_artifacts_dir(base_dir: str, *sub_dirs: str) -> str:
