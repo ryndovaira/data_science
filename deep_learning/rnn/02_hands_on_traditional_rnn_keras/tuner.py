@@ -6,7 +6,10 @@ from tensorflow.keras.models import Sequential
 
 from config import Config
 from data_preprocessing import load_and_preprocess_data
-from utils import setup_logger, save_model, checkpoint_path, plot_history, save_history, get_artifacts_dir, save_tuner_results, plot_tuner_trials
+from utils import checkpoint_path, get_artifacts_dir
+from logger import setup_logger
+from plotter import plot_history, plot_tuner_trials
+from saver import save_model, save_history, save_tuner_results
 
 # Setup logger
 logger = setup_logger()
@@ -34,9 +37,7 @@ def model_builder(hp):
 
     model = Sequential(
         [
-            Embedding(
-                input_dim=Config.MAX_FEATURES, output_dim=embedding_dim
-            ),
+            Embedding(input_dim=Config.MAX_FEATURES, output_dim=embedding_dim),
             SimpleRNN(rnn_units),
             Dropout(dropout_rate),
             Dense(1, activation="sigmoid"),
