@@ -1,6 +1,6 @@
 import json
-
 import os
+import logging
 
 import pandas as pd
 
@@ -8,8 +8,6 @@ from config import Config
 from utils import get_artifacts_dir
 
 # Get the existing logger configured in main.py
-import logging
-
 logger = logging.getLogger()
 
 
