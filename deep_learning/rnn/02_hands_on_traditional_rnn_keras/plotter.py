@@ -125,7 +125,7 @@ def plot_history(history):
         title="Training and Validation Metrics Over Epochs",
         xaxis_title="Epoch",
         yaxis_title="Metric Value",
-        template="plotly_dark",
+        # template="plotly_dark",
         showlegend=True,
         legend=dict(orientation="h", yanchor="bottom", y=-0.2),
     )
@@ -205,7 +205,7 @@ def plot_all_results(results_df):
         title="Test Accuracy vs. Sequence Length",
         xaxis_title="Max Sequence Length",
         yaxis_title="Test Accuracy",
-        template="plotly_dark",
+        # template="plotly_dark",
         showlegend=True,
     )
 
@@ -269,7 +269,7 @@ def plot_tuner_trials(tuner):
         title="Validation Accuracy Across Trials",
         xaxis_title="RNN Units",
         yaxis_title="Trial ID",
-        template="plotly_dark",
+        # template="plotly_dark",
     )
 
     # Save the heatmap as an HTML file
