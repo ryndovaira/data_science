@@ -11,7 +11,7 @@ class Config:
     MIN_LEN = 130
     MAX_LEN = 175
 
-    EPOCHS = 2  # Number of training epochs
+    EPOCHS = 50  # Number of training epochs
     PATIENCE = 5  # Patience for early stopping
 
     BATCH_SIZE = 32  # Number of samples per training batch
@@ -21,7 +21,7 @@ class Config:
     RANDOM_SEED = 42  # Random seed for reproducibility
 
     # Hyperband parameters
-    TUNER_MAX_EPOCHS = 2  # Number of epochs for hyperparameter tuning
+    TUNER_MAX_EPOCHS = 10  # Number of epochs for hyperparameter tuning
     HYPERBAND_FACTOR = 3
     HYPERBAND_ITERATIONS = 1
     HYPERBAND_PROJ_NAME = "trials"
