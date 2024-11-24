@@ -3,6 +3,7 @@ import os
 import logging
 
 import pandas as pd
+from keras_tuner.src.backend.io import tf
 
 from config import Config
 from utils import get_artifacts_dir
@@ -11,7 +12,7 @@ from utils import get_artifacts_dir
 logger = logging.getLogger()
 
 
-def save_model(model: "tf.keras.Model"):
+def save_model(model: tf.keras.Model):
     """Saves the model to a file."""
     save_dir = get_artifacts_dir(Config.MODEL_DIR)
     model.save(os.path.join(save_dir, f"model_{Config.min_max_len()}_{Config.TIMESTAMP}.keras"))
