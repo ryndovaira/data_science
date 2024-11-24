@@ -66,112 +66,113 @@ def plot_history(history):
 
     epochs = list(range(1, len(history.history["loss"]) + 1))
 
-    # Create the figure
-    fig = go.Figure()
+    training_color = "#50fa7b"  # Green for training metrics
+    validation_color = "#ff5555"  # Red for validation metrics
 
-    # Add training loss
+    # Create subplots with proper vertical spacing
+    fig = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=False,  # Separate X-axes to allow tick labels on both subplots
+        vertical_spacing=0.1,  # Spacing between subplots
+        subplot_titles=("Loss Over Epochs", "Accuracy Over Epochs"),
+    )
+
+    # Add loss traces with numeric annotations
     fig.add_trace(
         go.Scatter(
             x=epochs,
             y=history.history["loss"],
-            mode="markers+lines",
+            mode="markers+lines+text",
             name="Training Loss",
-            marker=dict(color="blue"),
-        )
+            marker=dict(color=training_color),
+            text=[f"{val:.3f}" for val in history.history["loss"]],
+            textposition="top center",
+        ),
+        row=1,
+        col=1,
     )
-    # Add validation loss
     fig.add_trace(
         go.Scatter(
             x=epochs,
             y=history.history["val_loss"],
-            mode="markers+lines",
+            mode="markers+lines+text",
             name="Validation Loss",
-            marker=dict(color="orange"),
-        )
+            marker=dict(color=validation_color),
+            text=[f"{val:.3f}" for val in history.history["val_loss"]],
+            textposition="top center",
+        ),
+        row=1,
+        col=1,
     )
-    # Add training accuracy
+
+    # Add accuracy traces with numeric annotations
     fig.add_trace(
         go.Scatter(
             x=epochs,
             y=history.history["accuracy"],
-            mode="markers+lines",
+            mode="markers+lines+text",
             name="Training Accuracy",
-            marker=dict(color="green"),
-        )
+            marker=dict(color=training_color),
+            text=[f"{val:.3f}" for val in history.history["accuracy"]],
+            textposition="top center",
+        ),
+        row=2,
+        col=1,
     )
-    # Add validation accuracy
     fig.add_trace(
         go.Scatter(
             x=epochs,
             y=history.history["val_accuracy"],
-            mode="markers+lines",
+            mode="markers+lines+text",
             name="Validation Accuracy",
-            marker=dict(color="red"),
-        )
+            marker=dict(color=validation_color),
+            text=[f"{val:.3f}" for val in history.history["val_accuracy"]],
+            textposition="top center",
+        ),
+        row=2,
+        col=1,
     )
 
-    # Add vertical and horizontal traces for each epoch
-    for epoch, train_loss, val_loss, train_acc, val_acc in zip(
-        epochs,
-        history.history["loss"],
-        history.history["val_loss"],
-        history.history["accuracy"],
-        history.history["val_accuracy"],
-    ):
-        # Add numeric annotations near each point
-        fig.add_trace(
-            go.Scatter(
-                x=[epoch],
-                y=[train_loss],
-                mode="text",
-                text=[f"{train_loss:.3f}"],
-                textposition="top center",
-                showlegend=False,
-            )
-        )
-        fig.add_trace(
-            go.Scatter(
-                x=[epoch],
-                y=[val_loss],
-                mode="text",
-                text=[f"{val_loss:.3f}"],
-                textposition="top center",
-                showlegend=False,
-            )
-        )
-        fig.add_trace(
-            go.Scatter(
-                x=[epoch],
-                y=[train_acc],
-                mode="text",
-                text=[f"{train_acc:.3f}"],
-                textposition="bottom center",
-                showlegend=False,
-            )
-        )
-        fig.add_trace(
-            go.Scatter(
-                x=[epoch],
-                y=[val_acc],
-                mode="text",
-                text=[f"{val_acc:.3f}"],
-                textposition="bottom center",
-                showlegend=False,
-            )
-        )
-
-    # Add layout details
+    # Update layout for title, legend, and margins
     fig.update_layout(
-        title="Training and Validation Metrics Over Epochs",
-        xaxis_title="Epoch",
-        yaxis_title="Metric Value",
-        showlegend=True,
-        legend=dict(orientation="h", yanchor="bottom", y=-0.2),
+        height=800,  # Increase height for better spacing
+        title=dict(
+            text="Training and Validation Metrics Over Epochs",
+            y=0.98,  # Place title near the top
+            x=0.5,
+            xanchor="center",
+            yanchor="top",
+        ),
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            yanchor="bottom",
+            y=1.05,  # Position directly below the title
+            xanchor="center",
+            x=0.5,
+        ),
+        margin=dict(
+            t=120,  # Top margin for title and legend
+            b=50,  # Bottom margin
+            l=60,  # Left margin
+            r=60,  # Right margin
+        ),
     )
 
-    # Save a plot as an HTML file
-    fig.write_html(save_file_path)
+    # Add titles and tick labels to X and Y axes
+    fig.update_yaxes(title_text="Loss", row=1, col=1)
+    fig.update_yaxes(title_text="Accuracy", row=2, col=1)
+    fig.update_xaxes(
+        tickmode="linear",
+        row=1,
+        col=1,
+    )  # Add numeric ticks for the top plot
+    fig.update_xaxes(
+        title_text="Epochs", tickmode="linear", row=2, col=1
+    )  # Numeric ticks for the bottom plot
 
+    # Save the plot
+    fig.write_html(save_file_path)
     logger.info(f"History plot saved to {save_file_path}.")
 
 
@@ -180,71 +181,39 @@ def plot_all_results(results_df):
     save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
     save_file_path = os.path.join(save_dir, f"accuracy_vs_length_{Config.TIMESTAMP}.html")
 
-    # Create a scatter plot for accuracy vs. sequence length
     fig = go.Figure()
 
-    # Add the main scatter plot
+    # Add scatter plot for accuracy vs. sequence length
     fig.add_trace(
         go.Scatter(
             x=results_df["max_len"],
             y=results_df["test_accuracy"],
             mode="markers+lines+text",
-            marker=dict(size=10, color="blue"),
+            text=results_df["test_accuracy"].round(3),
             name="Test Accuracy",
-            text=results_df["test_accuracy"].round(3),  # Display accuracy rounded to 3 decimals
-            textposition="top center",  # Position text above markers
         )
     )
 
-    # Add vertical and horizontal reference lines (traces to X and Y axes) and value annotations
-    for i, row in results_df.iterrows():
-        # Vertical line to X-axis
-        fig.add_shape(
-            type="line",
-            x0=row["max_len"],
-            x1=row["max_len"],
-            y0=0,
-            y1=row["test_accuracy"],
-            line=dict(color="gray", dash="dot"),
-        )
-        # Horizontal line to Y-axis
-        fig.add_shape(
-            type="line",
-            x0=0,
-            x1=row["max_len"],
-            y0=row["test_accuracy"],
-            y1=row["test_accuracy"],
-            line=dict(color="gray", dash="dot"),
-        )
-        # Add X-axis value annotation
-        fig.add_trace(
-            go.Scatter(
-                x=[row["max_len"]],
-                y=[0],
-                mode="text",
-                text=[str(row["max_len"])],
-                textposition="bottom center",
-                showlegend=False,
+    # Add annotations only for outliers or best points
+    threshold = results_df["test_accuracy"].mean() + results_df["test_accuracy"].std()
+    for _, row in results_df.iterrows():
+        if row["test_accuracy"] > threshold:
+            fig.add_trace(
+                go.Scatter(
+                    x=[row["max_len"]],
+                    y=[row["test_accuracy"]],
+                    mode="text",
+                    text=[f"{row['test_accuracy']:.3f}"],
+                    textposition="top center",
+                    showlegend=False,
+                )
             )
-        )
-        # Add Y-axis value annotation
-        fig.add_trace(
-            go.Scatter(
-                x=[0],
-                y=[row["test_accuracy"]],
-                mode="text",
-                text=[f"{row['test_accuracy']:.3f}"],
-                textposition="middle right",
-                showlegend=False,
-            )
-        )
 
-    # Add layout details
     fig.update_layout(
         title="Test Accuracy vs. Sequence Length",
         xaxis_title="Max Sequence Length",
         yaxis_title="Test Accuracy",
-        showlegend=True,
+        legend=dict(orientation="v", xanchor="right", x=1.05, yanchor="top", y=1.5),
     )
 
     # Save a plot as an HTML file
