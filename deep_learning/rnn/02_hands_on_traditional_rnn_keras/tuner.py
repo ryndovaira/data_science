@@ -1,6 +1,6 @@
 import keras_tuner as kt
 import tensorflow as tf
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, Dropout
 from tensorflow.keras.models import Sequential
 
@@ -73,7 +73,12 @@ def tune_hyperparameters():
             epochs=Config.TUNER_MAX_EPOCHS,
             validation_data=(x_val, y_val),
             batch_size=Config.BATCH_SIZE,
-            callbacks=[EarlyStopping(monitor="val_loss", patience=Config.PATIENCE)],
+            callbacks=[
+                EarlyStopping(monitor="val_loss", patience=Config.PATIENCE),
+                ReduceLROnPlateau(
+                    monitor="val_loss", factor=0.2, patience=Config.PATIENCE, min_lr=1e-6, verbose=1
+                ),
+            ],
         )
     except Exception as e:
         logger.error(f"Hyperparameter tuning failed: {e}")
