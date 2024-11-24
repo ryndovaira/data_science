@@ -1,8 +1,6 @@
 import os
 import logging
 
-import pandas as pd
-from plotly import graph_objects as go
 import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
