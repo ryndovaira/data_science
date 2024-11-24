@@ -64,7 +64,6 @@ def plot_history(history):
         save_dir, f"history_{Config.min_max_len()}_{Config.TIMESTAMP}.html"
     )
 
-    # Create the epoch list
     epochs = list(range(1, len(history.history["loss"]) + 1))
 
     # Create the figure
