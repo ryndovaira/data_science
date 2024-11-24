@@ -3,6 +3,7 @@ from datetime import datetime
 
 class Config:
     """Configuration for the project"""
+
     MAX_FEATURES = 5000  # Maximum number of words to keep in the vocabulary
 
     # Sequence length buckets
