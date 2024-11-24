@@ -38,5 +38,5 @@ class Config:
     TIMESTAMP = datetime.now().strftime("%y%m%d_%H%M%S")  # Timestamp for filenames
 
     @classmethod
-    def name(cls) -> str:
-        return f"{cls.MIN_LEN}_{cls.MAX_LEN}_{cls.HYPERBAND_FACTOR}_{cls.HYPERBAND_ITERATIONS}"
+    def min_max_len(cls) -> str:
+        return f"{cls.MIN_LEN}_{cls.MAX_LEN}"

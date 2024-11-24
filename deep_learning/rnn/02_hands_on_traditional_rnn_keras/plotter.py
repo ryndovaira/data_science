@@ -19,7 +19,9 @@ pio.templates.default = "plotly_dark"
 def plot_history(history):
     """Plots the training history and saves the plot to a file using Plotly."""
     save_dir = get_artifacts_dir(Config.PLOT_DIR)
-    save_file_path = os.path.join(save_dir, f"history_{Config.TIMESTAMP}.html")
+    save_file_path = os.path.join(
+        save_dir, f"history_{Config.min_max_len()}_{Config.TIMESTAMP}.html"
+    )
 
     # Create the epochs list
     epochs = list(range(1, len(history.history["loss"]) + 1))
@@ -137,7 +139,7 @@ def plot_history(history):
 def plot_all_results(results_df):
     """Generate an interactive plot to compare accuracy across length buckets using Plotly."""
     save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
-    save_file_path = os.path.join(save_dir, "accuracy_vs_length.html")
+    save_file_path = os.path.join(save_dir, f"accuracy_vs_length_{Config.TIMESTAMP}.html")
 
     # Create a scatter plot for accuracy vs. sequence length
     fig = go.Figure()
@@ -219,7 +221,9 @@ def plot_tuner_trials(tuner):
     best_trial = tuner.oracle.get_best_trials(num_trials=1)[0]  # Get the best trial
 
     save_dir = get_artifacts_dir(Config.PLOT_DIR)
-    save_file_path = os.path.join(save_dir, f"trial_comparison_heatmap_{Config.TIMESTAMP}.html")
+    save_file_path = os.path.join(
+        save_dir, f"trials_{Config.min_max_len()}_{Config.TIMESTAMP}.html"
+    )
 
     # Consolidate all trial data into a DataFrame for easier plotting
     trial_data = []

@@ -63,7 +63,7 @@ def tune_hyperparameters():
         max_epochs=Config.TUNER_MAX_EPOCHS,
         factor=Config.HYPERBAND_FACTOR,
         directory=get_artifacts_dir(Config.TUNER_DIR),
-        project_name=Config.HYPERBAND_PROJ_NAME,
+        project_name=f"{Config.HYPERBAND_PROJ_NAME}_{Config.min_max_len()}",
         hyperband_iterations=Config.HYPERBAND_ITERATIONS,
     )
     try:
