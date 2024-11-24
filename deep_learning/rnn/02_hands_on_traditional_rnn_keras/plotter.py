@@ -12,8 +12,49 @@ from utils import get_artifacts_dir
 logger = logging.getLogger()
 
 
-# Set the predefined theme globally
-pio.templates.default = "plotly_dark"
+# Define the Dracula theme
+dracula_template = {
+    "layout": {
+        "paper_bgcolor": "#282a36",  # Background color
+        "plot_bgcolor": "#282a36",  # Plot area background
+        "font": {
+            "color": "#f8f8f2",  # Text color
+            "size": 12,
+        },
+        "colorway": [
+            "#ff5555",  # Red
+            "#50fa7b",  # Green
+            "#bd93f9",  # Purple
+            "#f1fa8c",  # Yellow
+            "#6272a4",  # Blue
+        ],
+        "xaxis": {
+            "gridcolor": "#44475a",  # Grid lines
+            "zerolinecolor": "#44475a",  # Zero line
+            "tickcolor": "#f8f8f2",
+        },
+        "yaxis": {
+            "gridcolor": "#44475a",
+            "zerolinecolor": "#44475a",
+            "tickcolor": "#f8f8f2",
+        },
+        "legend": {
+            "bgcolor": "#282a36",  # Legend background
+            "bordercolor": "#44475a",  # Legend border
+            "font": {"color": "#f8f8f2"},
+        },
+        "coloraxis": {
+            "colorbar": {
+                "outlinecolor": "#f8f8f2",  # Colorbar border
+                "tickcolor": "#f8f8f2",
+            }
+        },
+    }
+}
+
+# Register the template and set it as default
+pio.templates["dracula"] = dracula_template
+pio.templates.default = "dracula"
 
 
 def plot_history(history):
