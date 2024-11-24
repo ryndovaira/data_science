@@ -8,7 +8,7 @@ from config import Config
 from data_preprocessing import load_and_preprocess_data
 from utils import checkpoint_path, get_artifacts_dir
 from logger import setup_logger
-from plotter import plot_history, plot_tuner_trials
+from plotter import plot_history
 from saver import save_model, save_history, save_tuner_results
 
 # Setup logger
@@ -79,13 +79,10 @@ def tune_hyperparameters():
         logger.error(f"Hyperparameter tuning failed: {e}")
         raise
 
-    # Get best hyperparameters
     best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
     logger.info(f"Best hyperparameters found: {best_hps.values}")
 
-    # Save and plot tuning results
     save_tuner_results(tuner)
-    plot_tuner_trials(tuner)
 
     return best_hps
 
