@@ -18,7 +18,6 @@ def checkpoint_path():
     """Returns the file path for saving model checkpoints."""
     save_dir = get_artifacts_dir(Config.CHECKPOINT_DIR)
 
-    # Use a custom file path with placeholders for epoch and validation loss
     return os.path.join(
         save_dir,
         f"model_checkpoint_{Config.TIMESTAMP}_epoch-{{epoch:02d}}_val-loss-{{val_loss:.4f}}.keras",
