@@ -11,7 +11,8 @@ class Config:
     MIN_LEN = 130
     MAX_LEN = 175
 
-    EPOCHS = 50  # Number of training epochs
+    EPOCHS = 2  # Number of training epochs
+    PATIENCE = 5  # Patience for early stopping
 
     BATCH_SIZE = 32  # Number of samples per training batch
     DEV_MODE = False  # Toggle for development mode (using fewer samples)

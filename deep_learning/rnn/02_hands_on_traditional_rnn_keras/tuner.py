@@ -73,7 +73,7 @@ def tune_hyperparameters():
             epochs=Config.TUNER_MAX_EPOCHS,
             validation_data=(x_val, y_val),
             batch_size=Config.BATCH_SIZE,
-            callbacks=[EarlyStopping(monitor="val_loss", patience=2)],
+            callbacks=[EarlyStopping(monitor="val_loss", patience=Config.PATIENCE)],
         )
     except Exception as e:
         logger.error(f"Hyperparameter tuning failed: {e}")
@@ -104,7 +104,7 @@ def retrain_with_best_hps(best_hps):
         validation_data=(x_val, y_val),
         batch_size=Config.BATCH_SIZE,
         callbacks=[
-            EarlyStopping(monitor="val_loss", patience=2, restore_best_weights=True),
+            EarlyStopping(monitor="val_loss", patience=Config.PATIENCE, restore_best_weights=True),
             ModelCheckpoint(filepath=checkpoint_path(), monitor="val_loss", save_best_only=True),
         ],
     )
