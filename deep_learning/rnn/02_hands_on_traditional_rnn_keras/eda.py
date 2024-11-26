@@ -157,7 +157,7 @@ def main():
     length_buckets = compute_length_buckets(train_lengths, test_lengths)
     print("\nNumber of Buckets:", len(length_buckets))
 
-    # Print number of sequences in each bucket
+    # Print the number of sequences in each bucket
     for i, (start, end) in enumerate(length_buckets):
         bucket_count = sum(1 for length in train_lengths if start <= length < end)
         print(f"Bucket {i + 1}: {bucket_count} sequences")
