@@ -127,7 +127,12 @@ def compute_length_buckets(train_lengths, test_lengths):
     return length_buckets
 
 
-def main():
+def load_dataset_compute_length_buckets():
+    """
+    Load the IMDB dataset and compute dynamic length buckets.
+    :return: A list of tuples representing dynamic length buckets.
+    """
+
     # Load data with default settings
     (x_train, y_train), (x_test, y_test) = imdb.load_data()
 
@@ -183,6 +188,11 @@ def main():
         test_p99,
         save_filename="test_sequence_lengths.html",
     )
+
+
+
+def main():
+    load_dataset_compute_length_buckets()
 
 
 if __name__ == "__main__":
