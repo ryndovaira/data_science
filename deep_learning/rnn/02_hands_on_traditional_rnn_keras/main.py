@@ -5,6 +5,7 @@ model tuning, training, and evaluation.
 
 import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
+from eda import load_dataset_compute_length_buckets
 from logger import setup_logger
 from plotter import plot_all_results
 from saver import save_all_results
@@ -13,21 +14,15 @@ from config import Config
 # Setup logger
 logger = setup_logger()
 
-# Define sequence length buckets
-LENGTH_BUCKETS = [
-    (0, 130),
-    (130, 175),
-    (175, 285),
-    (285, 590),
-    (590, 1000),
-]
-
 
 def main():
     """Main function to automate experiments across length buckets."""
+
+    length_buckets = load_dataset_compute_length_buckets()
+
     results = []  # Store results for comparison
 
-    for min_len, max_len in LENGTH_BUCKETS:
+    for min_len, max_len in length_buckets:
         logger.info(f"Starting experiment for length bucket: {min_len}-{max_len}.")
 
         # Update Config dynamically
