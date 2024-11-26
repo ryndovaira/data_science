@@ -96,7 +96,35 @@ def plot_hist_and_quartiles_plotly(
     fig.write_html(save_path)
     print(f"Plot saved to {save_path}")
 
-    fig.show()
+
+def compute_length_buckets(train_lengths, test_lengths):
+    """
+    Compute dynamic length buckets based on dataset statistics.
+
+    Args:
+        train_lengths: List or array of sequence lengths from the training set.
+        test_lengths: List or array of sequence lengths from the test set.
+
+    Returns:
+        A list of tuples representing dynamic length buckets.
+    """
+    # Combine train and test lengths into a single dataset
+    combined_lengths = np.concatenate([train_lengths, test_lengths])
+
+    # Compute summary statistics dynamically
+    _, _, max_len, q1, q2, q3, p95, p99 = get_statistics(combined_lengths)
+
+    # Create dynamic length buckets based on these statistics
+    length_buckets = [
+        (0, int(q1)),  # 0 to Q1
+        (int(q1), int(q2)),  # Q1 to Median
+        (int(q2), int(q3)),  # Median to Q3
+        (int(q3), int(p95)),  # Q3 to 95th Percentile
+        (int(p95), int(p99)),  # 95th Percentile to 99th Percentile
+        (int(p99), int(max_len)),  # 99th Percentile to Max
+    ]
+
+    return length_buckets
 
 
 def main():
@@ -124,6 +152,17 @@ def main():
     print_statistics(
         test_mean, test_median, test_max, test_q1, test_q2, test_q3, test_p95, test_p99
     )
+
+    # Compute dynamic buckets
+    length_buckets = compute_length_buckets(train_lengths, test_lengths)
+    print("\nNumber of Buckets:", len(length_buckets))
+
+    # Print number of sequences in each bucket
+    for i, (start, end) in enumerate(length_buckets):
+        bucket_count = sum(1 for length in train_lengths if start <= length < end)
+        print(f"Bucket {i + 1}: {bucket_count} sequences")
+
+    print("Dynamic Length Buckets:", length_buckets)
 
     plot_hist_and_quartiles_plotly(
         train_lengths,
