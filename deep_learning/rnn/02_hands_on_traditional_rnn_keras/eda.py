@@ -29,7 +29,7 @@ def print_statistics(mean, median, max_len, q1, q2, q3, p95, p99):
     print(f"99th Percentile: {p99:.2f}")
 
 
-def plot_hist_and_quartiles_plotly(
+def save_hist_and_quartiles_plotly(
     data_lengths,
     q1,
     q2,
@@ -164,7 +164,7 @@ def main():
 
     print("Dynamic Length Buckets:", length_buckets)
 
-    plot_hist_and_quartiles_plotly(
+    save_hist_and_quartiles_plotly(
         train_lengths,
         train_q1,
         train_q2,
@@ -174,7 +174,7 @@ def main():
         save_filename="train_sequence_lengths.html",
     )
 
-    plot_hist_and_quartiles_plotly(
+    save_hist_and_quartiles_plotly(
         test_lengths,
         test_q1,
         test_q2,
