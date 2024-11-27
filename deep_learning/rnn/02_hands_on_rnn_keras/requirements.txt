@@ -6,4 +6,3 @@ plotly
 scikit-learn
 tensorboard
 tensorflow[and-cuda]   # tensorflow
-tensorflow_datasets
