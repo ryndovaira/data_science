@@ -312,5 +312,5 @@ if __name__ == "__main__":
     import pandas as pd
 
     name = f"length_bucket_results_241127_181825.csv"
-    results_df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
-    plot_all_results(results_df)
+    df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
+    plot_all_results(df)
