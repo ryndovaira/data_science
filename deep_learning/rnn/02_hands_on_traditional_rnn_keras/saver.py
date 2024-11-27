@@ -6,7 +6,7 @@ import pandas as pd
 from keras_tuner.src.backend.io import tf
 
 from config import Config
-from utils import get_artifacts_arch_dir
+from utils import get_artifacts_arch_dir, get_artifacts_dir
 
 # Get the existing logger configured in main.py
 logger = logging.getLogger()
@@ -35,7 +35,7 @@ def save_history(history):
 
 def save_all_results(df):
     """Save all results to a CSV file."""
-    save_dir = get_artifacts_arch_dir(Config.FINAL_STAT_DIR)
+    save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
     save_file_path = os.path.join(save_dir, f"length_bucket_results_{Config.TIMESTAMP}.csv")
     df.to_csv(save_file_path, index=False)
 
