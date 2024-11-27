@@ -11,7 +11,6 @@ from utils import get_artifacts_arch_dir, get_artifacts_dir
 # Get the existing logger configured in main.py
 logger = logging.getLogger()
 
-
 # Define the Dracula theme
 dracula_template = {
     "layout": {
