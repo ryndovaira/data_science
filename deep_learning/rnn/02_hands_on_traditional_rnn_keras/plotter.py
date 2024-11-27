@@ -261,21 +261,46 @@ def plot_all_results(results_df):
                     go.Scatter(
                         x=arch_df["max_len"],
                         y=arch_df[f"{metric_type}_{metric}"],
-                        mode="lines+markers",
+                        mode="lines+markers+text",
+                        text=arch_df[f"{metric_type}_{metric}"].round(2).astype(str),
+                        textposition="top center",
                         name=f"{arch} {metric_type.title()} {metric.title()}",
                         line=dict(color=color_map[arch], dash=dash_style),
+                        legendgroup=metric_type,
                     ),
                     row=row,
                     col=1,
                 )
 
     fig.update_layout(
-        title="Metrics Comparison Across Architectures (Toggleable Legends)",
-        xaxis_title="Max Sequence Length",
-        yaxis_title="Accuracy",
-        yaxis2=dict(title="Loss"),
-        height=900,
-        legend=dict(orientation="h", y=-0.3, x=0.5, xanchor="center"),
+        title=dict(
+            text="Metrics Comparison Across Architectures",
+            x=0.5,
+            xanchor="center",
+            yanchor="top",
+        ),
+        xaxis=dict(title="Max Sequence Length (Log Scale)", type="log"),
+        yaxis=dict(
+            title="Accuracy",
+            range=[
+                results_df[["train_accuracy", "val_accuracy", "test_accuracy"]].max().max() + 0.25,
+                results_df[["train_accuracy", "val_accuracy", "test_accuracy"]].min().min() - 0.25,
+            ],
+        ),
+        xaxis2=dict(title="Max Sequence Length (Log Scale)", type="log"),
+        yaxis2=dict(
+            title="Loss",
+            range=[
+                results_df[["train_loss", "val_loss", "test_loss"]].min().min() - 0.25,
+                results_df[["train_loss", "val_loss", "test_loss"]].max().max() + 0.25,
+            ],
+        ),
+        height=800,
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            xanchor="center",
+            x=0.5,
+        ),
     )
 
     fig.write_html(save_file_path)
