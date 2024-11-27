@@ -31,7 +31,7 @@ def configure_tf_device():
 
 def model_builder(hp):
     """Builds the model for hyperparameter tuning."""
-    embedding_dim = hp.Choice("embedding_dim", values=[32, 64, 128])
+    embedding_dim = hp.Choice("embedding_dim", values=[32, 64, 128, 256])
     rnn_units = hp.Int("rnn_units", min_value=16, max_value=128, step=16)
     dropout_rate = hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
 
