@@ -235,9 +235,8 @@ def plot_all_results(results_df):
     fig = make_subplots(
         rows=2,
         cols=1,
-        shared_xaxes=True,
-        subplot_titles=["Accuracy (Train, Validation, Test)", "Loss (Train, Validation, Test)"],
-        vertical_spacing=0.1,
+        shared_xaxes=False,
+        vertical_spacing=0.15,
     )
 
     architectures = results_df["architecture"].unique()
