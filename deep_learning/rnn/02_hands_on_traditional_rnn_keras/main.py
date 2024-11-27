@@ -22,8 +22,8 @@ def main():
 
     results = []  # Store results for comparison
 
-    for min_len, max_len in length_buckets:
-        logger.info(f"Starting experiment for length bucket: {min_len}-{max_len}.")
+        for min_len, max_len in length_buckets:
+            logger.info(f"Starting experiment for length bucket: {min_len}-{max_len}.")
 
         # Update Config dynamically
         Config.MIN_LEN = min_len

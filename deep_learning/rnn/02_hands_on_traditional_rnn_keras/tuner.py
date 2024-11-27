@@ -35,15 +35,24 @@ def model_builder(hp):
     rnn_units = hp.Int("rnn_units", min_value=16, max_value=128, step=16)
     dropout_rate = hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
 
-    model = Sequential(
-        [
-            Embedding(input_dim=Config.MAX_FEATURES, output_dim=embedding_dim),
-            SimpleRNN(rnn_units),
-            Dropout(dropout_rate),
-            Dense(1, activation="sigmoid"),
-        ]
-    )
     model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+    # Model selection based on Config.ARCHITECTURE
+    model = Sequential()
+    model.add(Embedding(input_dim=Config.MAX_FEATURES, output_dim=embedding_dim))
+
+    # TODO: add layer stacking
+    if Config.ARCHITECTURE == "VanillaRNN":
+        model.add(SimpleRNN(rnn_units))
+    elif Config.ARCHITECTURE == "LSTM":
+        model.add(LSTM(rnn_units))
+    elif Config.ARCHITECTURE == "GRU":
+        model.add(GRU(rnn_units))
+    else:
+        raise ValueError(f"Unsupported architecture: {Config.ARCHITECTURE}")
+
+    model.add(Dropout(dropout_rate))
+    model.add(Dense(1, activation="sigmoid"))
+
     return model
 
 
