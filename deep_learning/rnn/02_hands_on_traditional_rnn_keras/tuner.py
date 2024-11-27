@@ -2,7 +2,7 @@ import keras_tuner as kt
 import tensorflow as tf
 from keras.src.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
-from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, Dropout
+from tensorflow.keras.layers import GRU, LSTM, SimpleRNN, Embedding, Dense, Dropout
 from tensorflow.keras.models import Sequential
 
 from config import Config
