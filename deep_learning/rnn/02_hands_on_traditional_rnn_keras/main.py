@@ -68,10 +68,10 @@ def main():
                     f"Experiment failed for length bucket {min_len}-{max_len}: {e}", exc_info=True
                 )
 
-        # Save and plot results
-        results_df = pd.DataFrame(results)
-        save_all_results(results_df)
         plot_all_results_old(results_df)
+    # Save and plot results
+    results_df = pd.DataFrame(results)
+    save_all_results(results_df)
     plot_all_results(results_df)
 
 
