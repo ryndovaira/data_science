@@ -175,52 +175,6 @@ def plot_history(history):
     logger.info(f"History plot saved to {save_file_path}.")
 
 
-def plot_all_results_old(results_df):
-    """Generate an interactive plot to compare accuracy across length buckets using Plotly."""
-    save_dir = get_artifacts_arch_dir(Config.FINAL_STAT_DIR)
-    save_file_path = os.path.join(save_dir, f"accuracy_vs_length_{Config.TIMESTAMP}.html")
-
-    fig = go.Figure()
-
-    # Add scatter plot for accuracy vs. sequence length
-    fig.add_trace(
-        go.Scatter(
-            x=results_df["max_len"],
-            y=results_df["test_accuracy"],
-            mode="markers+lines+text",
-            text=results_df["test_accuracy"].round(3),
-            name="Test Accuracy",
-        )
-    )
-
-    # Add annotations only for outliers or best points
-    threshold = results_df["test_accuracy"].mean() + results_df["test_accuracy"].std()
-    for _, row in results_df.iterrows():
-        if row["test_accuracy"] > threshold:
-            fig.add_trace(
-                go.Scatter(
-                    x=[row["max_len"]],
-                    y=[row["test_accuracy"]],
-                    mode="text",
-                    text=[f"{row['test_accuracy']:.3f}"],
-                    textposition="top center",
-                    showlegend=False,
-                )
-            )
-
-    fig.update_layout(
-        title="Test Accuracy vs. Sequence Length",
-        xaxis_title="Max Sequence Length",
-        yaxis_title="Test Accuracy",
-        legend=dict(orientation="v", xanchor="right", x=1.05, yanchor="top", y=1.5),
-    )
-
-    # Save a plot as an HTML file
-    fig.write_html(save_file_path)
-
-    logger.info(f"Comparison plot saved to {save_file_path}.")
-
-
 def plot_all_results(results_df):
     """
     Generate an interactive plot to compare accuracy and loss across architectures and length buckets using Plotly.

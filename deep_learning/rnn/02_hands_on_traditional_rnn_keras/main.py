@@ -7,7 +7,7 @@ import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
 from eda import load_dataset_compute_length_buckets
 from logger import setup_logger
-from plotter import plot_all_results_old, plot_all_results
+from plotter import plot_all_results
 from saver import save_all_results
 from config import Config
 
@@ -68,7 +68,6 @@ def main():
                     f"Experiment failed for length bucket {min_len}-{max_len}: {e}", exc_info=True
                 )
 
-        plot_all_results_old(results_df)
     # Save and plot results
     results_df = pd.DataFrame(results)
     save_all_results(results_df)
