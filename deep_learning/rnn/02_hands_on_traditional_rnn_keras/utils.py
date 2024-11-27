@@ -9,7 +9,9 @@ logger = logging.getLogger()
 
 def get_artifacts_dir(base_dir: str, *sub_dirs: str) -> str:
     """Returns the directory path for saving artifacts, ensuring it exists."""
-    dir_path = os.path.join(os.getcwd(), Config.ARTIFACTS_DIR, base_dir, *sub_dirs)
+    dir_path = os.path.join(
+        os.getcwd(), Config.ARTIFACTS_DIR, base_dir, Config.ARCHITECTURE, *sub_dirs
+    )
     os.makedirs(dir_path, exist_ok=True)
     return dir_path
 

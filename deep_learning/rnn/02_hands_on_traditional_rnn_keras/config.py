@@ -6,6 +6,8 @@ class Config:
 
     MAX_FEATURES = 5000  # Maximum number of words to keep in the vocabulary
 
+    ARCHITECTURE = "VanillaRNN"  # Options: "VanillaRNN", "LSTM", "GRU"
+
     # Sequence length buckets
     # 0-130, 130-175, 175-285, 285-590, 590-1000, 0-1000
     MIN_LEN = 130
