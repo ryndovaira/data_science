@@ -230,7 +230,7 @@ def plot_all_results(results_df):
         return
 
     save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
-    save_file_path = os.path.join(save_dir, f"toggleable_metrics_{Config.TIMESTAMP}.html")
+    save_file_path = os.path.join(save_dir, f"all_metrics_{Config.TIMESTAMP}.html")
 
     fig = make_subplots(
         rows=2,
