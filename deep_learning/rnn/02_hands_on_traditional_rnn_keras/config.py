@@ -9,7 +9,6 @@ class Config:
     ARCHITECTURE = "VanillaRNN"  # Options: "VanillaRNN", "LSTM", "GRU"
 
     # Sequence length buckets
-    # 0-130, 130-175, 175-285, 285-590, 590-1000, 0-1000
     MIN_LEN = 130
     MAX_LEN = 175
 
