@@ -225,6 +225,8 @@ def plot_all_results_old(results_df):
 def plot_all_results(results_df):
     """
     Generate a single combined plot for Train, Validation, and Test metrics with toggleable legends.
+    Improved styling: VanillaRNN-blue, LSTM-green, GRU-red.
+    Test-solid, Train-dash, Validation-dot.
     """
     if results_df.empty:
         logger.warning("No data available to plot metrics.")
@@ -243,49 +245,36 @@ def plot_all_results(results_df):
 
     architectures = results_df["architecture"].unique()
 
+    # Define color mapping for architectures
+    color_map = {
+        "VanillaRNN": "blue",
+        "LSTM": "green",
+        "GRU": "red",
+    }
+
+    # Define line styles for each metric
     style_map = {
-        "VanillaRNN": {"color": "blue", "dash": "solid"},
-        "LSTM": {"color": "green", "dash": "dot"},
-        "GRU": {"color": "red", "dash": "dashdot"},
+        "train": "dash",
+        "val": "dot",
+        "test": "solid",
     }
 
     for arch in architectures:
         arch_df = results_df[results_df["architecture"] == arch]
 
         for metric, row in [("accuracy", 1), ("loss", 2)]:
-            fig.add_trace(
-                go.Scatter(
-                    x=arch_df["max_len"],
-                    y=arch_df[f"train_{metric}"],
-                    mode="lines+markers",
-                    name=f"{arch} Train {metric.title()}",
-                    line=dict(color=style_map[arch]["color"], dash=style_map[arch]["dash"]),
-                ),
-                row=row,
-                col=1,
-            )
-            fig.add_trace(
-                go.Scatter(
-                    x=arch_df["max_len"],
-                    y=arch_df[f"val_{metric}"],
-                    mode="lines+markers",
-                    name=f"{arch} Validation {metric.title()}",
-                    line=dict(color=style_map[arch]["color"], dash=style_map[arch]["dash"]),
-                ),
-                row=row,
-                col=1,
-            )
-            fig.add_trace(
-                go.Scatter(
-                    x=arch_df["max_len"],
-                    y=arch_df[f"test_{metric}"],
-                    mode="lines+markers",
-                    name=f"{arch} Test {metric.title()}",
-                    line=dict(color=style_map[arch]["color"], dash=style_map[arch]["dash"]),
-                ),
-                row=row,
-                col=1,
-            )
+            for metric_type, dash_style in style_map.items():
+                fig.add_trace(
+                    go.Scatter(
+                        x=arch_df["max_len"],
+                        y=arch_df[f"{metric_type}_{metric}"],
+                        mode="lines+markers",
+                        name=f"{arch} {metric_type.title()} {metric.title()}",
+                        line=dict(color=color_map[arch], dash=dash_style),
+                    ),
+                    row=row,
+                    col=1,
+                )
 
     fig.update_layout(
         title="Metrics Comparison Across Architectures (Toggleable Legends)",
