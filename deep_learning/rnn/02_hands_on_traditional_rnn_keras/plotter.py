@@ -176,7 +176,7 @@ def plot_history(history):
     logger.info(f"History plot saved to {save_file_path}.")
 
 
-def plot_all_results(results_df):
+def plot_all_results_old(results_df):
     """Generate an interactive plot to compare accuracy across length buckets using Plotly."""
     save_dir = get_artifacts_arch_dir(Config.FINAL_STAT_DIR)
     save_file_path = os.path.join(save_dir, f"accuracy_vs_length_{Config.TIMESTAMP}.html")
@@ -220,3 +220,81 @@ def plot_all_results(results_df):
     fig.write_html(save_file_path)
 
     logger.info(f"Comparison plot saved to {save_file_path}.")
+
+
+def plot_all_results(results_df):
+    """
+    Generate a single combined plot for Train, Validation, and Test metrics with toggleable legends.
+    """
+    if results_df.empty:
+        logger.warning("No data available to plot metrics.")
+        return
+
+    save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
+    save_file_path = os.path.join(save_dir, f"toggleable_metrics_{Config.TIMESTAMP}.html")
+
+    fig = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        subplot_titles=["Accuracy (Train, Validation, Test)", "Loss (Train, Validation, Test)"],
+        vertical_spacing=0.1,
+    )
+
+    architectures = results_df["architecture"].unique()
+
+    style_map = {
+        "VanillaRNN": {"color": "blue", "dash": "solid"},
+        "LSTM": {"color": "green", "dash": "dot"},
+        "GRU": {"color": "red", "dash": "dashdot"},
+    }
+
+    for arch in architectures:
+        arch_df = results_df[results_df["architecture"] == arch]
+
+        for metric, row in [("accuracy", 1), ("loss", 2)]:
+            fig.add_trace(
+                go.Scatter(
+                    x=arch_df["max_len"],
+                    y=arch_df[f"train_{metric}"],
+                    mode="lines+markers",
+                    name=f"{arch} Train {metric.title()}",
+                    line=dict(color=style_map[arch]["color"], dash=style_map[arch]["dash"]),
+                ),
+                row=row,
+                col=1,
+            )
+            fig.add_trace(
+                go.Scatter(
+                    x=arch_df["max_len"],
+                    y=arch_df[f"val_{metric}"],
+                    mode="lines+markers",
+                    name=f"{arch} Validation {metric.title()}",
+                    line=dict(color=style_map[arch]["color"], dash=style_map[arch]["dash"]),
+                ),
+                row=row,
+                col=1,
+            )
+            fig.add_trace(
+                go.Scatter(
+                    x=arch_df["max_len"],
+                    y=arch_df[f"test_{metric}"],
+                    mode="lines+markers",
+                    name=f"{arch} Test {metric.title()}",
+                    line=dict(color=style_map[arch]["color"], dash=style_map[arch]["dash"]),
+                ),
+                row=row,
+                col=1,
+            )
+
+    fig.update_layout(
+        title="Metrics Comparison Across Architectures (Toggleable Legends)",
+        xaxis_title="Max Sequence Length",
+        yaxis_title="Accuracy",
+        yaxis2=dict(title="Loss"),
+        height=900,
+        legend=dict(orientation="h", y=-0.3, x=0.5, xanchor="center"),
+    )
+
+    fig.write_html(save_file_path)
+    logger.info(f"Toggleable metrics plot saved to {save_file_path}.")
