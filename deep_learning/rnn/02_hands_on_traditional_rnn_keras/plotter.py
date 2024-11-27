@@ -223,9 +223,7 @@ def plot_all_results_old(results_df):
 
 def plot_all_results(results_df):
     """
-    Generate a single combined plot for Train, Validation, and Test metrics with toggleable legends.
-    Improved styling: VanillaRNN-blue, LSTM-green, GRU-red.
-    Test-solid, Train-dash, Validation-dot.
+    Generate an interactive plot to compare accuracy and loss across architectures and length buckets using Plotly.
     """
     if results_df.empty:
         logger.warning("No data available to plot metrics.")
