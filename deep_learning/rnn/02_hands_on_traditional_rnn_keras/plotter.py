@@ -280,3 +280,12 @@ def plot_all_results(results_df):
 
     fig.write_html(save_file_path)
     logger.info(f"Toggleable metrics plot saved to {save_file_path}.")
+
+
+if __name__ == "__main__":
+    # for debugging purposes
+    import pandas as pd
+
+    name = f"length_bucket_results_241127_181825.csv"
+    results_df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
+    plot_all_results(results_df)
