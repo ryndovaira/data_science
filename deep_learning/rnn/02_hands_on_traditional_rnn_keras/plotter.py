@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from config import Config
-from utils import get_artifacts_dir
+from utils import get_artifacts_arch_dir, get_artifacts_dir
 
 # Get the existing logger configured in main.py
 logger = logging.getLogger()
@@ -59,7 +59,7 @@ pio.templates.default = "dracula"
 
 def plot_history(history):
     """Plots the training history as two subplots: one for loss and one for accuracy, with numeric annotations."""
-    save_dir = get_artifacts_dir(Config.PLOT_DIR)
+    save_dir = get_artifacts_arch_dir(Config.PLOT_DIR)
     save_file_path = os.path.join(
         save_dir, f"history_{Config.min_max_len()}_{Config.TIMESTAMP}.html"
     )
@@ -178,7 +178,7 @@ def plot_history(history):
 
 def plot_all_results(results_df):
     """Generate an interactive plot to compare accuracy across length buckets using Plotly."""
-    save_dir = get_artifacts_dir(Config.FINAL_STAT_DIR)
+    save_dir = get_artifacts_arch_dir(Config.FINAL_STAT_DIR)
     save_file_path = os.path.join(save_dir, f"accuracy_vs_length_{Config.TIMESTAMP}.html")
 
     fig = go.Figure()

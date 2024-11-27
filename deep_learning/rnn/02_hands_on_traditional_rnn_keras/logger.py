@@ -9,8 +9,7 @@ def setup_logger():
     """Sets up a logger that writes to a specified log file with a unique timestamp."""
 
     # Define the log directory path
-    save_dir = os.path.join(os.getcwd(), Config.ARTIFACTS_DIR, Config.LOG_DIR)
-    os.makedirs(save_dir, exist_ok=True)
+    save_dir = get_artifacts_dir(Config.LOG_DIR)
 
     # Define the log file path with a timestamp
     log_file_path = os.path.join(save_dir, f"log_{Config.TIMESTAMP}.txt")

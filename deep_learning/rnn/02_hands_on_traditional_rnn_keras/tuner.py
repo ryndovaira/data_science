@@ -6,7 +6,7 @@ from tensorflow.keras.models import Sequential
 
 from config import Config
 from data_preprocessing import load_and_preprocess_data
-from utils import checkpoint_path, get_artifacts_dir
+from utils import checkpoint_path, get_artifacts_arch_dir
 from logger import setup_logger
 from plotter import plot_history
 from saver import save_model, save_history, save_tuner_results
@@ -62,7 +62,7 @@ def tune_hyperparameters():
         objective="val_accuracy",
         max_epochs=Config.TUNER_MAX_EPOCHS,
         factor=Config.HYPERBAND_FACTOR,
-        directory=get_artifacts_dir(Config.TUNER_DIR),
+        directory=get_artifacts_arch_dir(Config.TUNER_DIR),
         project_name=f"{Config.HYPERBAND_PROJ_NAME}_{Config.min_max_len()}",
         hyperband_iterations=Config.HYPERBAND_ITERATIONS,
     )
