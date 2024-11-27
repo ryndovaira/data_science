@@ -1,5 +1,6 @@
 import keras_tuner as kt
 import tensorflow as tf
+from keras.src.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 from tensorflow.keras.layers import Embedding, SimpleRNN, Dense, Dropout
 from tensorflow.keras.models import Sequential
@@ -35,7 +36,6 @@ def model_builder(hp):
     rnn_units = hp.Int("rnn_units", min_value=16, max_value=128, step=16)
     dropout_rate = hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
 
-    model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
     # Model selection based on Config.ARCHITECTURE
     model = Sequential()
     model.add(Embedding(input_dim=Config.MAX_FEATURES, output_dim=embedding_dim))
@@ -53,6 +53,7 @@ def model_builder(hp):
     model.add(Dropout(dropout_rate))
     model.add(Dense(1, activation="sigmoid"))
 
+    model.compile(optimizer=Adam(clipnorm=1.0), loss="binary_crossentropy", metrics=["accuracy"])
     return model
 
 
