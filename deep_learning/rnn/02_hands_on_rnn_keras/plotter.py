@@ -225,7 +225,6 @@ def plot_all_results(results_df):
                     row=row,
                     col=1,
                 )
-
     fig.update_layout(
         title=dict(
             text="Metrics Comparison Across Architectures",
@@ -237,8 +236,8 @@ def plot_all_results(results_df):
         yaxis=dict(
             title="Accuracy",
             range=[
-                results_df[["train_accuracy", "val_accuracy", "test_accuracy"]].max().max() + 0.25,
                 results_df[["train_accuracy", "val_accuracy", "test_accuracy"]].min().min() - 0.25,
+                results_df[["train_accuracy", "val_accuracy", "test_accuracy"]].max().max() + 0.25,
             ],
         ),
         xaxis2=dict(title="Max Sequence Length (Log Scale)", type="log"),
@@ -265,6 +264,6 @@ if __name__ == "__main__":
     # for debugging purposes
     import pandas as pd
 
-    name = f"length_bucket_results_241127_181825.csv"
+    name = f"length_bucket_results_241127_190242.csv"
     df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
     plot_all_results(df)
