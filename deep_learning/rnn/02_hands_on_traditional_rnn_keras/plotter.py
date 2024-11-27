@@ -241,14 +241,11 @@ def plot_all_results(results_df):
 
     architectures = results_df["architecture"].unique()
 
-    # Define color mapping for architectures
     color_map = {
         "VanillaRNN": "blue",
         "LSTM": "green",
         "GRU": "red",
     }
-
-    # Define line styles for each metric
     style_map = {
         "train": "dash",
         "val": "dot",
