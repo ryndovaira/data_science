@@ -129,6 +129,10 @@ def retrain_with_best_hps(best_hps):
     save_history(history)
 
     test_loss, test_accuracy = model.evaluate(x_test, y_test)
+    train_loss = history.history["loss"][-1]  # Final training loss
+    train_accuracy = history.history["accuracy"][-1]  # Final training accuracy
+    val_loss = history.history["val_loss"][-1]  # Final validation loss
+    val_accuracy = history.history["val_accuracy"][-1]  # Final validation accuracy
     logger.info(f"Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.4f}")
 
-    return test_loss, test_accuracy
+    return test_loss, test_accuracy, val_loss, val_accuracy, train_loss, train_accuracy
