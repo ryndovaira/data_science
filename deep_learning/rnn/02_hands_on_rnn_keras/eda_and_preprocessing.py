@@ -14,31 +14,45 @@ logger = logging.getLogger()
 
 def load_and_preprocess_data(min_length: int, max_length: int, max_features: int) -> tuple:
     """Loads and preprocesses the IMDB dataset with splits for train, val, and test."""
+    logger.info(
+        f"Starting data loading and preprocessing with min_length={min_length}, max_length={max_length}, max_features={max_features}."
+    )
+
     (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=Config.MAX_FEATURES)
+    logger.info(f"Data loaded: train={len(x_train)}, test={len(x_test)}.")
 
     logger.info(f"Filtering and preprocessing data with max_features={max_features}.")
     x_train, y_train = filter_by_length(x_train, y_train, min_length, max_length)
     x_test, y_test = filter_by_length(x_test, y_test, min_length, max_length)
+    logger.info(
+        f"Data filtered: train={len(x_train)}, test={len(x_test)} "
+        f"with min_length={min_length}, max_length={max_length}."
+    )
 
     unique, counts = np.unique(y_train, return_counts=True)
     unique, counts = unique.tolist(), counts.tolist()
     logger.info(f"Classes distribution: {dict(zip(unique, counts))}")
 
-    # Split training data into training and validation sets
+    logger.info("Splitting data into train, val, and test sets.")
     x_train, x_val, y_train, y_val = train_test_split(
         x_train, y_train, test_size=0.35, random_state=Config.RANDOM_SEED, stratify=y_train
     )
 
     if Config.DEV_MODE:
+        logger.info(f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples.")
         x_train, y_train = x_train[: Config.DEV_SAMPLES], y_train[: Config.DEV_SAMPLES]
         x_val, y_val = x_val[: Config.DEV_SAMPLES], y_val[: Config.DEV_SAMPLES]
         x_test, y_test = x_test[: Config.DEV_SAMPLES], y_test[: Config.DEV_SAMPLES]
-        logger.info(f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples.")
+        logger.info(
+            f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples: "
+            f"train={len(x_train)}, val={len(x_val)}, test={len(x_test)}."
+        )
 
+    logger.info(f"Truncating sequences to a maximum feature value of {max_features}.")
     x_train, x_val, x_test = map(
         lambda x: truncate_indices(x, max_features), (x_train, x_val, x_test)
     )
-
+    logger.info(f"Padding sequences to a maximum length of {Config.MAX_LEN}.")
     x_train, x_val, x_test = map(
         lambda x: sequence.pad_sequences(x, maxlen=Config.MAX_LEN), (x_train, x_val, x_test)
     )
@@ -188,6 +202,7 @@ def compute_length_buckets(train_lengths, test_lengths):
         (int(q3), int(p95) - 1),  # Q3 to 95th Percentile
         (int(p95), int(max_len)),  # 95th Percentile to Max
     ]
+
 
 def load_dataset_compute_length_buckets():
     """

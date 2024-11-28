@@ -46,7 +46,6 @@ def main():
                 test_loss, test_accuracy, val_loss, val_accuracy, train_loss, train_accuracy = (
                     retrain_with_best_hps(best_hps)
                 )
-                logger.info(f"Model retrained for {min_len}-{max_len}.")
 
                 results.append(
                     {

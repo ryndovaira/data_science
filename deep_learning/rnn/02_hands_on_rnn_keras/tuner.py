@@ -67,6 +67,8 @@ def model_builder(hp):
 
 def tune_hyperparameters():
     """Tunes hyperparameters using Keras Tuner and generates trial plots."""
+    logger.info("Starting hyperparameter tuning.")
+
     configure_tf_device()
 
     logger.info(f"Tuner Max Epochs: {Config.TUNER_MAX_EPOCHS}")
@@ -108,6 +110,7 @@ def tune_hyperparameters():
     except Exception as e:
         logger.error(f"Hyperparameter tuning failed: {e}")
         raise
+    logger.info("Hyperparameter tuning completed.")
 
     best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
     logger.info(f"Best hyperparameters found: {best_hps.values}")
