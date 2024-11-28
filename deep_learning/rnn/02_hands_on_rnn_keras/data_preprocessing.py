@@ -126,7 +126,7 @@ def get_statistics(data_lengths):
     return mean, median, max_len, q1, q2, q3, p95, p99
 
 
-def save_hist_and_quartiles_plotly(
+def plot_hist_and_quartiles(
     data_lengths,
     q1,
     q2,
@@ -231,7 +231,7 @@ def compute_length_buckets(x_train, x_test):
 
     logger.info("Dynamic Length Buckets:", length_buckets)
 
-    save_hist_and_quartiles_plotly(
+    plot_hist_and_quartiles(
         train_lengths,
         train_q1,
         train_q2,
@@ -241,7 +241,7 @@ def compute_length_buckets(x_train, x_test):
         save_filename="train_sequence_lengths.html",
     )
 
-    save_hist_and_quartiles_plotly(
+    plot_hist_and_quartiles(
         test_lengths,
         test_q1,
         test_q2,
