@@ -181,16 +181,13 @@ def compute_length_buckets(train_lengths, test_lengths):
     _, _, max_len, q1, q2, q3, p95, p99 = get_statistics(combined_lengths)
 
     # Create dynamic length buckets based on these statistics
-    length_buckets = [
+    return [
         (0, int(q1)),  # 0 to Q1
         (int(q1), int(q2) - 1),  # Q1 to Median
         (int(q2), int(q3) - 1),  # Median to Q3
         (int(q3), int(p95) - 1),  # Q3 to 95th Percentile
         (int(p95), int(max_len)),  # 95th Percentile to Max
     ]
-
-    return length_buckets
-
 
 def load_dataset_compute_length_buckets():
     """
