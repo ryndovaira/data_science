@@ -72,10 +72,17 @@ def main():
                 )
 
     logger.info("All experiments completed.")
-    logger.info("Saving results and generating plots.")
+
+    logger.info("Saving results.")
     results_df = pd.DataFrame(results)
+    logger.info(f"Results: {results_df}")
     save_all_results(results_df)
+    logger.info("Results saved.")
+
+    logger.info("Plotting results.")
     plot_all_results(results_df)
+    logger.info("Results plotted.")
+
     logger.info("Pipeline completed.")
 
 
