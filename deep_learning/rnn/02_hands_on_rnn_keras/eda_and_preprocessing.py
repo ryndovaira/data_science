@@ -12,14 +12,20 @@ from config import Config
 logger = logging.getLogger()
 
 
-def load_and_preprocess_data(min_length: int, max_length: int, max_features: int) -> tuple:
-    """Loads and preprocesses the IMDB dataset with splits for train, val, and test."""
-    logger.info(
-        f"Starting data loading and preprocessing with min_length={min_length}, max_length={max_length}, max_features={max_features}."
-    )
-
+def load_dataset():
+    logger.info("Loading IMDB dataset.")
     (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=Config.MAX_FEATURES)
     logger.info(f"Data loaded: train={len(x_train)}, test={len(x_test)}.")
+    return x_train, y_train, x_test, y_test
+
+
+def preprocess_data(
+    x_train, y_train, x_test, y_test, min_length: int, max_length: int, max_features: int
+) -> tuple:
+    """Preprocesses the IMDB dataset with splits for train, val, and test."""
+    logger.info(
+        f"Starting preprocessing with min_length={min_length}, max_length={max_length}, max_features={max_features}."
+    )
 
     x_train, y_train = filter_by_length(x_train, y_train, min_length, max_length)
     x_test, y_test = filter_by_length(x_test, y_test, min_length, max_length)
@@ -120,19 +126,6 @@ def get_statistics(data_lengths):
     return mean, median, max_len, q1, q2, q3, p95, p99
 
 
-def print_statistics(mean, median, max_len, q1, q2, q3, p95, p99):
-    """Print summary statistics for sequence lengths."""
-    logger.info("Printing summary statistics for sequence lengths.")
-    print(f"Mean: {mean:.2f}")
-    print(f"Median: {median:.2f}")
-    print(f"Max: {max_len:.2f}")
-    print(f"First Quartile (Q1 - 25th percentile): {q1:.2f}")
-    print(f"Second Quartile (Q2 - 50th percentile - Median): {q2:.2f}")
-    print(f"Third Quartile (Q3 - 75th percentile): {q3:.2f}")
-    print(f"95th Percentile: {p95:.2f}")
-    print(f"99th Percentile: {p99:.2f}")
-
-
 def save_hist_and_quartiles_plotly(
     data_lengths,
     q1,
@@ -202,42 +195,11 @@ def save_hist_and_quartiles_plotly(
     logger.info(f"Plot saved to {save_path}")
 
 
-def compute_length_buckets(train_lengths, test_lengths):
-    """
-    Compute dynamic length buckets based on dataset statistics.
-
-    Args:
-        train_lengths: List or array of sequence lengths from the training set.
-        test_lengths: List or array of sequence lengths from the test set.
-
-    Returns:
-        A list of tuples representing dynamic length buckets.
-    """
-    logger.info("Computing dynamic length buckets based on dataset statistics.")
-    # Combine train and test lengths into a single dataset
-    combined_lengths = np.concatenate([train_lengths, test_lengths])
-
-    # Compute summary statistics dynamically
-    _, _, max_len, q1, q2, q3, p95, p99 = get_statistics(combined_lengths)
-
-    # Create dynamic length buckets based on these statistics
-    return [
-        (0, int(q1)),  # 0 to Q1
-        (int(q1), int(q2) - 1),  # Q1 to Median
-        (int(q2), int(q3) - 1),  # Median to Q3
-        (int(q3), int(p95) - 1),  # Q3 to 95th Percentile
-        (int(p95), int(max_len)),  # 95th Percentile to Max
-    ]
-
-
-def load_dataset_compute_length_buckets():
+def compute_length_buckets(x_train, x_test):
     """
     Load the IMDB dataset and compute dynamic length buckets.
     :return: A list of tuples representing dynamic length buckets.
     """
-    logger.info("Loading IMDB dataset and computing dynamic length buckets.")
-    # Load data with default settings
-    (x_train, y_train), (x_test, y_test) = imdb.load_data()
 
     logger.info("Computing sequence lengths for training and test sets.")
     train_lengths = [len(seq) for seq in x_train]
@@ -251,21 +213,18 @@ def load_dataset_compute_length_buckets():
         get_statistics(test_lengths)
     )
 
-    # Print statistics
-    print("Train Lengths Statistics:")
-    print_statistics(
-        train_mean, train_median, train_max, train_q1, train_q2, train_q3, train_p95, train_p99
-    )
-    print("\nTest Lengths Statistics:")
-    print_statistics(
-        test_mean, test_median, test_max, test_q1, test_q2, test_q3, test_p95, test_p99
-    )
+    logger.info("Computing dynamic length buckets based on dataset statistics.")
+    combined_lengths = np.concatenate([train_lengths, test_lengths])
+    _, _, max_len, q1, q2, q3, p95, p99 = get_statistics(combined_lengths)
+    length_buckets = [
+        (0, int(q1)),  # 0 to Q1
+        (int(q1), int(q2) - 1),  # Q1 to Median
+        (int(q2), int(q3) - 1),  # Median to Q3
+        (int(q3), int(p95) - 1),  # Q3 to 95th Percentile
+        (int(p95), int(max_len)),  # 95th Percentile to Max
+    ]
+    logger.info(f"Number of Buckets: {len(length_buckets)}")
 
-    # Compute dynamic buckets
-    length_buckets = compute_length_buckets(train_lengths, test_lengths)
-    print("\nNumber of Buckets:", len(length_buckets))
-
-    # Print the number of sequences in each bucket
     for i, (start, end) in enumerate(length_buckets):
         bucket_count = sum(1 for length in train_lengths if start <= length < end)
         logger.info(f"Bucket {i + 1}: {bucket_count} sequences")
@@ -299,7 +258,8 @@ def main():
     """
     Main function to load the IMDB dataset and compute dynamic length buckets.
     """
-    load_dataset_compute_length_buckets()
+    x_train, y_train, x_test, y_test = load_dataset()
+    compute_length_buckets(x_train, x_test)
 
 
 if __name__ == "__main__":
