@@ -21,7 +21,6 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
     (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=Config.MAX_FEATURES)
     logger.info(f"Data loaded: train={len(x_train)}, test={len(x_test)}.")
 
-    logger.info(f"Filtering and preprocessing data with max_features={max_features}.")
     x_train, y_train = filter_by_length(x_train, y_train, min_length, max_length)
     x_test, y_test = filter_by_length(x_test, y_test, min_length, max_length)
     logger.info(
@@ -48,7 +47,6 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
             f"train={len(x_train)}, val={len(x_val)}, test={len(x_test)}."
         )
 
-    logger.info(f"Truncating sequences to a maximum feature value of {max_features}.")
     x_train, x_val, x_test = map(
         lambda x: truncate_indices(x, max_features), (x_train, x_val, x_test)
     )
@@ -71,21 +69,27 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
 
 def filter_by_length(data, labels, min_length, max_length):
     """Filters sequences by length."""
+    logger.info(f"Filtering sequences by length: {min_length} <= length <= {max_length}.")
     filtered_data, filtered_labels = [], []
     for seq, label in zip(data, labels):
         if min_length <= len(seq) <= max_length:
             filtered_data.append(seq)
             filtered_labels.append(label)
+    logger.info(
+        f"Filtered data: {len(filtered_data)} sequences. Filtered labels: {len(filtered_labels)}"
+    )
     return np.array(filtered_data, dtype=object), np.array(filtered_labels)
 
 
 def truncate_indices(data, max_features):
     """Truncates indices in sequences to a maximum feature value."""
+    logger.info(f"Truncating indices to a maximum of {max_features}.")
     return [[min(word, max_features - 1) for word in seq] for seq in data]
 
 
 def get_statistics(data_lengths):
     """Compute summary statistics for sequence lengths."""
+    logger.info("Computing summary statistics for sequence lengths.")
     mean = np.mean(data_lengths)
     median = np.median(data_lengths)
     max_len = np.max(data_lengths)
@@ -94,11 +98,20 @@ def get_statistics(data_lengths):
     q3 = np.percentile(data_lengths, 75)
     p95 = np.percentile(data_lengths, 95)
     p99 = np.percentile(data_lengths, 99)
+
+    logger.info(
+        f"Mean: {mean:.2f}, Median: {median:.2f}, Max: {max_len:.2f}\n"
+        f"Q1 (25th percentile): {q1:.2f}, Q2 (Median): {q2:.2f}, "
+        f"Q3 (75th percentile): {q3:.2f}\n95th Percentile: {p95:.2f}, "
+        f"99th Percentile: {p99:.2f}"
+    )
+
     return mean, median, max_len, q1, q2, q3, p95, p99
 
 
 def print_statistics(mean, median, max_len, q1, q2, q3, p95, p99):
     """Print summary statistics for sequence lengths."""
+    logger.info("Printing summary statistics for sequence lengths.")
     print(f"Mean: {mean:.2f}")
     print(f"Median: {median:.2f}")
     print(f"Max: {max_len:.2f}")
@@ -120,6 +133,7 @@ def save_hist_and_quartiles_plotly(
     save_dir: str = os.path.join(os.getcwd(), "eda", "plots"),
 ):
     """Plot histogram of sequence lengths with quartiles using Plotly."""
+    logger.info("Saving histogram of sequence lengths with quartiles using Plotly.")
     fig = go.Figure()
 
     # Add histogram
@@ -188,6 +202,7 @@ def compute_length_buckets(train_lengths, test_lengths):
     Returns:
         A list of tuples representing dynamic length buckets.
     """
+    logger.info("Computing dynamic length buckets based on dataset statistics.")
     # Combine train and test lengths into a single dataset
     combined_lengths = np.concatenate([train_lengths, test_lengths])
 
@@ -209,7 +224,7 @@ def load_dataset_compute_length_buckets():
     Load the IMDB dataset and compute dynamic length buckets.
     :return: A list of tuples representing dynamic length buckets.
     """
-
+    logger.info("Loading IMDB dataset and computing dynamic length buckets.")
     # Load data with default settings
     (x_train, y_train), (x_test, y_test) = imdb.load_data()
 
