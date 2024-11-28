@@ -33,6 +33,7 @@ def configure_tf_device():
 
 def model_builder(hp):
     """Builds the model for hyperparameter tuning."""
+    logger.info("Building model for hyperparameter tuning.")
     embedding_dim = hp.Choice("embedding_dim", values=[32, 64, 128, 256])
     rnn_units = hp.Int("rnn_units", min_value=16, max_value=128, step=16)
     dropout_rate = hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
@@ -60,6 +61,7 @@ def model_builder(hp):
     model.add(Dense(1, activation="sigmoid"))
 
     model.compile(optimizer=Adam(clipnorm=1.0), loss="binary_crossentropy", metrics=["accuracy"])
+    logger.info("Model compiled.")
     return model
 
 
@@ -117,17 +119,17 @@ def tune_hyperparameters():
 
 def retrain_with_best_hps(best_hps):
     """Retrains the model using the best hyperparameters."""
+    logger.info("Retraining model with the best hyperparameters.")
+
     configure_tf_device()
 
     logger.info(f"Epochs: {Config.EPOCHS}")
-
-    logger.info("Retraining model with the best hyperparameters.")
-
-    (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
-        Config.MIN_LEN, Config.MAX_LEN, Config.MAX_FEATURES
-    )
+    logger.info(f"Batch Size: {Config.BATCH_SIZE}")
+    logger.info(f"Patience: {Config.PATIENCE}")
 
     model = model_builder(best_hps)
+
+    logger.info("Model training started.")
     history = model.fit(
         x_train,
         y_train,
@@ -139,11 +141,13 @@ def retrain_with_best_hps(best_hps):
             ModelCheckpoint(filepath=checkpoint_path(), monitor="val_loss", save_best_only=True),
         ],
     )
+    logger.info("Model training completed.")
 
     save_model(model)
     plot_history(history)
     save_history(history)
 
+    logger.info("Model evaluation on a test set.")
     test_loss, test_accuracy = model.evaluate(x_test, y_test)
 
     logger.info(f"Final loss and accuracy:")

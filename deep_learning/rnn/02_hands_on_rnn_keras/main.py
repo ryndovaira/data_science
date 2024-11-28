@@ -43,7 +43,6 @@ def main():
                 best_hps = tune_hyperparameters()
                 logger.info(f"Hyperparameter tuning completed for {min_len}-{max_len}.")
 
-                logger.info("Retraining model with the best hyperparameters.")
                 test_loss, test_accuracy, val_loss, val_accuracy, train_loss, train_accuracy = (
                     retrain_with_best_hps(best_hps)
                 )
