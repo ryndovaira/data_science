@@ -11,13 +11,15 @@ dependencies:
   - attrs=24.2.0
   - babel=2.11.0
   - beautifulsoup4=4.12.3
+  - black=24.8.0
   - bleach=4.1.0
   - brotli-python=1.0.9
   - bzip2=1.0.8
-  - ca-certificates=2024.8.30
+  - ca-certificates=2024.9.24
   - certifi=2024.8.30
   - cffi=1.17.1
   - charset-normalizer=3.4.0
+  - click=8.1.7
   - colorama=0.4.6
   - comm=0.2.1
   - debugpy=1.6.7
@@ -49,6 +51,7 @@ dependencies:
   - libsodium=1.0.18
   - matplotlib-inline=0.1.6
   - mistune=2.0.4
+  - mypy_extensions=1.0.0
   - nb_conda_kernels=2.5.1
   - nbclient=0.8.0
   - nbconvert=7.16.4
@@ -61,7 +64,7 @@ dependencies:
   - packaging=24.2
   - pandocfilters=1.5.0
   - parso=0.8.3
-  - pip=24.2
+  - pathspec=0.10.3
   - platformdirs=3.10.0
   - prometheus_client=0.21.0
   - prompt-toolkit=3.0.43
@@ -114,20 +117,33 @@ dependencies:
   - pip:
       - absl-py==2.1.0
       - astunparse==1.6.3
+      - cloudpickle==3.1.0
       - contourpy==1.3.1
       - cycler==0.12.1
+      - dm-tree==0.1.8
+      - docstring-parser==0.16
+      - etils==1.10.0
       - flatbuffers==24.3.25
       - fonttools==4.55.0
+      - fsspec==2024.10.0
       - gast==0.6.0
       - google-pasta==0.2.0
+      - googleapis-common-protos==1.66.0
       - grpcio==1.68.0
       - h5py==3.12.1
+      - imageio==2.36.0
+      - immutabledict==4.2.1
+      - importlib-resources==6.4.5
       - joblib==1.4.2
+      - kaleido==0.2.1
       - keras==3.6.0
       - keras-tuner==1.4.7
       - kiwisolver==1.4.7
       - kt-legacy==1.0.5
+      - lazy-loader==0.4
       - libclang==18.1.1
+      - lime==0.2.0.1
+      - llvmlite==0.43.0
       - markdown==3.7
       - markdown-it-py==3.0.0
       - markupsafe==3.0.2
@@ -135,27 +151,42 @@ dependencies:
       - mdurl==0.1.2
       - ml-dtypes==0.4.1
       - namex==0.0.8
+      - networkx==3.4.2
+      - numba==0.60.0
       - numpy==2.0.2
       - opt-einsum==3.4.0
       - optree==0.13.1
       - pandas==2.2.3
       - pillow==11.0.0
+      - pip==24.3.1
       - plotly==5.24.1
+      - promise==2.3
       - protobuf==5.28.3
+      - pyarrow==18.1.0
       - pyparsing==3.2.0
       - rich==13.9.4
+      - scikit-image==0.24.0
       - scikit-learn==1.5.2
       - scipy==1.14.1
       - seaborn==0.13.2
+      - shap==0.46.0
+      - simple-parsing==0.1.6
+      - slicer==0.0.8
       - tenacity==9.0.0
       - tensorboard==2.18.0
       - tensorboard-data-server==0.7.2
       - tensorflow==2.18.0
+      - tensorflow-datasets==4.9.7
       - tensorflow-intel==2.18.0
+      - tensorflow-metadata==1.16.1
       - termcolor==2.5.0
       - threadpoolctl==3.5.0
+      - tifffile==2024.9.20
+      - toml==0.10.2
+      - tqdm==4.67.0
       - typing-extensions==4.12.2
       - tzdata==2024.2
       - werkzeug==3.1.3
       - wrapt==1.16.0
+      - zipp==3.21.0
 prefix: C:\Users\Mi\.conda\envs\tensorflow_keras
