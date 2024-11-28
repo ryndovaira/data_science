@@ -18,36 +18,39 @@ logger = setup_logger()
 def main():
     """Main function to automate experiments across length buckets."""
 
+    logger.info("Starting pipeline.")
+    logger.info("Loading dataset and computing length buckets.")
     length_buckets = load_dataset_compute_length_buckets()
+    logger.info("Dataset loaded and length buckets computed.")
 
     results = []
 
-    # Iterate through different architectures
     architectures = ["VanillaRNN", "LSTM", "GRU"]
+    logger.info(f"Testing architectures: {architectures}")
     for arch in architectures:
         Config.ARCHITECTURE = arch
         logger.info(f"Testing architecture: {arch}")
-
         for min_len, max_len in length_buckets:
             logger.info(f"Starting experiment for length bucket: {min_len}-{max_len}.")
-
-            # Update Config dynamically
             Config.MIN_LEN = min_len
             Config.MAX_LEN = max_len
 
             try:
                 # Hyperparameter tuning
+                logger.info("Loading and preprocessing data.")
+                logger.info("Data loaded and preprocessed.")
+
                 logger.info("Starting hyperparameter tuning.")
                 best_hps = tune_hyperparameters()
                 logger.info(f"Hyperparameter tuning completed for {min_len}-{max_len}.")
 
-                # Retrain with best hyperparameters
+                logger.info(f"Best hyperparameters found: {best_hps.values}")
                 logger.info("Retraining model with the best hyperparameters.")
                 test_loss, test_accuracy, val_loss, val_accuracy, train_loss, train_accuracy = (
                     retrain_with_best_hps(best_hps)
                 )
+                logger.info(f"Model retrained for {min_len}-{max_len}.")
 
-                # Record results
                 results.append(
                     {
                         "architecture": Config.ARCHITECTURE,
@@ -68,10 +71,12 @@ def main():
                     f"Experiment failed for length bucket {min_len}-{max_len}: {e}", exc_info=True
                 )
 
-    # Save and plot results
+    logger.info("All experiments completed.")
+    logger.info("Saving results and generating plots.")
     results_df = pd.DataFrame(results)
     save_all_results(results_df)
     plot_all_results(results_df)
+    logger.info("Pipeline completed.")
 
 
 if __name__ == "__main__":
