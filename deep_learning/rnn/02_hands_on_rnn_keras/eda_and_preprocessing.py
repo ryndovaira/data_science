@@ -33,7 +33,7 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
         x_train, y_train = x_train[: Config.DEV_SAMPLES], y_train[: Config.DEV_SAMPLES]
         x_val, y_val = x_val[: Config.DEV_SAMPLES], y_val[: Config.DEV_SAMPLES]
         x_test, y_test = x_test[: Config.DEV_SAMPLES], y_test[: Config.DEV_SAMPLES]
-        logger.info("Development mode active, reduced dataset size.")
+        logger.info(f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples.")
 
     x_train, x_val, x_test = map(
         lambda x: truncate_indices(x, max_features), (x_train, x_val, x_test)
