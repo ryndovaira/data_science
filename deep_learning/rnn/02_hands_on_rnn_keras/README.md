@@ -1,7 +1,7 @@
 
-# IMDb Review Classification with Vanilla RNN and Hyperparameter Tuning
+# IMDb Review Classification with RNN Architectures and Hyperparameter Tuning
 
-This project demonstrates how to classify IMDb movie reviews into positive or negative sentiments using a **Vanilla RNN (Simple RNN)** model in TensorFlow/Keras. The project includes dynamic dataset bucketing, hyperparameter tuning, logging, artifact management, and interactive visualization, providing an extensible and educational pipeline for machine learning.
+This project demonstrates how to classify IMDb movie reviews into positive or negative sentiments using various RNN architectures (**Vanilla RNN**, **LSTM**, and **GRU**) in TensorFlow/Keras. The project includes dynamic dataset bucketing, hyperparameter tuning, logging, artifact management, and interactive visualization, providing an extensible and educational pipeline for machine learning.
 
 ---
 
@@ -10,6 +10,7 @@ This project demonstrates how to classify IMDb movie reviews into positive or ne
 1. [Overview](#overview)
 2. [Project Structure](#project-structure)
 3. [Requirements](#requirements)
+   - [Installation](#installation)
 4. [Usage](#usage)
    - [Running the Pipeline](#running-the-pipeline)
 5. [Features](#features)
@@ -23,7 +24,7 @@ This project demonstrates how to classify IMDb movie reviews into positive or ne
 
 The project focuses on:
 - Preprocessing the IMDb movie reviews dataset using configurable length buckets.
-- Implementing a Vanilla RNN for binary classification.
+- Implementing multiple RNN architectures (**Vanilla RNN**, **LSTM**, and **GRU**) for binary classification.
 - Optimizing model hyperparameters with **Keras Tuner**.
 - Managing artifacts such as logs, plots, and model checkpoints.
 - Visualizing results, training metrics, and hyperparameter outcomes.
@@ -40,10 +41,8 @@ The project files are organized as follows:
 root/
 ├── config.py                 # Centralized configuration for hyperparameters and paths
 ├── data_preprocessing.py     # Functions for loading and preprocessing IMDb dataset
-├── eda.py                    # Exploratory data analysis, sequence statistics, and plots
 ├── logger.py                 # Setup and configuration for logging
 ├── main.py                   # Main script to run the entire pipeline
-├── model.py                  # Defines the model architecture (missing in files provided)
 ├── plotter.py                # Visualization tools for metrics and results
 ├── saver.py                  # Utility functions for saving models and results
 ├── tuner.py                  # Hyperparameter tuning logic
@@ -55,61 +54,67 @@ root/
 
 ## Requirements
 
-To use this project, ensure you have the following installed:
+Ensure you have the following dependencies:
 
-- Python 3.8 or higher
+- Python == 3.12.7
 - TensorFlow == 2.18.0
-- Keras == 3.6.0
+- Keras == 3.7.0
 - Keras Tuner == 1.4.7
-- Pandas, NumPy, Plotly, Seaborn, Scikit-learn
+- Pandas == 2.2.3
+- NumPy == 2.0.2
+- Plotly == 5.24.1
+- Scikit-learn == 1.5.2
 
-Install dependencies:
+### Installation
+
+Use the provided `environment.yml` to create a controlled environment:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate tensorflow_keras_cpu
 ```
 
 ---
 
 ## Usage
 
-### Running the Pipeline
+### Running the Full Pipeline
 
-Run the main script to execute the full pipeline:
+Execute the main script to train and evaluate models across architectures and length buckets:
 
 ```bash
 python main.py
 ```
 
-Results will be saved in the `artifacts/` directory, including:
-- Best model
-- Training logs
-- Hyperparameter tuning results
-- Performance plots
+Artifacts will be saved to the following locations:
+- Training history: `artifacts/history/`
+- Model checkpoints: `artifacts/checkpoints/`
+- Visualizations: `artifacts/plots/`
+- Logs: `artifacts/logs/`
 
 ---
 
 ## Features
 
-- **Dynamic Length Bucketing**:
-  - Preprocesses dataset into buckets of sequence lengths for targeted training and evaluation.
-  - Facilitates insights into model performance across data variations.
+- **Dynamic Architecture Support**:
+  - Choose between **Vanilla RNN**, **LSTM**, and **GRU** for training.
+  - Configurable through the `Config` class in `config.py`.
 
-- **Vanilla RNN Implementation**:
-  - A Simple RNN model with tunable hyperparameters, including embedding dimensions and dropout.
+- **Dynamic Length Bucketing**:
+  - Preprocesses data into buckets of sequence lengths for more targeted model evaluation.
+  - Includes sequence length statistics and visualizations.
 
 - **Hyperparameter Optimization**:
   - Uses **Keras Tuner** to tune RNN units, embedding dimensions, and dropout rates.
 
+- **Advanced Callbacks**:
+  - Includes early stopping and learning rate reduction to prevent overfitting and optimize convergence.
+
 - **Artifact Management**:
   - Automatically organizes logs, models, plots, and tuning results for reproducibility.
 
-- **Visualization**:
-  - Detailed training metrics and hyperparameter heatmaps.
-  - Interactive plots for accuracy and loss trends using Plotly.
-
-- **Logging**:
-  - Centralized logging with both file and console output for debugging and analysis.
+- **Interactive Visualization**:
+  - Generate comparative accuracy and loss plots for architectures and length buckets.
 
 ---
 
@@ -149,5 +154,5 @@ Feel free to reach out for collaborations or feedback.
 
 ## Notes for Further Improvements
 
-- Replace Vanilla RNN with LSTMs or GRUs for larger datasets or more complex tasks.
+- Replace RNNs with LSTMs or GRUs for larger datasets or more complex tasks.
 - Explore attention mechanisms for further accuracy gains.
