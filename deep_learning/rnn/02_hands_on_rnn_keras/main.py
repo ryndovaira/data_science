@@ -71,9 +71,7 @@ def main():
                 )
 
             except Exception as e:
-                logger.error(
-                    f"Experiment failed for length bucket {min_len}-{max_len}: {e}", exc_info=True
-                )
+                logger.error(f"Experiment failed for {min_len}-{max_len} with {arch}: {e}")
 
     logger.info("All experiments completed.")
 
