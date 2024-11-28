@@ -28,9 +28,7 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
         f"with min_length={min_length}, max_length={max_length}."
     )
 
-    unique, counts = np.unique(y_train, return_counts=True)
-    unique, counts = unique.tolist(), counts.tolist()
-    logger.info(f"Classes distribution: {dict(zip(unique, counts))}")
+    class_distribution(y_train)
 
     logger.info("Splitting data into train, val, and test sets.")
     x_train, x_val, y_train, y_val = train_test_split(
@@ -38,13 +36,8 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
     )
 
     if Config.DEV_MODE:
-        logger.info(f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples.")
-        x_train, y_train = x_train[: Config.DEV_SAMPLES], y_train[: Config.DEV_SAMPLES]
-        x_val, y_val = x_val[: Config.DEV_SAMPLES], y_val[: Config.DEV_SAMPLES]
-        x_test, y_test = x_test[: Config.DEV_SAMPLES], y_test[: Config.DEV_SAMPLES]
-        logger.info(
-            f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples: "
-            f"train={len(x_train)}, val={len(x_val)}, test={len(x_test)}."
+        x_test, x_train, x_val, y_test, y_train, y_val = dev_mode(
+            x_test, x_train, x_val, y_test, y_train, y_val
         )
 
     x_train, x_val, x_test = map(
@@ -65,6 +58,24 @@ def load_and_preprocess_data(min_length: int, max_length: int, max_features: int
         (np.array(x_val), np.array(y_val)),
         (np.array(x_test), np.array(y_test)),
     )
+
+
+def dev_mode(x_test, x_train, x_val, y_test, y_train, y_val):
+    logger.info(f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples.")
+    x_train, y_train = x_train[: Config.DEV_SAMPLES], y_train[: Config.DEV_SAMPLES]
+    x_val, y_val = x_val[: Config.DEV_SAMPLES], y_val[: Config.DEV_SAMPLES]
+    x_test, y_test = x_test[: Config.DEV_SAMPLES], y_test[: Config.DEV_SAMPLES]
+    logger.info(
+        f"DEV_MODE active: Using {Config.DEV_SAMPLES} samples: "
+        f"train={len(x_train)}, val={len(x_val)}, test={len(x_test)}."
+    )
+    return x_test, x_train, x_val, y_test, y_train, y_val
+
+
+def class_distribution(y_train):
+    unique, counts = np.unique(y_train, return_counts=True)
+    unique, counts = unique.tolist(), counts.tolist()
+    logger.info(f"Classes distribution: {dict(zip(unique, counts))}")
 
 
 def filter_by_length(data, labels, min_length, max_length):
