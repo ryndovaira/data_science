@@ -5,7 +5,7 @@ model tuning, training, and evaluation.
 
 import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
-from eda_and_preprocessing import load_dataset_compute_length_buckets
+from eda_and_preprocessing import load_dataset_compute_length_buckets, load_and_preprocess_data
 from logger import setup_logger
 from plotter import plot_all_results
 from saver import save_all_results
@@ -36,15 +36,14 @@ def main():
             Config.MAX_LEN = max_len
 
             try:
-                logger.info("Loading and preprocessing data.")
-                logger.info("Data loaded and preprocessed.")
+                (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
+                    Config.MIN_LEN, Config.MAX_LEN, Config.MAX_FEATURES
+                )
 
-                logger.info("Starting hyperparameter tuning.")
-                best_hps = tune_hyperparameters()
-                logger.info(f"Hyperparameter tuning completed for {min_len}-{max_len}.")
+                best_hps = tune_hyperparameters(x_train, y_train, x_val, y_val)
 
-                test_loss, test_accuracy, val_loss, val_accuracy, train_loss, train_accuracy = (
-                    retrain_with_best_hps(best_hps)
+                train_loss, train_accuracy, val_loss, val_accuracy, test_loss, test_accuracy = (
+                    retrain_with_best_hps(best_hps, x_train, y_train, x_val, y_val, x_test, y_test)
                 )
 
                 results.append(

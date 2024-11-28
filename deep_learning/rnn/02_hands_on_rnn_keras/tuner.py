@@ -6,7 +6,6 @@ from tensorflow.keras.layers import GRU, LSTM, SimpleRNN, Embedding, Dense, Drop
 from tensorflow.keras.models import Sequential
 
 from config import Config
-from eda_and_preprocessing import load_and_preprocess_data
 from utils import checkpoint_path, get_artifacts_arch_dir
 from logger import setup_logger
 from plotter import plot_history
@@ -65,7 +64,7 @@ def model_builder(hp):
     return model
 
 
-def tune_hyperparameters():
+def tune_hyperparameters(x_train, y_train, x_val, y_val):
     """Tunes hyperparameters using Keras Tuner and generates trial plots."""
     logger.info("Starting hyperparameter tuning.")
 
@@ -78,11 +77,6 @@ def tune_hyperparameters():
     logger.info(f"Patience: {Config.PATIENCE}")
 
     logger.info("Starting hyperparameter tuning.")
-
-    # Pass dummy max features for initial data loading (updated dynamically during tuning)
-    (x_train, y_train), (x_val, y_val), _ = load_and_preprocess_data(
-        Config.MIN_LEN, Config.MAX_LEN, Config.MAX_FEATURES
-    )
 
     tuner = kt.Hyperband(
         model_builder,
@@ -120,7 +114,7 @@ def tune_hyperparameters():
     return best_hps
 
 
-def retrain_with_best_hps(best_hps):
+def retrain_with_best_hps(best_hps, x_train, y_train, x_val, y_val, x_test, y_test):
     """Retrains the model using the best hyperparameters."""
     logger.info("Retraining model with the best hyperparameters.")
 
@@ -162,4 +156,4 @@ def retrain_with_best_hps(best_hps):
     logger.info(f"Val Loss: {val_loss:.4f}, Val Accuracy: {val_accuracy:.4f}")
     logger.info(f"Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.4f}")
 
-    return test_loss, test_accuracy, val_loss, val_accuracy, train_loss, train_accuracy
+    return train_loss, train_accuracy, val_loss, val_accuracy, test_loss, test_accuracy
