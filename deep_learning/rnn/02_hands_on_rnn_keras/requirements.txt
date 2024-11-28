@@ -5,4 +5,5 @@ pandas
 plotly
 scikit-learn
 tensorboard
-tensorflow[and-cuda]   # tensorflow
+# tensorflow[and-cuda]
+tensorflow
