@@ -18,6 +18,7 @@ logger = setup_logger()
 
 def configure_tf_device():
     """Configure TensorFlow to use GPU if available."""
+    logger.info("Configuring TensorFlow device.")
     gpus = tf.config.list_physical_devices("GPU")
     if gpus:
         try:
@@ -36,7 +37,12 @@ def model_builder(hp):
     rnn_units = hp.Int("rnn_units", min_value=16, max_value=128, step=16)
     dropout_rate = hp.Float("dropout_rate", min_value=0.1, max_value=0.5, step=0.1)
 
-    # Model selection based on Config.ARCHITECTURE
+    logger.info(f"Using {Config.ARCHITECTURE} architecture.")
+    logger.info(f"Embedding Dimension: {embedding_dim}")
+    logger.info(f"RNN Units: {rnn_units}")
+    logger.info(f"Dropout Rate: {dropout_rate}")
+    logger.info(f"Max Features: {Config.MAX_FEATURES}")
+
     model = Sequential()
     model.add(Embedding(input_dim=Config.MAX_FEATURES, output_dim=embedding_dim))
 
@@ -59,7 +65,14 @@ def model_builder(hp):
 
 def tune_hyperparameters():
     """Tunes hyperparameters using Keras Tuner and generates trial plots."""
-    configure_tf_device()  # Ensure TensorFlow is set up for GPUs
+    configure_tf_device()
+
+    logger.info(f"Tuner Max Epochs: {Config.TUNER_MAX_EPOCHS}")
+    logger.info(f"Hyperband Factor: {Config.HYPERBAND_FACTOR}")
+    logger.info(f"Hyperband Iterations: {Config.HYPERBAND_ITERATIONS}")
+    logger.info(f"Batch Size: {Config.BATCH_SIZE}")
+    logger.info(f"Patience: {Config.PATIENCE}")
+
     logger.info("Starting hyperparameter tuning.")
 
     # Pass dummy max features for initial data loading (updated dynamically during tuning)
@@ -104,7 +117,10 @@ def tune_hyperparameters():
 
 def retrain_with_best_hps(best_hps):
     """Retrains the model using the best hyperparameters."""
-    configure_tf_device()  # Ensure TensorFlow is set up for GPUs
+    configure_tf_device()
+
+    logger.info(f"Epochs: {Config.EPOCHS}")
+
     logger.info("Retraining model with the best hyperparameters.")
 
     (x_train, y_train), (x_val, y_val), (x_test, y_test) = load_and_preprocess_data(
