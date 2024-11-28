@@ -160,7 +160,7 @@ def save_hist_and_quartiles_plotly(
     os.makedirs(save_dir, exist_ok=True)
     save_path = os.path.join(save_dir, save_filename)
     fig.write_html(save_path)
-    print(f"Plot saved to {save_path}")
+    logger.info(f"Plot saved to {save_path}")
 
 
 def compute_length_buckets(train_lengths, test_lengths):
