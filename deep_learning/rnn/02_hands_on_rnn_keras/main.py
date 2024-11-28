@@ -5,7 +5,7 @@ model tuning, training, and evaluation.
 
 import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
-from eda import load_dataset_compute_length_buckets
+from eda_and_preprocessing import load_dataset_compute_length_buckets
 from logger import setup_logger
 from plotter import plot_all_results
 from saver import save_all_results

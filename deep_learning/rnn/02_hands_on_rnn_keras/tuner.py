@@ -6,7 +6,7 @@ from tensorflow.keras.layers import GRU, LSTM, SimpleRNN, Embedding, Dense, Drop
 from tensorflow.keras.models import Sequential
 
 from config import Config
-from data_preprocessing import load_and_preprocess_data
+from eda_and_preprocessing import load_and_preprocess_data
 from utils import checkpoint_path, get_artifacts_arch_dir
 from logger import setup_logger
 from plotter import plot_history
