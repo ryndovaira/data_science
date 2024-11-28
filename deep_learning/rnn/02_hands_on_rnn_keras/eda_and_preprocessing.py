@@ -285,6 +285,9 @@ def load_dataset_compute_length_buckets():
 
 
 def main():
+    """
+    Main function to automate experiments across length buckets.
+    """
     load_dataset_compute_length_buckets()
 
 
