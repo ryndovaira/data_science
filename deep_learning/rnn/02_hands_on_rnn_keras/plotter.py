@@ -277,7 +277,7 @@ def plot_hist_and_quartiles(
     p95,
     p99,
     save_filename: str = "sequence_lengths.html",
-    save_dir: str = os.path.join(os.getcwd(), "eda", "plots"),
+    save_dir: str = get_artifacts_dir(Config.PLOT_DIR, "EDA"),
 ):
     """Plot histogram of sequence lengths with quartiles using Plotly."""
     logger.info("Saving histogram of sequence lengths with quartiles using Plotly.")
