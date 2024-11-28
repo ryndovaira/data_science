@@ -74,6 +74,11 @@ conda env create -f environment.yml
 conda activate tensorflow_keras_cpu
 ```
 
+> **Note**: This project uses the **CPU version** of TensorFlow. If you wish to use a GPU, you must install the GPU-compatible TensorFlow package separately:
+> ```bash
+> pip install tensorflow[and-cuda]
+> ```
+
 ---
 
 ## Usage
