@@ -239,7 +239,7 @@ def load_dataset_compute_length_buckets():
     # Load data with default settings
     (x_train, y_train), (x_test, y_test) = imdb.load_data()
 
-    # Compute sequence lengths for training and test sets
+    logger.info("Computing sequence lengths for training and test sets.")
     train_lengths = [len(seq) for seq in x_train]
     test_lengths = [len(seq) for seq in x_test]
 
@@ -268,9 +268,9 @@ def load_dataset_compute_length_buckets():
     # Print the number of sequences in each bucket
     for i, (start, end) in enumerate(length_buckets):
         bucket_count = sum(1 for length in train_lengths if start <= length < end)
-        print(f"Bucket {i + 1}: {bucket_count} sequences")
+        logger.info(f"Bucket {i + 1}: {bucket_count} sequences")
 
-    print("Dynamic Length Buckets:", length_buckets)
+    logger.info("Dynamic Length Buckets:", length_buckets)
 
     save_hist_and_quartiles_plotly(
         train_lengths,
