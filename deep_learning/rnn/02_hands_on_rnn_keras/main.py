@@ -26,12 +26,10 @@ def main():
     results = []
 
     architectures = ["VanillaRNN", "LSTM", "GRU"]
-    logger.info(f"Testing architectures: {architectures}")
     for arch in architectures:
         Config.ARCHITECTURE = arch
-        logger.info(f"Testing architecture: {arch}")
         for min_len, max_len in length_buckets:
-            logger.info(f"Starting experiment for length bucket: {min_len}-{max_len}.")
+            logger.info(f"Starting experiment for length bucket {min_len}-{max_len} with {arch}.")
             Config.MIN_LEN = min_len
             Config.MAX_LEN = max_len
 
