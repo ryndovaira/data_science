@@ -267,3 +267,72 @@ if __name__ == "__main__":
     name = f"length_bucket_results_241127_190242.csv"
     df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
     plot_all_results(df)
+
+
+def plot_hist_and_quartiles(
+    data_lengths,
+    q1,
+    q2,
+    q3,
+    p95,
+    p99,
+    save_filename: str = "sequence_lengths.html",
+    save_dir: str = os.path.join(os.getcwd(), "eda", "plots"),
+):
+    """Plot histogram of sequence lengths with quartiles using Plotly."""
+    logger.info("Saving histogram of sequence lengths with quartiles using Plotly.")
+    fig = go.Figure()
+
+    # Add histogram
+    fig.add_trace(
+        go.Histogram(
+            x=data_lengths, nbinsx=50, marker_color="skyblue", opacity=0.7, name="Sequence Lengths"
+        )
+    )
+
+    # Add vertical lines for quartiles with hover tooltips
+    for value, label, color in zip(
+        [q1, q2, q3, p95, p99],
+        [
+            "Q1 (25th percentile)",
+            "Q2 (Median)",
+            "Q3 (75th percentile)",
+            "95th Percentile",
+            "99th Percentile",
+        ],
+        ["blue", "green", "red", "purple", "orange"],
+    ):
+        fig.add_shape(
+            type="line",
+            x0=value,
+            y0=0,
+            x1=value,
+            y1=1,
+            line=dict(color=color, dash="dash"),
+            xref="x",
+            yref="paper",
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=[value],
+                y=[0],
+                mode="markers",
+                marker=dict(size=5, color=color),
+                name=f"{label}: {value:0.0f}",
+                hovertemplate=f"{label}: <b>{value:0.0f}</b><extra></extra>",
+            )
+        )
+
+    fig.update_layout(
+        title="Sequence Length Distribution with Quartiles",
+        xaxis_title="Sequence Length",
+        yaxis_title="Frequency",
+        template="plotly_white",
+        bargap=0.1,
+        height=600,  # Increase height to give space for annotations
+    )
+
+    os.makedirs(save_dir, exist_ok=True)
+    save_path = os.path.join(save_dir, save_filename)
+    fig.write_html(save_path)
+    logger.info(f"Plot saved to {save_path}")
