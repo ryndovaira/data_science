@@ -17,6 +17,7 @@ This project demonstrates how to classify IMDb movie reviews into positive or ne
 6. [Results](#results)
    - [Timing and Performance](#timing-and-performance)
 7. [Summary and Insights](#summary-and-insights)
+   - [Future Work](#future-work)
 8. [Contributing](#contributing)
 9. [About the Author](#about-the-author)
 
@@ -143,43 +144,65 @@ Artifacts will be saved to the following locations:
 4. **Hyperparameter Tuning Epochs**: 15 (per configuration)
 5. **Architecture**: Vanilla RNN, LSTM, GRU
 
-#### Timing Overview
-- **Total Time for All Experiments**: ~6 hours 45 minutes (NVIDIA GeForce RTX 4060)
-- **Average Training Time Per Architecture**:
-  - Vanilla RNN: ~2 hours 10 minutes
-  - LSTM: ~2 hours 25 minutes
-  - GRU: ~2 hours 10 minutes
+#### Timing Overview from Logs
+- **Vanilla RNN**: Total time ~147 seconds (~2 minutes 27 seconds); average per bucket ~29.4 seconds.
+- **LSTM**: Total time ~2422 seconds (~40 minutes 22 seconds); average per bucket ~484.4 seconds (~8 minutes 4 seconds).
+- **GRU**: Total time ~2450 seconds (~40 minutes 50 seconds); average per bucket ~489.9 seconds (~8 minutes 10 seconds).
 
-Note: Time differences are primarily due to computational complexity differences between architectures.
+#### Observations
+- Vanilla RNN is the fastest across all buckets due to its simpler architecture.
+- GRU and LSTM are comparably slower, with GRU slightly faster in some buckets.
+
+### Bucket-Level Behavior
+
+#### Accuracy by Bucket and Architecture
+- **Vanilla RNN**:
+  - Bucket 0-129: ~78.6% test accuracy.
+  - Bucket 130-175: ~78.4% test accuracy.
+  - Bucket 176-284: ~77.0% test accuracy.
+  - Bucket 285-597: ~55.8% test accuracy.
+  - Bucket 598-2494: ~53.3% test accuracy.
+
+- **LSTM**:
+  - Bucket 0-129: ~90.1% test accuracy.
+  - Bucket 130-175: ~88.7% test accuracy.
+  - Bucket 176-284: ~87.9% test accuracy.
+  - Bucket 285-597: ~85.2% test accuracy.
+  - Bucket 598-2494: ~83.4% test accuracy.
+
+- **GRU**:
+  - Bucket 0-129: ~89.8% test accuracy.
+  - Bucket 130-175: ~87.5% test accuracy.
+  - Bucket 176-284: ~86.7% test accuracy.
+  - Bucket 285-597: ~84.1% test accuracy.
+  - Bucket 598-2494: ~82.3% test accuracy.
+
+#### Key Takeaways
+- **Short Sequences**: All architectures achieve higher accuracy on shorter sequences, with LSTM and GRU exceeding 85% consistently.
+- **Long Sequences**: Vanilla RNN struggles with longer sequences (>285 tokens) due to lack of memory capabilities, whereas LSTM and GRU handle these better, retaining ~82-85% accuracy.
 
 ---
 
 ## Summary and Insights
 
 ### Results Summary
-- **Vanilla RNN**:
-  - Performs well on smaller datasets but struggles with long-term dependencies.
-  - Accuracy: ~85%
-- **LSTM**:
-  - Handles long-term dependencies effectively; performs best overall.
-  - Accuracy: ~90%
-- **GRU**:
-  - Comparable to LSTM with fewer parameters; faster training.
-  - Accuracy: ~89%
+- **Vanilla RNN**: Best suited for short sequences but faces a steep drop in accuracy for longer buckets.
+- **LSTM**: Excels at long sequences, offering the highest accuracy consistently across buckets.
+- **GRU**: A balanced choice, trading a slight loss in accuracy for faster training times.
 
-### Insights and Conclusions
-1. **Accuracy vs. Complexity**:
-   - LSTM provides the highest accuracy but is slightly slower.
-   - GRU offers a balance between speed and performance.
-   - Vanilla RNN is limited in capability but faster, suitable for simpler tasks.
+### Future Work
+1. **Transformer-Based Models**:
+   - Investigate the use of **Transformers**, **BERT**, and **LLaMA** for improved performance and interpretability.
+   - Incorporate pre-trained models like **ChatGPT** for better context understanding.
 
-2. **Resource Considerations**:
-   - High-performance GPUs significantly reduce training time.
-   - For non-GPU systems, consider reducing epochs or sample size.
+2. **Attention Mechanisms**:
+   - Enhance RNN models with attention layers to improve accuracy for longer sequences.
 
-3. **Future Work**:
-   - Explore Transformer-based architectures for further improvements.
-   - Use attention mechanisms to enhance interpretability.
+3. **Expand the Dataset**:
+   - Test on larger, more diverse datasets to generalize the findings.
+
+4. **Explainable AI**:
+   - Explore explainability techniques to understand feature importance and decision-making processes.
 
 ---
 
