@@ -3,6 +3,7 @@ Main module to execute the end-to-end pipeline for data loading,
 model tuning, training, and evaluation.
 """
 
+import time
 import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
 from data_preprocessing import (
@@ -23,6 +24,7 @@ def main():
     """Main function to automate experiments across length buckets."""
 
     logger.info("Starting pipeline.")
+    start_time = time.time()
 
     x_train, y_train, x_test, y_test = load_dataset()
 
@@ -34,9 +36,12 @@ def main():
     for arch in architectures:
         Config.ARCHITECTURE = arch
         for min_len, max_len in length_buckets:
+
             logger.info(f"Starting experiment for length bucket {min_len}-{max_len} with {arch}.")
             Config.MIN_LEN = min_len
             Config.MAX_LEN = max_len
+
+            experiment_start_time = time.time()
 
             try:
                 (x_train, y_train), (x_val, y_val), (x_test, y_test) = preprocess_data(
@@ -70,10 +75,16 @@ def main():
                     }
                 )
 
+                logger.info(
+                    f"Experiment completed for {arch} with length bucket {min_len}-{max_len}. "
+                    f"Time taken: {time.time() - experiment_start_time:.2f} seconds."
+                )
+
             except Exception as e:
                 logger.error(f"Experiment failed for {min_len}-{max_len} with {arch}: {e}")
 
-    logger.info("All experiments completed.")
+    total_time = time.time() - start_time
+    logger.info(f"All experiments completed. Total time: {total_time:.2f} seconds.")
 
     logger.info("Saving results.")
     results_df = pd.DataFrame(results)
