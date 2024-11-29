@@ -86,10 +86,10 @@ def class_distribution(y_train):
 
 def filter_by_length(data, labels, min_length, max_length):
     """Filters sequences by length."""
-    logger.info(f"Filtering sequences by length: {min_length} <= length <= {max_length}.")
+    logger.info(f"Filtering sequences by length: {min_length} <= length < {max_length}.")
     filtered_data, filtered_labels = [], []
     for seq, label in zip(data, labels):
-        if min_length <= len(seq) <= max_length:
+        if min_length <= len(seq) < max_length:
             filtered_data.append(seq)
             filtered_labels.append(label)
     logger.info(
