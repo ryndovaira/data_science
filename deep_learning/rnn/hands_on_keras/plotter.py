@@ -260,15 +260,6 @@ def plot_all_results(results_df):
     logger.info(f"Toggleable metrics plot saved to {save_file_path}.")
 
 
-if __name__ == "__main__":
-    # for debugging purposes
-    import pandas as pd
-
-    name = f"length_bucket_results_241127_190242.csv"
-    df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
-    plot_all_results(df)
-
-
 def plot_hist_and_quartiles(
     data_lengths,
     q1,
@@ -336,3 +327,12 @@ def plot_hist_and_quartiles(
     save_path = os.path.join(save_dir, save_filename)
     fig.write_html(save_path)
     logger.info(f"Plot saved to {save_path}")
+
+
+if __name__ == "__main__":
+    # for debugging purposes
+    import pandas as pd
+
+    name = f"length_bucket_results_241127_190242.csv"
+    df = pd.read_csv(os.path.join(get_artifacts_dir(Config.FINAL_STAT_DIR), name))
+    plot_all_results(df)
