@@ -105,7 +105,6 @@ def truncate_indices(data, max_features):
 
 def get_statistics(data_lengths):
     """Compute summary statistics for sequence lengths."""
-    logger.info("Computing summary statistics for sequence lengths.")
     mean = np.mean(data_lengths)
     median = np.median(data_lengths)
     max_len = np.max(data_lengths)
@@ -132,17 +131,20 @@ def compute_length_buckets(x_train, x_test):
     train_lengths = [len(seq) for seq in x_train]
     test_lengths = [len(seq) for seq in x_test]
 
-    # Compute statistics for training and test sets
+    logger.info("Computing statistics for training sequence lengths.")
     train_mean, train_median, train_max, train_q1, train_q2, train_q3, train_p95, train_p99 = (
         get_statistics(train_lengths)
     )
+
+    logger.info("Computing statistics for test sequence lengths.")
     test_mean, test_median, test_max, test_q1, test_q2, test_q3, test_p95, test_p99 = (
         get_statistics(test_lengths)
     )
 
-    logger.info("Computing dynamic length buckets based on dataset statistics.")
+    logger.info("Computing statistics for combined sequence lengths.")
     combined_lengths = np.concatenate([train_lengths, test_lengths])
     _, _, max_len, q1, q2, q3, p95, p99 = get_statistics(combined_lengths)
+
     length_buckets = [
         (0, q1),  # 0 to Q1
         (q1, q2 - 1),  # Q1 to Median
@@ -150,8 +152,10 @@ def compute_length_buckets(x_train, x_test):
         (q3, p95 - 1),  # Q3 to 95th Percentile
         (p95, max_len),  # 95th Percentile to Max
     ]
-    logger.info(f"Number of Buckets: {len(length_buckets)}")
-    logger.info(f"Length Buckets: {length_buckets}")
+
+    for i, (start, end) in enumerate(length_buckets):
+        bucket_count = sum(1 for length in train_lengths if start <= length < end)
+        logger.info(f"Bucket {i + 1} {(start, end)}: {bucket_count} sequences")
 
     plot_hist_and_quartiles(
         train_lengths,
