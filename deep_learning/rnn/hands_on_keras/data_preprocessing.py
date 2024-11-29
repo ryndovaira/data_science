@@ -151,7 +151,6 @@ def compute_length_buckets(x_train, x_test):
         (q2, q3 - 1),  # Median to Q3
         (q3, p95 - 1),  # Q3 to 95th Percentile
         (p95, max_len),  # 95th Percentile to Max
-        (0, p95),  # 0 to 95th Percentile
     ]
 
     for i, (start, end) in enumerate(length_buckets):
