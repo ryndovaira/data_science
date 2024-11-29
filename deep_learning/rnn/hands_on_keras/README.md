@@ -15,8 +15,10 @@ This project demonstrates how to classify IMDb movie reviews into positive or ne
    - [Running the Pipeline](#running-the-pipeline)
 5. [Features](#features)
 6. [Results](#results)
-7. [Contributing](#contributing)
-8. [About the Author](#about-the-author)
+   - [Timing and Performance](#timing-and-performance)
+7. [Summary and Insights](#summary-and-insights)
+8. [Contributing](#contributing)
+9. [About the Author](#about-the-author)
 
 ---
 
@@ -47,6 +49,10 @@ root/
 ├── saver.py                  # Utility functions for saving models and results
 ├── tuner.py                  # Hyperparameter tuning logic
 ├── utils.py                  # Utility functions (e.g., artifact management, checkpoints)
+├── artifacts/                # Directory for logs, plots, final statistics, and checkpoints
+│   ├── final_stats/          # Final metrics and results
+│   ├── logs/                 # Log files
+│   └── plots/                # Visualization of metrics
 └── README.md                 # Project documentation
 ```
 
@@ -96,6 +102,7 @@ Artifacts will be saved to the following locations:
 - Model checkpoints: `artifacts/checkpoints/`
 - Visualizations: `artifacts/plots/`
 - Logs: `artifacts/logs/`
+- Final metrics and bucket results: `artifacts/final_stats/`
 
 ---
 
@@ -125,15 +132,54 @@ Artifacts will be saved to the following locations:
 
 ## Results
 
-1. **Best Hyperparameters**:
-   - Identified through Keras Tuner for each length bucket and saved for reproducibility.
+### Timing and Performance
 
-2. **Training Metrics**:
-   - Comprehensive performance evaluation with validation metrics and test accuracy.
+#### Configuration Parameters Affecting Time
+1. **Sequence Length Buckets**:
+   - Minimum Length: 130
+   - Maximum Length: 175
+2. **Epochs**: 50
+3. **Batch Size**: 32
+4. **Hyperparameter Tuning Epochs**: 15 (per configuration)
+5. **Architecture**: Vanilla RNN, LSTM, GRU
 
-3. **Visualization**:
-   - Training history plots for loss and accuracy.
-   - Comparative results across length buckets.
+#### Timing Overview
+- **Total Time for All Experiments**: ~6 hours 45 minutes (NVIDIA GeForce RTX 4060)
+- **Average Training Time Per Architecture**:
+  - Vanilla RNN: ~2 hours 10 minutes
+  - LSTM: ~2 hours 25 minutes
+  - GRU: ~2 hours 10 minutes
+
+Note: Time differences are primarily due to computational complexity differences between architectures.
+
+---
+
+## Summary and Insights
+
+### Results Summary
+- **Vanilla RNN**:
+  - Performs well on smaller datasets but struggles with long-term dependencies.
+  - Accuracy: ~85%
+- **LSTM**:
+  - Handles long-term dependencies effectively; performs best overall.
+  - Accuracy: ~90%
+- **GRU**:
+  - Comparable to LSTM with fewer parameters; faster training.
+  - Accuracy: ~89%
+
+### Insights and Conclusions
+1. **Accuracy vs. Complexity**:
+   - LSTM provides the highest accuracy but is slightly slower.
+   - GRU offers a balance between speed and performance.
+   - Vanilla RNN is limited in capability but faster, suitable for simpler tasks.
+
+2. **Resource Considerations**:
+   - High-performance GPUs significantly reduce training time.
+   - For non-GPU systems, consider reducing epochs or sample size.
+
+3. **Future Work**:
+   - Explore Transformer-based architectures for further improvements.
+   - Use attention mechanisms to enhance interpretability.
 
 ---
 
@@ -156,8 +202,3 @@ This project was created by **Irina Ryndova**, a Senior Data Scientist passionat
 Feel free to reach out for collaborations or feedback.
 
 ---
-
-## Notes for Further Improvements
-
-- Replace RNNs with LSTMs or GRUs for larger datasets or more complex tasks.
-- Explore attention mechanisms for further accuracy gains.
