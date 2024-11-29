@@ -151,11 +151,6 @@ def compute_length_buckets(x_train, x_test):
         (int(p95), int(max_len)),  # 95th Percentile to Max
     ]
     logger.info(f"Number of Buckets: {len(length_buckets)}")
-
-    for i, (start, end) in enumerate(length_buckets):
-        bucket_count = sum(1 for length in train_lengths if start <= length < end)
-        logger.info(f"Bucket {i + 1}: {bucket_count} sequences")
-
     logger.info("Dynamic Length Buckets:", length_buckets)
 
     plot_hist_and_quartiles(
