@@ -45,6 +45,7 @@ def preprocess_data(
             x_test, x_train, x_val, y_test, y_train, y_val
         )
 
+    logger.info(f"Truncating indices to a maximum of {max_features}.")
     x_train, x_val, x_test = map(
         lambda x: truncate_indices(x, max_features), (x_train, x_val, x_test)
     )
@@ -99,7 +100,6 @@ def filter_by_length(data, labels, min_length, max_length):
 
 def truncate_indices(data, max_features):
     """Truncates indices in sequences to a maximum feature value."""
-    logger.info(f"Truncating indices to a maximum of {max_features}.")
     return [[min(word, max_features - 1) for word in seq] for seq in data]
 
 
