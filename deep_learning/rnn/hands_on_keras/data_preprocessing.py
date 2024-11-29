@@ -109,11 +109,11 @@ def get_statistics(data_lengths):
     mean = np.mean(data_lengths)
     median = np.median(data_lengths)
     max_len = np.max(data_lengths)
-    q1 = np.percentile(data_lengths, 25)
-    q2 = np.percentile(data_lengths, 50)
-    q3 = np.percentile(data_lengths, 75)
-    p95 = np.percentile(data_lengths, 95)
-    p99 = np.percentile(data_lengths, 99)
+    q1 = np.percentile(data_lengths, 25).astype(int)
+    q2 = np.percentile(data_lengths, 50).astype(int)
+    q3 = np.percentile(data_lengths, 75).astype(int)
+    p95 = np.percentile(data_lengths, 95).astype(int)
+    p99 = np.percentile(data_lengths, 99).astype(int)
 
     logger.info(
         f"Mean: {mean}, Median: {median}, Max: {max_len}, Q1: {q1}, Q2: {q2}, Q3: {q3}, P95: {p95}, P99: {p99}"
@@ -144,11 +144,11 @@ def compute_length_buckets(x_train, x_test):
     combined_lengths = np.concatenate([train_lengths, test_lengths])
     _, _, max_len, q1, q2, q3, p95, p99 = get_statistics(combined_lengths)
     length_buckets = [
-        (0, int(q1)),  # 0 to Q1
-        (int(q1), int(q2) - 1),  # Q1 to Median
-        (int(q2), int(q3) - 1),  # Median to Q3
-        (int(q3), int(p95) - 1),  # Q3 to 95th Percentile
-        (int(p95), int(max_len)),  # 95th Percentile to Max
+        (0, q1),  # 0 to Q1
+        (q1, q2 - 1),  # Q1 to Median
+        (q2, q3 - 1),  # Median to Q3
+        (q3, p95 - 1),  # Q3 to 95th Percentile
+        (p95, max_len),  # 95th Percentile to Max
     ]
     logger.info(f"Number of Buckets: {len(length_buckets)}")
     logger.info(f"Length Buckets: {length_buckets}")
