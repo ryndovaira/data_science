@@ -116,10 +116,7 @@ def get_statistics(data_lengths):
     p99 = np.percentile(data_lengths, 99)
 
     logger.info(
-        f"Mean: {mean:.2f}, Median: {median:.2f}, Max: {max_len:.2f}\n"
-        f"Q1 (25th percentile): {q1:.2f}, Q2 (Median): {q2:.2f}, "
-        f"Q3 (75th percentile): {q3:.2f}\n95th Percentile: {p95:.2f}, "
-        f"99th Percentile: {p99:.2f}"
+        f"Mean: {mean}, Median: {median}, Max: {max_len}, Q1: {q1}, Q2: {q2}, Q3: {q3}, P95: {p95}, P99: {p99}"
     )
 
     return mean, median, max_len, q1, q2, q3, p95, p99
