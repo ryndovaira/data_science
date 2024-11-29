@@ -36,19 +36,20 @@ This plugin aims to integrate seamlessly into the IntelliJ environment, offering
 
 ## Project Structure
 
-The files for this project are organized as follows:
+All development for the plugin takes place in the `intellij_ai_assistant/` directory:
 
 ```
-root/
-├── README.md                 # Project documentation
-├── llm_dev_project_helper/   # IntelliJ Plugin source files
+deep_learning/
+├── intellij_ai_assistant/
 │   ├── README.md             # Plugin-specific documentation
-│   └── __init__.py           # Initialization file for the plugin
-├── config/                   # Configuration files
-├── src/                      # Core plugin source code (Kotlin/Python)
-├── resources/                # Plugin resources (e.g., icons, templates)
-└── tests/                    # Unit tests for plugin functionality
+│   ├── __init__.py           # Initialization file for the plugin
+│   ├── config/               # Configuration files
+│   ├── src/                  # Core plugin source code (Kotlin/Python)
+│   ├── resources/            # Plugin resources (e.g., icons, templates)
+│   └── tests/                # Unit tests for plugin functionality
 ```
+
+Other directories under `deep_learning/` are unrelated to this project.
 
 ---
 
