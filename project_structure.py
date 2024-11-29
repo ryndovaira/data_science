@@ -52,7 +52,6 @@ if __name__ == "__main__":
     root_name = os.path.basename(project_directory.rstrip("/"))
     print(f"Scanning project directory: {project_directory}")
     tree = [
-        f"# Project Structure\n",
         "```",
         f"{root_name}/",
     ]  # Add Markdown header and start code block
