@@ -1,0 +1,2871 @@
+2024-11-29 17:12:05,917 - INFO - Starting pipeline.
+2024-11-29 17:12:05,917 - INFO - Loading IMDB dataset.
+2024-11-29 17:12:08,075 - INFO - Data loaded: train=25000, test=25000.
+2024-11-29 17:12:08,075 - INFO - Computing sequence lengths for training and test sets.
+2024-11-29 17:12:08,077 - INFO - Computing statistics for training sequence lengths.
+2024-11-29 17:12:08,093 - INFO - Mean: 238.71364, Median: 178.0, Max: 2494, Q1: 130, Q2: 178, Q3: 291, P95: 610, P99: 926
+2024-11-29 17:12:08,093 - INFO - Computing statistics for test sequence lengths.
+2024-11-29 17:12:08,100 - INFO - Mean: 230.8042, Median: 174.0, Max: 2315, Q1: 128, Q2: 174, Q3: 280, P95: 586, P99: 902
+2024-11-29 17:12:08,100 - INFO - Computing statistics for combined sequence lengths.
+2024-11-29 17:12:08,104 - INFO - Mean: 234.75892, Median: 176.0, Max: 2494, Q1: 129, Q2: 176, Q3: 285, P95: 598, P99: 914
+2024-11-29 17:12:08,106 - INFO - Bucket 1 (0, np.int64(129)): 6008 sequences
+2024-11-29 17:12:08,107 - INFO - Bucket 2 (np.int64(129), np.int64(175)): 6155 sequences
+2024-11-29 17:12:08,109 - INFO - Bucket 3 (np.int64(176), np.int64(284)): 6275 sequences
+2024-11-29 17:12:08,110 - INFO - Bucket 4 (np.int64(285), np.int64(597)): 5105 sequences
+2024-11-29 17:12:08,111 - INFO - Bucket 5 (np.int64(598), np.int64(2494)): 1319 sequences
+2024-11-29 17:12:08,111 - INFO - Saving histogram of sequence lengths with quartiles using Plotly.
+2024-11-29 17:12:08,559 - INFO - Plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/EDA/train_sequence_lengths.html
+2024-11-29 17:12:08,559 - INFO - Saving histogram of sequence lengths with quartiles using Plotly.
+2024-11-29 17:12:08,615 - INFO - Plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/EDA/test_sequence_lengths.html
+2024-11-29 17:12:08,616 - INFO - Starting preprocessing with min_length=0, max_length=129, max_features=5000.
+2024-11-29 17:12:08,616 - INFO - Filtering sequences by length: 0 <= length < 129.
+2024-11-29 17:12:08,619 - INFO - Filtered data: 6008 sequences. Filtered labels: 6008
+2024-11-29 17:12:08,620 - INFO - Filtering sequences by length: 0 <= length < 129.
+2024-11-29 17:12:08,622 - INFO - Filtered data: 6409 sequences. Filtered labels: 6409
+2024-11-29 17:12:08,622 - INFO - Data filtered: train=6008, test=6409 with min_length=0, max_length=129.
+2024-11-29 17:12:08,623 - INFO - Classes distribution: {0: 2856, 1: 3152}
+2024-11-29 17:12:08,623 - INFO - Splitting data into train, val, and test sets.
+2024-11-29 17:12:08,627 - INFO - Truncating indices to a maximum of 5000.
+2024-11-29 17:12:08,733 - INFO - Padding sequences to a maximum length of 175.
+2024-11-29 17:12:08,791 - INFO - Data loaded and preprocessed: train=3905, val=2103, test=6409.
+2024-11-29 17:12:08,794 - INFO - Starting preprocessing with min_length=129, max_length=175, max_features=5000.
+2024-11-29 17:12:08,794 - INFO - Filtering sequences by length: 129 <= length < 175.
+2024-11-29 17:12:08,798 - INFO - Filtered data: 6155 sequences. Filtered labels: 6155
+2024-11-29 17:12:08,800 - INFO - Filtering sequences by length: 129 <= length < 175.
+2024-11-29 17:12:08,803 - INFO - Filtered data: 6123 sequences. Filtered labels: 6123
+2024-11-29 17:12:08,804 - INFO - Data filtered: train=6155, test=6123 with min_length=129, max_length=175.
+2024-11-29 17:12:08,804 - INFO - Classes distribution: {0: 3201, 1: 2954}
+2024-11-29 17:12:08,804 - INFO - Splitting data into train, val, and test sets.
+2024-11-29 17:12:08,806 - INFO - Truncating indices to a maximum of 5000.
+2024-11-29 17:12:08,976 - INFO - Padding sequences to a maximum length of 175.
+2024-11-29 17:12:09,059 - INFO - Data loaded and preprocessed: train=4000, val=2155, test=6123.
+2024-11-29 17:12:09,062 - INFO - Starting preprocessing with min_length=176, max_length=284, max_features=5000.
+2024-11-29 17:12:09,062 - INFO - Filtering sequences by length: 176 <= length < 284.
+2024-11-29 17:12:09,065 - INFO - Filtered data: 6275 sequences. Filtered labels: 6275
+2024-11-29 17:12:09,066 - INFO - Filtering sequences by length: 176 <= length < 284.
+2024-11-29 17:12:09,068 - INFO - Filtered data: 6268 sequences. Filtered labels: 6268
+2024-11-29 17:12:09,069 - INFO - Data filtered: train=6275, test=6268 with min_length=176, max_length=284.
+2024-11-29 17:12:09,069 - INFO - Classes distribution: {0: 3258, 1: 3017}
+2024-11-29 17:12:09,069 - INFO - Splitting data into train, val, and test sets.
+2024-11-29 17:12:09,071 - INFO - Truncating indices to a maximum of 5000.
+2024-11-29 17:12:09,347 - INFO - Padding sequences to a maximum length of 175.
+2024-11-29 17:12:09,451 - INFO - Data loaded and preprocessed: train=4078, val=2197, test=6268.
+2024-11-29 17:12:09,454 - INFO - Starting preprocessing with min_length=285, max_length=597, max_features=5000.
+2024-11-29 17:12:09,454 - INFO - Filtering sequences by length: 285 <= length < 597.
+2024-11-29 17:12:09,457 - INFO - Filtered data: 5105 sequences. Filtered labels: 5105
+2024-11-29 17:12:09,458 - INFO - Filtering sequences by length: 285 <= length < 597.
+2024-11-29 17:12:09,460 - INFO - Filtered data: 4887 sequences. Filtered labels: 4887
+2024-11-29 17:12:09,461 - INFO - Data filtered: train=5105, test=4887 with min_length=285, max_length=597.
+2024-11-29 17:12:09,461 - INFO - Classes distribution: {0: 2520, 1: 2585}
+2024-11-29 17:12:09,461 - INFO - Splitting data into train, val, and test sets.
+2024-11-29 17:12:09,463 - INFO - Truncating indices to a maximum of 5000.
+2024-11-29 17:12:09,828 - INFO - Padding sequences to a maximum length of 175.
+2024-11-29 17:12:09,917 - INFO - Data loaded and preprocessed: train=3318, val=1787, test=4887.
+2024-11-29 17:12:09,919 - INFO - Starting preprocessing with min_length=598, max_length=2494, max_features=5000.
+2024-11-29 17:12:09,919 - INFO - Filtering sequences by length: 598 <= length < 2494.
+2024-11-29 17:12:09,921 - INFO - Filtered data: 1319 sequences. Filtered labels: 1319
+2024-11-29 17:12:09,922 - INFO - Filtering sequences by length: 598 <= length < 2494.
+2024-11-29 17:12:09,925 - INFO - Filtered data: 1185 sequences. Filtered labels: 1185
+2024-11-29 17:12:09,925 - INFO - Data filtered: train=1319, test=1185 with min_length=598, max_length=2494.
+2024-11-29 17:12:09,925 - INFO - Classes distribution: {0: 591, 1: 728}
+2024-11-29 17:12:09,925 - INFO - Splitting data into train, val, and test sets.
+2024-11-29 17:12:09,927 - INFO - Truncating indices to a maximum of 5000.
+2024-11-29 17:12:10,092 - INFO - Padding sequences to a maximum length of 175.
+2024-11-29 17:12:10,120 - INFO - Data loaded and preprocessed: train=857, val=462, test=1185.
+2024-11-29 17:12:10,120 - INFO - Starting experiment for length bucket 0-129 with VanillaRNN.
+2024-11-29 17:12:10,194 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:12:10,194 - INFO - Configuring TensorFlow device.
+2024-11-29 17:12:10,638 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:12:10,638 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:12:10,639 - INFO - Hyperband Factor: 3
+2024-11-29 17:12:10,639 - INFO - Hyperband Iterations: 1
+2024-11-29 17:12:10,639 - INFO - Batch Size: 32
+2024-11-29 17:12:10,639 - INFO - Patience: 8
+2024-11-29 17:12:10,639 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:12:10,854 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:12:10,855 - INFO - Best hyperparameters found: {'embedding_dim': 64, 'rnn_units': 48, 'dropout_rate': 0.1, 'tuner/epochs': 5, 'tuner/initial_epoch': 0, 'tuner/bracket': 1, 'tuner/round': 0}
+2024-11-29 17:12:10,855 - INFO - Saving tuner results.
+2024-11-29 17:12:10,861 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/VanillaRNN/tuner_results_0_129_241129_171205.csv
+2024-11-29 17:12:10,861 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:12:10,861 - INFO - Configuring TensorFlow device.
+2024-11-29 17:12:10,861 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:12:10,861 - INFO - Epochs: 50
+2024-11-29 17:12:10,861 - INFO - Batch Size: 32
+2024-11-29 17:12:10,861 - INFO - Patience: 8
+2024-11-29 17:12:10,862 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:12:10,862 - INFO - Using VanillaRNN architecture.
+2024-11-29 17:12:10,862 - INFO - Embedding Dimension: 64
+2024-11-29 17:12:10,862 - INFO - RNN Units: 48
+2024-11-29 17:12:10,862 - INFO - Dropout Rate: 0.1
+2024-11-29 17:12:10,862 - INFO - Max Features: 5000
+2024-11-29 17:12:10,875 - INFO - Model compiled.
+2024-11-29 17:12:10,876 - INFO - Model training started.
+2024-11-29 17:12:45,758 - INFO - Model training completed.
+2024-11-29 17:12:45,758 - INFO - Saving model.
+2024-11-29 17:12:45,785 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/VanillaRNN.
+2024-11-29 17:12:45,877 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/VanillaRNN/history_0_129_241129_171205.html.
+2024-11-29 17:12:45,877 - INFO - Saving history.
+2024-11-29 17:12:45,878 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/VanillaRNN/history_0_129_241129_171205.json.
+2024-11-29 17:12:45,878 - INFO - Model evaluation on a test set.
+2024-11-29 17:12:48,684 - INFO - Final loss and accuracy:
+2024-11-29 17:12:48,684 - INFO - Train Loss: 0.0019, Train Accuracy: 0.9997
+2024-11-29 17:12:48,684 - INFO - Val Loss: 0.7526, Val Accuracy: 0.8179
+2024-11-29 17:12:48,684 - INFO - Test Loss: 0.4750, Test Accuracy: 0.7859
+2024-11-29 17:12:48,685 - INFO - Experiment completed for VanillaRNN with length bucket 0-129. Time taken: 38.56 seconds.
+2024-11-29 17:12:48,685 - INFO - Starting experiment for length bucket 129-175 with VanillaRNN.
+2024-11-29 17:12:48,685 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:12:48,685 - INFO - Configuring TensorFlow device.
+2024-11-29 17:12:48,685 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:12:48,685 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:12:48,685 - INFO - Hyperband Factor: 3
+2024-11-29 17:12:48,685 - INFO - Hyperband Iterations: 1
+2024-11-29 17:12:48,685 - INFO - Batch Size: 32
+2024-11-29 17:12:48,685 - INFO - Patience: 8
+2024-11-29 17:12:48,685 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:12:48,830 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:12:48,830 - INFO - Best hyperparameters found: {'embedding_dim': 64, 'rnn_units': 32, 'dropout_rate': 0.2, 'tuner/epochs': 15, 'tuner/initial_epoch': 0, 'tuner/bracket': 0, 'tuner/round': 0}
+2024-11-29 17:12:48,830 - INFO - Saving tuner results.
+2024-11-29 17:12:48,831 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/VanillaRNN/tuner_results_129_175_241129_171205.csv
+2024-11-29 17:12:48,832 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:12:48,832 - INFO - Configuring TensorFlow device.
+2024-11-29 17:12:48,832 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:12:48,832 - INFO - Epochs: 50
+2024-11-29 17:12:48,832 - INFO - Batch Size: 32
+2024-11-29 17:12:48,832 - INFO - Patience: 8
+2024-11-29 17:12:48,832 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:12:48,832 - INFO - Using VanillaRNN architecture.
+2024-11-29 17:12:48,832 - INFO - Embedding Dimension: 64
+2024-11-29 17:12:48,832 - INFO - RNN Units: 32
+2024-11-29 17:12:48,832 - INFO - Dropout Rate: 0.2
+2024-11-29 17:12:48,832 - INFO - Max Features: 5000
+2024-11-29 17:12:48,840 - INFO - Model compiled.
+2024-11-29 17:12:48,840 - INFO - Model training started.
+2024-11-29 17:13:19,138 - INFO - Model training completed.
+2024-11-29 17:13:19,138 - INFO - Saving model.
+2024-11-29 17:13:19,163 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/VanillaRNN.
+2024-11-29 17:13:19,191 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/VanillaRNN/history_129_175_241129_171205.html.
+2024-11-29 17:13:19,191 - INFO - Saving history.
+2024-11-29 17:13:19,192 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/VanillaRNN/history_129_175_241129_171205.json.
+2024-11-29 17:13:19,192 - INFO - Model evaluation on a test set.
+2024-11-29 17:13:20,901 - INFO - Final loss and accuracy:
+2024-11-29 17:13:20,902 - INFO - Train Loss: 0.0012, Train Accuracy: 1.0000
+2024-11-29 17:13:20,902 - INFO - Val Loss: 0.7122, Val Accuracy: 0.8037
+2024-11-29 17:13:20,902 - INFO - Test Loss: 0.5149, Test Accuracy: 0.7843
+2024-11-29 17:13:20,902 - INFO - Experiment completed for VanillaRNN with length bucket 129-175. Time taken: 32.22 seconds.
+2024-11-29 17:13:20,902 - INFO - Starting experiment for length bucket 176-284 with VanillaRNN.
+2024-11-29 17:13:20,902 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:13:20,902 - INFO - Configuring TensorFlow device.
+2024-11-29 17:13:20,902 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:13:20,902 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:13:20,902 - INFO - Hyperband Factor: 3
+2024-11-29 17:13:20,902 - INFO - Hyperband Iterations: 1
+2024-11-29 17:13:20,902 - INFO - Batch Size: 32
+2024-11-29 17:13:20,902 - INFO - Patience: 8
+2024-11-29 17:13:20,902 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:13:20,932 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:13:20,932 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 112, 'dropout_rate': 0.5, 'tuner/epochs': 15, 'tuner/initial_epoch': 5, 'tuner/bracket': 1, 'tuner/round': 1, 'tuner/trial_id': '0020'}
+2024-11-29 17:13:20,932 - INFO - Saving tuner results.
+2024-11-29 17:13:20,933 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/VanillaRNN/tuner_results_176_284_241129_171205.csv
+2024-11-29 17:13:20,933 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:13:20,933 - INFO - Configuring TensorFlow device.
+2024-11-29 17:13:20,933 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:13:20,933 - INFO - Epochs: 50
+2024-11-29 17:13:20,933 - INFO - Batch Size: 32
+2024-11-29 17:13:20,933 - INFO - Patience: 8
+2024-11-29 17:13:20,933 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:13:20,933 - INFO - Using VanillaRNN architecture.
+2024-11-29 17:13:20,934 - INFO - Embedding Dimension: 32
+2024-11-29 17:13:20,934 - INFO - RNN Units: 112
+2024-11-29 17:13:20,934 - INFO - Dropout Rate: 0.5
+2024-11-29 17:13:20,934 - INFO - Max Features: 5000
+2024-11-29 17:13:20,940 - INFO - Model compiled.
+2024-11-29 17:13:20,940 - INFO - Model training started.
+2024-11-29 17:14:04,401 - INFO - Model training completed.
+2024-11-29 17:14:04,402 - INFO - Saving model.
+2024-11-29 17:14:04,428 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/VanillaRNN.
+2024-11-29 17:14:04,455 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/VanillaRNN/history_176_284_241129_171205.html.
+2024-11-29 17:14:04,455 - INFO - Saving history.
+2024-11-29 17:14:04,455 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/VanillaRNN/history_176_284_241129_171205.json.
+2024-11-29 17:14:04,456 - INFO - Model evaluation on a test set.
+2024-11-29 17:14:07,427 - INFO - Final loss and accuracy:
+2024-11-29 17:14:07,428 - INFO - Train Loss: 0.1440, Train Accuracy: 0.9529
+2024-11-29 17:14:07,428 - INFO - Val Loss: 0.8233, Val Accuracy: 0.7820
+2024-11-29 17:14:07,428 - INFO - Test Loss: 0.5051, Test Accuracy: 0.7703
+2024-11-29 17:14:07,428 - INFO - Experiment completed for VanillaRNN with length bucket 176-284. Time taken: 46.53 seconds.
+2024-11-29 17:14:07,428 - INFO - Starting experiment for length bucket 285-597 with VanillaRNN.
+2024-11-29 17:14:07,428 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:14:07,428 - INFO - Configuring TensorFlow device.
+2024-11-29 17:14:07,428 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:14:07,428 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:14:07,428 - INFO - Hyperband Factor: 3
+2024-11-29 17:14:07,428 - INFO - Hyperband Iterations: 1
+2024-11-29 17:14:07,428 - INFO - Batch Size: 32
+2024-11-29 17:14:07,428 - INFO - Patience: 8
+2024-11-29 17:14:07,428 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:14:07,459 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:14:07,459 - INFO - Best hyperparameters found: {'embedding_dim': 64, 'rnn_units': 16, 'dropout_rate': 0.4, 'tuner/epochs': 15, 'tuner/initial_epoch': 5, 'tuner/bracket': 2, 'tuner/round': 2, 'tuner/trial_id': '0012'}
+2024-11-29 17:14:07,460 - INFO - Saving tuner results.
+2024-11-29 17:14:07,461 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/VanillaRNN/tuner_results_285_597_241129_171205.csv
+2024-11-29 17:14:07,461 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:14:07,461 - INFO - Configuring TensorFlow device.
+2024-11-29 17:14:07,461 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:14:07,461 - INFO - Epochs: 50
+2024-11-29 17:14:07,461 - INFO - Batch Size: 32
+2024-11-29 17:14:07,461 - INFO - Patience: 8
+2024-11-29 17:14:07,461 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:14:07,461 - INFO - Using VanillaRNN architecture.
+2024-11-29 17:14:07,461 - INFO - Embedding Dimension: 64
+2024-11-29 17:14:07,461 - INFO - RNN Units: 16
+2024-11-29 17:14:07,461 - INFO - Dropout Rate: 0.4
+2024-11-29 17:14:07,462 - INFO - Max Features: 5000
+2024-11-29 17:14:07,469 - INFO - Model compiled.
+2024-11-29 17:14:07,469 - INFO - Model training started.
+2024-11-29 17:14:27,475 - INFO - Model training completed.
+2024-11-29 17:14:27,475 - INFO - Saving model.
+2024-11-29 17:14:27,496 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/VanillaRNN.
+2024-11-29 17:14:27,522 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/VanillaRNN/history_285_597_241129_171205.html.
+2024-11-29 17:14:27,522 - INFO - Saving history.
+2024-11-29 17:14:27,522 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/VanillaRNN/history_285_597_241129_171205.json.
+2024-11-29 17:14:27,522 - INFO - Model evaluation on a test set.
+2024-11-29 17:14:28,947 - INFO - Final loss and accuracy:
+2024-11-29 17:14:28,947 - INFO - Train Loss: 0.0205, Train Accuracy: 0.9991
+2024-11-29 17:14:28,947 - INFO - Val Loss: 1.2552, Val Accuracy: 0.5417
+2024-11-29 17:14:28,947 - INFO - Test Loss: 0.6815, Test Accuracy: 0.5580
+2024-11-29 17:14:28,947 - INFO - Experiment completed for VanillaRNN with length bucket 285-597. Time taken: 21.52 seconds.
+2024-11-29 17:14:28,947 - INFO - Starting experiment for length bucket 598-2494 with VanillaRNN.
+2024-11-29 17:14:28,947 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:14:28,947 - INFO - Configuring TensorFlow device.
+2024-11-29 17:14:28,947 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:14:28,947 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:14:28,948 - INFO - Hyperband Factor: 3
+2024-11-29 17:14:28,948 - INFO - Hyperband Iterations: 1
+2024-11-29 17:14:28,948 - INFO - Batch Size: 32
+2024-11-29 17:14:28,948 - INFO - Patience: 8
+2024-11-29 17:14:28,948 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:14:28,965 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:14:28,965 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 96, 'dropout_rate': 0.4, 'tuner/epochs': 15, 'tuner/initial_epoch': 0, 'tuner/bracket': 0, 'tuner/round': 0}
+2024-11-29 17:14:28,965 - INFO - Saving tuner results.
+2024-11-29 17:14:28,966 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/VanillaRNN/tuner_results_598_2494_241129_171205.csv
+2024-11-29 17:14:28,966 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:14:28,966 - INFO - Configuring TensorFlow device.
+2024-11-29 17:14:28,966 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:14:28,966 - INFO - Epochs: 50
+2024-11-29 17:14:28,967 - INFO - Batch Size: 32
+2024-11-29 17:14:28,967 - INFO - Patience: 8
+2024-11-29 17:14:28,967 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:14:28,967 - INFO - Using VanillaRNN architecture.
+2024-11-29 17:14:28,967 - INFO - Embedding Dimension: 32
+2024-11-29 17:14:28,967 - INFO - RNN Units: 96
+2024-11-29 17:14:28,967 - INFO - Dropout Rate: 0.4
+2024-11-29 17:14:28,967 - INFO - Max Features: 5000
+2024-11-29 17:14:28,975 - INFO - Model compiled.
+2024-11-29 17:14:28,975 - INFO - Model training started.
+2024-11-29 17:14:36,412 - INFO - Model training completed.
+2024-11-29 17:14:36,412 - INFO - Saving model.
+2024-11-29 17:14:36,438 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/VanillaRNN.
+2024-11-29 17:14:36,467 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/VanillaRNN/history_598_2494_241129_171205.html.
+2024-11-29 17:14:36,467 - INFO - Saving history.
+2024-11-29 17:14:36,467 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/VanillaRNN/history_598_2494_241129_171205.json.
+2024-11-29 17:14:36,467 - INFO - Model evaluation on a test set.
+2024-11-29 17:14:37,177 - INFO - Final loss and accuracy:
+2024-11-29 17:14:37,178 - INFO - Train Loss: 0.0543, Train Accuracy: 0.9930
+2024-11-29 17:14:37,178 - INFO - Val Loss: 1.2202, Val Accuracy: 0.5411
+2024-11-29 17:14:37,178 - INFO - Test Loss: 0.6897, Test Accuracy: 0.5333
+2024-11-29 17:14:37,178 - INFO - Experiment completed for VanillaRNN with length bucket 598-2494. Time taken: 8.23 seconds.
+2024-11-29 17:14:37,178 - INFO - Starting experiment for length bucket 0-129 with LSTM.
+2024-11-29 17:14:37,178 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:14:37,178 - INFO - Configuring TensorFlow device.
+2024-11-29 17:14:37,178 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:14:37,178 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:14:37,178 - INFO - Hyperband Factor: 3
+2024-11-29 17:14:37,178 - INFO - Hyperband Iterations: 1
+2024-11-29 17:14:37,178 - INFO - Batch Size: 32
+2024-11-29 17:14:37,178 - INFO - Patience: 8
+2024-11-29 17:14:37,178 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:14:37,180 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:14:37,180 - INFO - Using LSTM architecture.
+2024-11-29 17:14:37,180 - INFO - Embedding Dimension: 32
+2024-11-29 17:14:37,180 - INFO - RNN Units: 16
+2024-11-29 17:14:37,181 - INFO - Dropout Rate: 0.1
+2024-11-29 17:14:37,181 - INFO - Max Features: 5000
+2024-11-29 17:14:37,187 - INFO - Model compiled.
+2024-11-29 17:14:37,394 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:14:37,397 - INFO - Using LSTM architecture.
+2024-11-29 17:14:37,398 - INFO - Embedding Dimension: 32
+2024-11-29 17:14:37,398 - INFO - RNN Units: 128
+2024-11-29 17:14:37,398 - INFO - Dropout Rate: 0.4
+2024-11-29 17:14:37,398 - INFO - Max Features: 5000
+2024-11-29 17:14:37,411 - INFO - Model compiled.
+2024-11-29 17:14:47,428 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:14:47,432 - INFO - Using LSTM architecture.
+2024-11-29 17:14:47,433 - INFO - Embedding Dimension: 64
+2024-11-29 17:14:47,433 - INFO - RNN Units: 128
+2024-11-29 17:14:47,434 - INFO - Dropout Rate: 0.1
+2024-11-29 17:14:47,434 - INFO - Max Features: 5000
+2024-11-29 17:14:47,447 - INFO - Model compiled.
+2024-11-29 17:14:55,693 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:14:55,696 - INFO - Using LSTM architecture.
+2024-11-29 17:14:55,698 - INFO - Embedding Dimension: 32
+2024-11-29 17:14:55,698 - INFO - RNN Units: 32
+2024-11-29 17:14:55,698 - INFO - Dropout Rate: 0.2
+2024-11-29 17:14:55,698 - INFO - Max Features: 5000
+2024-11-29 17:14:55,711 - INFO - Model compiled.
+2024-11-29 17:15:02,177 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:02,182 - INFO - Using LSTM architecture.
+2024-11-29 17:15:02,183 - INFO - Embedding Dimension: 256
+2024-11-29 17:15:02,183 - INFO - RNN Units: 32
+2024-11-29 17:15:02,183 - INFO - Dropout Rate: 0.5
+2024-11-29 17:15:02,183 - INFO - Max Features: 5000
+2024-11-29 17:15:02,197 - INFO - Model compiled.
+2024-11-29 17:15:11,269 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:11,269 - INFO - Using LSTM architecture.
+2024-11-29 17:15:11,272 - INFO - Embedding Dimension: 64
+2024-11-29 17:15:11,273 - INFO - RNN Units: 112
+2024-11-29 17:15:11,273 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:15:11,273 - INFO - Max Features: 5000
+2024-11-29 17:15:11,286 - INFO - Model compiled.
+2024-11-29 17:15:20,401 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:20,403 - INFO - Using LSTM architecture.
+2024-11-29 17:15:20,405 - INFO - Embedding Dimension: 128
+2024-11-29 17:15:20,405 - INFO - RNN Units: 64
+2024-11-29 17:15:20,405 - INFO - Dropout Rate: 0.1
+2024-11-29 17:15:20,405 - INFO - Max Features: 5000
+2024-11-29 17:15:20,420 - INFO - Model compiled.
+2024-11-29 17:15:28,819 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:28,824 - INFO - Using LSTM architecture.
+2024-11-29 17:15:28,824 - INFO - Embedding Dimension: 64
+2024-11-29 17:15:28,824 - INFO - RNN Units: 16
+2024-11-29 17:15:28,824 - INFO - Dropout Rate: 0.5
+2024-11-29 17:15:28,824 - INFO - Max Features: 5000
+2024-11-29 17:15:28,840 - INFO - Model compiled.
+2024-11-29 17:15:33,868 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:33,873 - INFO - Using LSTM architecture.
+2024-11-29 17:15:33,875 - INFO - Embedding Dimension: 128
+2024-11-29 17:15:33,875 - INFO - RNN Units: 64
+2024-11-29 17:15:33,875 - INFO - Dropout Rate: 0.5
+2024-11-29 17:15:33,875 - INFO - Max Features: 5000
+2024-11-29 17:15:33,892 - INFO - Model compiled.
+2024-11-29 17:15:43,278 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:43,282 - INFO - Using LSTM architecture.
+2024-11-29 17:15:43,283 - INFO - Embedding Dimension: 256
+2024-11-29 17:15:43,285 - INFO - RNN Units: 48
+2024-11-29 17:15:43,285 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:15:43,285 - INFO - Max Features: 5000
+2024-11-29 17:15:43,299 - INFO - Model compiled.
+2024-11-29 17:15:52,353 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:15:52,357 - INFO - Using LSTM architecture.
+2024-11-29 17:15:52,360 - INFO - Embedding Dimension: 128
+2024-11-29 17:15:52,360 - INFO - RNN Units: 32
+2024-11-29 17:15:52,360 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:15:52,360 - INFO - Max Features: 5000
+2024-11-29 17:15:52,373 - INFO - Model compiled.
+2024-11-29 17:16:00,929 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:16:00,933 - INFO - Using LSTM architecture.
+2024-11-29 17:16:00,934 - INFO - Embedding Dimension: 64
+2024-11-29 17:16:00,934 - INFO - RNN Units: 80
+2024-11-29 17:16:00,934 - INFO - Dropout Rate: 0.5
+2024-11-29 17:16:00,934 - INFO - Max Features: 5000
+2024-11-29 17:16:00,947 - INFO - Model compiled.
+2024-11-29 17:16:07,423 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:16:07,425 - INFO - Using LSTM architecture.
+2024-11-29 17:16:07,427 - INFO - Embedding Dimension: 128
+2024-11-29 17:16:07,429 - INFO - RNN Units: 64
+2024-11-29 17:16:07,429 - INFO - Dropout Rate: 0.4
+2024-11-29 17:16:07,430 - INFO - Max Features: 5000
+2024-11-29 17:16:07,442 - INFO - Model compiled.
+2024-11-29 17:16:17,366 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:16:17,369 - INFO - Using LSTM architecture.
+2024-11-29 17:16:17,371 - INFO - Embedding Dimension: 128
+2024-11-29 17:16:17,371 - INFO - RNN Units: 64
+2024-11-29 17:16:17,371 - INFO - Dropout Rate: 0.1
+2024-11-29 17:16:17,371 - INFO - Max Features: 5000
+2024-11-29 17:16:17,385 - INFO - Model compiled.
+2024-11-29 17:16:30,094 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:16:30,103 - INFO - Using LSTM architecture.
+2024-11-29 17:16:30,104 - INFO - Embedding Dimension: 64
+2024-11-29 17:16:30,104 - INFO - RNN Units: 112
+2024-11-29 17:16:30,104 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:16:30,104 - INFO - Max Features: 5000
+2024-11-29 17:16:30,118 - INFO - Model compiled.
+2024-11-29 17:16:40,546 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:16:40,548 - INFO - Using LSTM architecture.
+2024-11-29 17:16:40,551 - INFO - Embedding Dimension: 128
+2024-11-29 17:16:40,551 - INFO - RNN Units: 64
+2024-11-29 17:16:40,551 - INFO - Dropout Rate: 0.4
+2024-11-29 17:16:40,551 - INFO - Max Features: 5000
+2024-11-29 17:16:40,569 - INFO - Model compiled.
+2024-11-29 17:16:53,027 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:16:53,030 - INFO - Using LSTM architecture.
+2024-11-29 17:16:53,032 - INFO - Embedding Dimension: 64
+2024-11-29 17:16:53,032 - INFO - RNN Units: 128
+2024-11-29 17:16:53,032 - INFO - Dropout Rate: 0.1
+2024-11-29 17:16:53,033 - INFO - Max Features: 5000
+2024-11-29 17:16:53,045 - INFO - Model compiled.
+2024-11-29 17:17:02,207 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:17:02,208 - INFO - Using LSTM architecture.
+2024-11-29 17:17:02,210 - INFO - Embedding Dimension: 128
+2024-11-29 17:17:02,211 - INFO - RNN Units: 64
+2024-11-29 17:17:02,211 - INFO - Dropout Rate: 0.4
+2024-11-29 17:17:02,211 - INFO - Max Features: 5000
+2024-11-29 17:17:02,228 - INFO - Model compiled.
+2024-11-29 17:17:36,091 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:17:36,100 - INFO - Using LSTM architecture.
+2024-11-29 17:17:36,101 - INFO - Embedding Dimension: 64
+2024-11-29 17:17:36,101 - INFO - RNN Units: 112
+2024-11-29 17:17:36,101 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:17:36,101 - INFO - Max Features: 5000
+2024-11-29 17:17:36,113 - INFO - Model compiled.
+2024-11-29 17:18:09,775 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:18:09,784 - INFO - Using LSTM architecture.
+2024-11-29 17:18:09,785 - INFO - Embedding Dimension: 128
+2024-11-29 17:18:09,785 - INFO - RNN Units: 48
+2024-11-29 17:18:09,785 - INFO - Dropout Rate: 0.2
+2024-11-29 17:18:09,785 - INFO - Max Features: 5000
+2024-11-29 17:18:09,799 - INFO - Model compiled.
+2024-11-29 17:18:30,792 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:18:30,794 - INFO - Using LSTM architecture.
+2024-11-29 17:18:30,796 - INFO - Embedding Dimension: 128
+2024-11-29 17:18:30,797 - INFO - RNN Units: 48
+2024-11-29 17:18:30,797 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:18:30,797 - INFO - Max Features: 5000
+2024-11-29 17:18:30,810 - INFO - Model compiled.
+2024-11-29 17:18:47,132 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:18:47,136 - INFO - Using LSTM architecture.
+2024-11-29 17:18:47,138 - INFO - Embedding Dimension: 128
+2024-11-29 17:18:47,138 - INFO - RNN Units: 80
+2024-11-29 17:18:47,138 - INFO - Dropout Rate: 0.1
+2024-11-29 17:18:47,138 - INFO - Max Features: 5000
+2024-11-29 17:18:47,154 - INFO - Model compiled.
+2024-11-29 17:19:01,960 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:19:01,964 - INFO - Using LSTM architecture.
+2024-11-29 17:19:01,967 - INFO - Embedding Dimension: 256
+2024-11-29 17:19:01,967 - INFO - RNN Units: 96
+2024-11-29 17:19:01,967 - INFO - Dropout Rate: 0.1
+2024-11-29 17:19:01,967 - INFO - Max Features: 5000
+2024-11-29 17:19:01,979 - INFO - Model compiled.
+2024-11-29 17:19:19,392 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:19:19,393 - INFO - Using LSTM architecture.
+2024-11-29 17:19:19,395 - INFO - Embedding Dimension: 32
+2024-11-29 17:19:19,396 - INFO - RNN Units: 96
+2024-11-29 17:19:19,396 - INFO - Dropout Rate: 0.1
+2024-11-29 17:19:19,396 - INFO - Max Features: 5000
+2024-11-29 17:19:19,410 - INFO - Model compiled.
+2024-11-29 17:19:38,808 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:19:38,813 - INFO - Using LSTM architecture.
+2024-11-29 17:19:38,814 - INFO - Embedding Dimension: 256
+2024-11-29 17:19:38,815 - INFO - RNN Units: 80
+2024-11-29 17:19:38,815 - INFO - Dropout Rate: 0.5
+2024-11-29 17:19:38,815 - INFO - Max Features: 5000
+2024-11-29 17:19:38,827 - INFO - Model compiled.
+2024-11-29 17:19:58,751 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:19:58,753 - INFO - Using LSTM architecture.
+2024-11-29 17:19:58,756 - INFO - Embedding Dimension: 32
+2024-11-29 17:19:58,756 - INFO - RNN Units: 96
+2024-11-29 17:19:58,756 - INFO - Dropout Rate: 0.1
+2024-11-29 17:19:58,756 - INFO - Max Features: 5000
+2024-11-29 17:19:58,769 - INFO - Model compiled.
+2024-11-29 17:20:29,082 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:20:29,084 - INFO - Using LSTM architecture.
+2024-11-29 17:20:29,086 - INFO - Embedding Dimension: 128
+2024-11-29 17:20:29,087 - INFO - RNN Units: 48
+2024-11-29 17:20:29,087 - INFO - Dropout Rate: 0.2
+2024-11-29 17:20:29,087 - INFO - Max Features: 5000
+2024-11-29 17:20:29,100 - INFO - Model compiled.
+2024-11-29 17:21:00,796 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:21:00,798 - INFO - Using LSTM architecture.
+2024-11-29 17:21:00,800 - INFO - Embedding Dimension: 128
+2024-11-29 17:21:00,801 - INFO - RNN Units: 112
+2024-11-29 17:21:00,801 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:21:00,801 - INFO - Max Features: 5000
+2024-11-29 17:21:00,815 - INFO - Model compiled.
+2024-11-29 17:21:35,694 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:21:35,695 - INFO - Using LSTM architecture.
+2024-11-29 17:21:35,698 - INFO - Embedding Dimension: 64
+2024-11-29 17:21:35,700 - INFO - RNN Units: 96
+2024-11-29 17:21:35,700 - INFO - Dropout Rate: 0.1
+2024-11-29 17:21:35,701 - INFO - Max Features: 5000
+2024-11-29 17:21:35,714 - INFO - Model compiled.
+2024-11-29 17:22:18,638 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:22:18,644 - INFO - Using LSTM architecture.
+2024-11-29 17:22:18,645 - INFO - Embedding Dimension: 64
+2024-11-29 17:22:18,645 - INFO - RNN Units: 48
+2024-11-29 17:22:18,645 - INFO - Dropout Rate: 0.2
+2024-11-29 17:22:18,645 - INFO - Max Features: 5000
+2024-11-29 17:22:18,658 - INFO - Model compiled.
+2024-11-29 17:22:59,908 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:22:59,910 - INFO - Using LSTM architecture.
+2024-11-29 17:22:59,913 - INFO - Embedding Dimension: 64
+2024-11-29 17:22:59,913 - INFO - RNN Units: 96
+2024-11-29 17:22:59,913 - INFO - Dropout Rate: 0.5
+2024-11-29 17:22:59,913 - INFO - Max Features: 5000
+2024-11-29 17:22:59,926 - INFO - Model compiled.
+2024-11-29 17:23:38,456 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:23:38,457 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 96, 'dropout_rate': 0.1, 'tuner/epochs': 5, 'tuner/initial_epoch': 0, 'tuner/bracket': 1, 'tuner/round': 0}
+2024-11-29 17:23:38,457 - INFO - Saving tuner results.
+2024-11-29 17:23:38,458 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/LSTM/tuner_results_0_129_241129_171205.csv
+2024-11-29 17:23:38,458 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:23:38,458 - INFO - Configuring TensorFlow device.
+2024-11-29 17:23:38,458 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:23:38,458 - INFO - Epochs: 50
+2024-11-29 17:23:38,458 - INFO - Batch Size: 32
+2024-11-29 17:23:38,458 - INFO - Patience: 8
+2024-11-29 17:23:38,458 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:23:38,459 - INFO - Using LSTM architecture.
+2024-11-29 17:23:38,459 - INFO - Embedding Dimension: 32
+2024-11-29 17:23:38,459 - INFO - RNN Units: 96
+2024-11-29 17:23:38,459 - INFO - Dropout Rate: 0.1
+2024-11-29 17:23:38,459 - INFO - Max Features: 5000
+2024-11-29 17:23:38,466 - INFO - Model compiled.
+2024-11-29 17:23:38,466 - INFO - Model training started.
+2024-11-29 17:24:19,321 - INFO - Model training completed.
+2024-11-29 17:24:19,322 - INFO - Saving model.
+2024-11-29 17:24:19,345 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/LSTM.
+2024-11-29 17:24:19,375 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/LSTM/history_0_129_241129_171205.html.
+2024-11-29 17:24:19,375 - INFO - Saving history.
+2024-11-29 17:24:19,376 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/LSTM/history_0_129_241129_171205.json.
+2024-11-29 17:24:19,376 - INFO - Model evaluation on a test set.
+2024-11-29 17:24:21,779 - INFO - Final loss and accuracy:
+2024-11-29 17:24:21,779 - INFO - Train Loss: 0.0263, Train Accuracy: 0.9913
+2024-11-29 17:24:21,779 - INFO - Val Loss: 0.6875, Val Accuracy: 0.8250
+2024-11-29 17:24:21,779 - INFO - Test Loss: 0.3979, Test Accuracy: 0.8379
+2024-11-29 17:24:21,779 - INFO - Experiment completed for LSTM with length bucket 0-129. Time taken: 584.60 seconds.
+2024-11-29 17:24:21,779 - INFO - Starting experiment for length bucket 129-175 with LSTM.
+2024-11-29 17:24:21,779 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:24:21,779 - INFO - Configuring TensorFlow device.
+2024-11-29 17:24:21,780 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:24:21,780 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:24:21,780 - INFO - Hyperband Factor: 3
+2024-11-29 17:24:21,780 - INFO - Hyperband Iterations: 1
+2024-11-29 17:24:21,780 - INFO - Batch Size: 32
+2024-11-29 17:24:21,780 - INFO - Patience: 8
+2024-11-29 17:24:21,780 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:24:21,786 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:24:21,787 - INFO - Using LSTM architecture.
+2024-11-29 17:24:21,787 - INFO - Embedding Dimension: 32
+2024-11-29 17:24:21,787 - INFO - RNN Units: 16
+2024-11-29 17:24:21,787 - INFO - Dropout Rate: 0.1
+2024-11-29 17:24:21,787 - INFO - Max Features: 5000
+2024-11-29 17:24:21,794 - INFO - Model compiled.
+2024-11-29 17:24:22,003 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:24:22,006 - INFO - Using LSTM architecture.
+2024-11-29 17:24:22,008 - INFO - Embedding Dimension: 64
+2024-11-29 17:24:22,009 - INFO - RNN Units: 32
+2024-11-29 17:24:22,009 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:24:22,010 - INFO - Max Features: 5000
+2024-11-29 17:24:22,027 - INFO - Model compiled.
+2024-11-29 17:24:30,620 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:24:30,621 - INFO - Using LSTM architecture.
+2024-11-29 17:24:30,624 - INFO - Embedding Dimension: 32
+2024-11-29 17:24:30,626 - INFO - RNN Units: 96
+2024-11-29 17:24:30,626 - INFO - Dropout Rate: 0.1
+2024-11-29 17:24:30,626 - INFO - Max Features: 5000
+2024-11-29 17:24:30,639 - INFO - Model compiled.
+2024-11-29 17:24:39,188 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:24:39,198 - INFO - Using LSTM architecture.
+2024-11-29 17:24:39,200 - INFO - Embedding Dimension: 256
+2024-11-29 17:24:39,201 - INFO - RNN Units: 32
+2024-11-29 17:24:39,202 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:24:39,202 - INFO - Max Features: 5000
+2024-11-29 17:24:39,214 - INFO - Model compiled.
+2024-11-29 17:24:45,536 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:24:45,546 - INFO - Using LSTM architecture.
+2024-11-29 17:24:45,546 - INFO - Embedding Dimension: 64
+2024-11-29 17:24:45,548 - INFO - RNN Units: 96
+2024-11-29 17:24:45,549 - INFO - Dropout Rate: 0.1
+2024-11-29 17:24:45,549 - INFO - Max Features: 5000
+2024-11-29 17:24:45,563 - INFO - Model compiled.
+2024-11-29 17:24:54,526 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:24:54,533 - INFO - Using LSTM architecture.
+2024-11-29 17:24:54,535 - INFO - Embedding Dimension: 32
+2024-11-29 17:24:54,536 - INFO - RNN Units: 64
+2024-11-29 17:24:54,537 - INFO - Dropout Rate: 0.5
+2024-11-29 17:24:54,537 - INFO - Max Features: 5000
+2024-11-29 17:24:54,551 - INFO - Model compiled.
+2024-11-29 17:25:03,282 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:03,292 - INFO - Using LSTM architecture.
+2024-11-29 17:25:03,294 - INFO - Embedding Dimension: 256
+2024-11-29 17:25:03,295 - INFO - RNN Units: 64
+2024-11-29 17:25:03,296 - INFO - Dropout Rate: 0.5
+2024-11-29 17:25:03,296 - INFO - Max Features: 5000
+2024-11-29 17:25:03,309 - INFO - Model compiled.
+2024-11-29 17:25:12,296 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:12,311 - INFO - Using LSTM architecture.
+2024-11-29 17:25:12,311 - INFO - Embedding Dimension: 32
+2024-11-29 17:25:12,313 - INFO - RNN Units: 96
+2024-11-29 17:25:12,315 - INFO - Dropout Rate: 0.4
+2024-11-29 17:25:12,315 - INFO - Max Features: 5000
+2024-11-29 17:25:12,330 - INFO - Model compiled.
+2024-11-29 17:25:18,101 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:18,111 - INFO - Using LSTM architecture.
+2024-11-29 17:25:18,112 - INFO - Embedding Dimension: 32
+2024-11-29 17:25:18,114 - INFO - RNN Units: 80
+2024-11-29 17:25:18,115 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:25:18,115 - INFO - Max Features: 5000
+2024-11-29 17:25:18,128 - INFO - Model compiled.
+2024-11-29 17:25:27,147 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:27,158 - INFO - Using LSTM architecture.
+2024-11-29 17:25:27,159 - INFO - Embedding Dimension: 128
+2024-11-29 17:25:27,161 - INFO - RNN Units: 16
+2024-11-29 17:25:27,161 - INFO - Dropout Rate: 0.1
+2024-11-29 17:25:27,161 - INFO - Max Features: 5000
+2024-11-29 17:25:27,174 - INFO - Model compiled.
+2024-11-29 17:25:35,776 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:35,789 - INFO - Using LSTM architecture.
+2024-11-29 17:25:35,790 - INFO - Embedding Dimension: 32
+2024-11-29 17:25:35,792 - INFO - RNN Units: 96
+2024-11-29 17:25:35,793 - INFO - Dropout Rate: 0.5
+2024-11-29 17:25:35,793 - INFO - Max Features: 5000
+2024-11-29 17:25:35,810 - INFO - Model compiled.
+2024-11-29 17:25:42,199 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:42,209 - INFO - Using LSTM architecture.
+2024-11-29 17:25:42,210 - INFO - Embedding Dimension: 256
+2024-11-29 17:25:42,211 - INFO - RNN Units: 96
+2024-11-29 17:25:42,212 - INFO - Dropout Rate: 0.4
+2024-11-29 17:25:42,212 - INFO - Max Features: 5000
+2024-11-29 17:25:42,225 - INFO - Model compiled.
+2024-11-29 17:25:51,040 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:51,051 - INFO - Using LSTM architecture.
+2024-11-29 17:25:51,053 - INFO - Embedding Dimension: 256
+2024-11-29 17:25:51,054 - INFO - RNN Units: 16
+2024-11-29 17:25:51,054 - INFO - Dropout Rate: 0.5
+2024-11-29 17:25:51,054 - INFO - Max Features: 5000
+2024-11-29 17:25:51,067 - INFO - Model compiled.
+2024-11-29 17:25:59,460 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:25:59,460 - INFO - Using LSTM architecture.
+2024-11-29 17:25:59,461 - INFO - Embedding Dimension: 64
+2024-11-29 17:25:59,463 - INFO - RNN Units: 32
+2024-11-29 17:25:59,466 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:25:59,466 - INFO - Max Features: 5000
+2024-11-29 17:25:59,479 - INFO - Model compiled.
+2024-11-29 17:26:11,864 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:26:11,874 - INFO - Using LSTM architecture.
+2024-11-29 17:26:11,875 - INFO - Embedding Dimension: 256
+2024-11-29 17:26:11,877 - INFO - RNN Units: 32
+2024-11-29 17:26:11,879 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:26:11,879 - INFO - Max Features: 5000
+2024-11-29 17:26:11,893 - INFO - Model compiled.
+2024-11-29 17:26:22,221 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:26:22,222 - INFO - Using LSTM architecture.
+2024-11-29 17:26:22,222 - INFO - Embedding Dimension: 32
+2024-11-29 17:26:22,225 - INFO - RNN Units: 96
+2024-11-29 17:26:22,227 - INFO - Dropout Rate: 0.4
+2024-11-29 17:26:22,227 - INFO - Max Features: 5000
+2024-11-29 17:26:22,240 - INFO - Model compiled.
+2024-11-29 17:26:34,415 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:26:34,416 - INFO - Using LSTM architecture.
+2024-11-29 17:26:34,417 - INFO - Embedding Dimension: 256
+2024-11-29 17:26:34,420 - INFO - RNN Units: 96
+2024-11-29 17:26:34,421 - INFO - Dropout Rate: 0.4
+2024-11-29 17:26:34,421 - INFO - Max Features: 5000
+2024-11-29 17:26:34,434 - INFO - Model compiled.
+2024-11-29 17:26:44,749 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:26:44,759 - INFO - Using LSTM architecture.
+2024-11-29 17:26:44,761 - INFO - Embedding Dimension: 256
+2024-11-29 17:26:44,762 - INFO - RNN Units: 96
+2024-11-29 17:26:44,762 - INFO - Dropout Rate: 0.4
+2024-11-29 17:26:44,762 - INFO - Max Features: 5000
+2024-11-29 17:26:44,778 - INFO - Model compiled.
+2024-11-29 17:27:16,906 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:27:16,915 - INFO - Using LSTM architecture.
+2024-11-29 17:27:16,916 - INFO - Embedding Dimension: 32
+2024-11-29 17:27:16,918 - INFO - RNN Units: 96
+2024-11-29 17:27:16,918 - INFO - Dropout Rate: 0.4
+2024-11-29 17:27:16,918 - INFO - Max Features: 5000
+2024-11-29 17:27:16,931 - INFO - Model compiled.
+2024-11-29 17:27:52,247 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:27:52,256 - INFO - Using LSTM architecture.
+2024-11-29 17:27:52,257 - INFO - Embedding Dimension: 128
+2024-11-29 17:27:52,259 - INFO - RNN Units: 128
+2024-11-29 17:27:52,260 - INFO - Dropout Rate: 0.4
+2024-11-29 17:27:52,260 - INFO - Max Features: 5000
+2024-11-29 17:27:52,276 - INFO - Model compiled.
+2024-11-29 17:28:10,258 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:28:10,267 - INFO - Using LSTM architecture.
+2024-11-29 17:28:10,267 - INFO - Embedding Dimension: 128
+2024-11-29 17:28:10,268 - INFO - RNN Units: 48
+2024-11-29 17:28:10,270 - INFO - Dropout Rate: 0.1
+2024-11-29 17:28:10,270 - INFO - Max Features: 5000
+2024-11-29 17:28:10,283 - INFO - Model compiled.
+2024-11-29 17:28:27,099 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:28:27,110 - INFO - Using LSTM architecture.
+2024-11-29 17:28:27,111 - INFO - Embedding Dimension: 256
+2024-11-29 17:28:27,114 - INFO - RNN Units: 112
+2024-11-29 17:28:27,115 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:28:27,115 - INFO - Max Features: 5000
+2024-11-29 17:28:27,133 - INFO - Model compiled.
+2024-11-29 17:28:41,950 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:28:41,962 - INFO - Using LSTM architecture.
+2024-11-29 17:28:41,963 - INFO - Embedding Dimension: 128
+2024-11-29 17:28:41,966 - INFO - RNN Units: 64
+2024-11-29 17:28:41,969 - INFO - Dropout Rate: 0.5
+2024-11-29 17:28:41,969 - INFO - Max Features: 5000
+2024-11-29 17:28:41,992 - INFO - Model compiled.
+2024-11-29 17:29:00,527 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:29:00,536 - INFO - Using LSTM architecture.
+2024-11-29 17:29:00,538 - INFO - Embedding Dimension: 256
+2024-11-29 17:29:00,539 - INFO - RNN Units: 48
+2024-11-29 17:29:00,539 - INFO - Dropout Rate: 0.2
+2024-11-29 17:29:00,539 - INFO - Max Features: 5000
+2024-11-29 17:29:00,552 - INFO - Model compiled.
+2024-11-29 17:29:17,033 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:29:17,042 - INFO - Using LSTM architecture.
+2024-11-29 17:29:17,044 - INFO - Embedding Dimension: 256
+2024-11-29 17:29:17,046 - INFO - RNN Units: 80
+2024-11-29 17:29:17,047 - INFO - Dropout Rate: 0.1
+2024-11-29 17:29:17,047 - INFO - Max Features: 5000
+2024-11-29 17:29:17,060 - INFO - Model compiled.
+2024-11-29 17:29:37,012 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:29:37,019 - INFO - Using LSTM architecture.
+2024-11-29 17:29:37,019 - INFO - Embedding Dimension: 128
+2024-11-29 17:29:37,021 - INFO - RNN Units: 64
+2024-11-29 17:29:37,023 - INFO - Dropout Rate: 0.5
+2024-11-29 17:29:37,023 - INFO - Max Features: 5000
+2024-11-29 17:29:37,035 - INFO - Model compiled.
+2024-11-29 17:30:10,098 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:30:10,107 - INFO - Using LSTM architecture.
+2024-11-29 17:30:10,108 - INFO - Embedding Dimension: 128
+2024-11-29 17:30:10,110 - INFO - RNN Units: 48
+2024-11-29 17:30:10,110 - INFO - Dropout Rate: 0.1
+2024-11-29 17:30:10,110 - INFO - Max Features: 5000
+2024-11-29 17:30:10,123 - INFO - Model compiled.
+2024-11-29 17:30:39,379 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:30:39,388 - INFO - Using LSTM architecture.
+2024-11-29 17:30:39,389 - INFO - Embedding Dimension: 64
+2024-11-29 17:30:39,391 - INFO - RNN Units: 16
+2024-11-29 17:30:39,392 - INFO - Dropout Rate: 0.1
+2024-11-29 17:30:39,392 - INFO - Max Features: 5000
+2024-11-29 17:30:39,405 - INFO - Model compiled.
+2024-11-29 17:31:22,283 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:31:22,293 - INFO - Using LSTM architecture.
+2024-11-29 17:31:22,295 - INFO - Embedding Dimension: 128
+2024-11-29 17:31:22,296 - INFO - RNN Units: 48
+2024-11-29 17:31:22,296 - INFO - Dropout Rate: 0.2
+2024-11-29 17:31:22,296 - INFO - Max Features: 5000
+2024-11-29 17:31:22,309 - INFO - Model compiled.
+2024-11-29 17:31:57,654 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:31:57,663 - INFO - Using LSTM architecture.
+2024-11-29 17:31:57,663 - INFO - Embedding Dimension: 256
+2024-11-29 17:31:57,664 - INFO - RNN Units: 16
+2024-11-29 17:31:57,666 - INFO - Dropout Rate: 0.1
+2024-11-29 17:31:57,667 - INFO - Max Features: 5000
+2024-11-29 17:31:57,679 - INFO - Model compiled.
+2024-11-29 17:32:32,267 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:32:32,277 - INFO - Using LSTM architecture.
+2024-11-29 17:32:32,279 - INFO - Embedding Dimension: 64
+2024-11-29 17:32:32,279 - INFO - RNN Units: 48
+2024-11-29 17:32:32,282 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:32:32,284 - INFO - Max Features: 5000
+2024-11-29 17:32:32,302 - INFO - Model compiled.
+2024-11-29 17:33:07,284 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:33:07,284 - INFO - Best hyperparameters found: {'embedding_dim': 128, 'rnn_units': 48, 'dropout_rate': 0.1, 'tuner/epochs': 15, 'tuner/initial_epoch': 5, 'tuner/bracket': 1, 'tuner/round': 1, 'tuner/trial_id': '0019'}
+2024-11-29 17:33:07,284 - INFO - Saving tuner results.
+2024-11-29 17:33:07,285 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/LSTM/tuner_results_129_175_241129_171205.csv
+2024-11-29 17:33:07,285 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:33:07,285 - INFO - Configuring TensorFlow device.
+2024-11-29 17:33:07,285 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:33:07,285 - INFO - Epochs: 50
+2024-11-29 17:33:07,285 - INFO - Batch Size: 32
+2024-11-29 17:33:07,285 - INFO - Patience: 8
+2024-11-29 17:33:07,285 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:33:07,286 - INFO - Using LSTM architecture.
+2024-11-29 17:33:07,286 - INFO - Embedding Dimension: 128
+2024-11-29 17:33:07,286 - INFO - RNN Units: 48
+2024-11-29 17:33:07,286 - INFO - Dropout Rate: 0.1
+2024-11-29 17:33:07,286 - INFO - Max Features: 5000
+2024-11-29 17:33:07,293 - INFO - Model compiled.
+2024-11-29 17:33:07,293 - INFO - Model training started.
+2024-11-29 17:33:38,649 - INFO - Model training completed.
+2024-11-29 17:33:38,650 - INFO - Saving model.
+2024-11-29 17:33:38,677 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/LSTM.
+2024-11-29 17:33:38,703 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/LSTM/history_129_175_241129_171205.html.
+2024-11-29 17:33:38,703 - INFO - Saving history.
+2024-11-29 17:33:38,703 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/LSTM/history_129_175_241129_171205.json.
+2024-11-29 17:33:38,703 - INFO - Model evaluation on a test set.
+2024-11-29 17:33:41,060 - INFO - Final loss and accuracy:
+2024-11-29 17:33:41,061 - INFO - Train Loss: 0.0422, Train Accuracy: 0.9883
+2024-11-29 17:33:41,061 - INFO - Val Loss: 0.8209, Val Accuracy: 0.8167
+2024-11-29 17:33:41,061 - INFO - Test Loss: 0.4114, Test Accuracy: 0.8210
+2024-11-29 17:33:41,061 - INFO - Experiment completed for LSTM with length bucket 129-175. Time taken: 559.28 seconds.
+2024-11-29 17:33:41,061 - INFO - Starting experiment for length bucket 176-284 with LSTM.
+2024-11-29 17:33:41,061 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:33:41,061 - INFO - Configuring TensorFlow device.
+2024-11-29 17:33:41,061 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:33:41,061 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:33:41,061 - INFO - Hyperband Factor: 3
+2024-11-29 17:33:41,061 - INFO - Hyperband Iterations: 1
+2024-11-29 17:33:41,061 - INFO - Batch Size: 32
+2024-11-29 17:33:41,061 - INFO - Patience: 8
+2024-11-29 17:33:41,061 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:33:41,063 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:33:41,063 - INFO - Using LSTM architecture.
+2024-11-29 17:33:41,063 - INFO - Embedding Dimension: 32
+2024-11-29 17:33:41,063 - INFO - RNN Units: 16
+2024-11-29 17:33:41,064 - INFO - Dropout Rate: 0.1
+2024-11-29 17:33:41,064 - INFO - Max Features: 5000
+2024-11-29 17:33:41,071 - INFO - Model compiled.
+2024-11-29 17:33:41,286 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:33:41,286 - INFO - Using LSTM architecture.
+2024-11-29 17:33:41,286 - INFO - Embedding Dimension: 64
+2024-11-29 17:33:41,288 - INFO - RNN Units: 32
+2024-11-29 17:33:41,291 - INFO - Dropout Rate: 0.5
+2024-11-29 17:33:41,294 - INFO - Max Features: 5000
+2024-11-29 17:33:41,311 - INFO - Model compiled.
+2024-11-29 17:33:50,595 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:33:50,597 - INFO - Using LSTM architecture.
+2024-11-29 17:33:50,600 - INFO - Embedding Dimension: 32
+2024-11-29 17:33:50,603 - INFO - RNN Units: 112
+2024-11-29 17:33:50,603 - INFO - Dropout Rate: 0.5
+2024-11-29 17:33:50,603 - INFO - Max Features: 5000
+2024-11-29 17:33:50,617 - INFO - Model compiled.
+2024-11-29 17:34:00,426 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:00,427 - INFO - Using LSTM architecture.
+2024-11-29 17:34:00,428 - INFO - Embedding Dimension: 256
+2024-11-29 17:34:00,431 - INFO - RNN Units: 80
+2024-11-29 17:34:00,434 - INFO - Dropout Rate: 0.2
+2024-11-29 17:34:00,435 - INFO - Max Features: 5000
+2024-11-29 17:34:00,448 - INFO - Model compiled.
+2024-11-29 17:34:07,633 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:07,641 - INFO - Using LSTM architecture.
+2024-11-29 17:34:07,642 - INFO - Embedding Dimension: 32
+2024-11-29 17:34:07,645 - INFO - RNN Units: 112
+2024-11-29 17:34:07,646 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:34:07,646 - INFO - Max Features: 5000
+2024-11-29 17:34:07,659 - INFO - Model compiled.
+2024-11-29 17:34:17,282 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:17,282 - INFO - Using LSTM architecture.
+2024-11-29 17:34:17,283 - INFO - Embedding Dimension: 32
+2024-11-29 17:34:17,286 - INFO - RNN Units: 96
+2024-11-29 17:34:17,288 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:34:17,289 - INFO - Max Features: 5000
+2024-11-29 17:34:17,302 - INFO - Model compiled.
+2024-11-29 17:34:26,871 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:26,871 - INFO - Using LSTM architecture.
+2024-11-29 17:34:26,873 - INFO - Embedding Dimension: 256
+2024-11-29 17:34:26,875 - INFO - RNN Units: 96
+2024-11-29 17:34:26,878 - INFO - Dropout Rate: 0.1
+2024-11-29 17:34:26,879 - INFO - Max Features: 5000
+2024-11-29 17:34:26,892 - INFO - Model compiled.
+2024-11-29 17:34:36,700 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:36,707 - INFO - Using LSTM architecture.
+2024-11-29 17:34:36,708 - INFO - Embedding Dimension: 32
+2024-11-29 17:34:36,710 - INFO - RNN Units: 48
+2024-11-29 17:34:36,711 - INFO - Dropout Rate: 0.1
+2024-11-29 17:34:36,712 - INFO - Max Features: 5000
+2024-11-29 17:34:36,725 - INFO - Model compiled.
+2024-11-29 17:34:43,577 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:43,585 - INFO - Using LSTM architecture.
+2024-11-29 17:34:43,587 - INFO - Embedding Dimension: 32
+2024-11-29 17:34:43,589 - INFO - RNN Units: 32
+2024-11-29 17:34:43,590 - INFO - Dropout Rate: 0.4
+2024-11-29 17:34:43,590 - INFO - Max Features: 5000
+2024-11-29 17:34:43,603 - INFO - Model compiled.
+2024-11-29 17:34:52,875 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:34:52,882 - INFO - Using LSTM architecture.
+2024-11-29 17:34:52,883 - INFO - Embedding Dimension: 64
+2024-11-29 17:34:52,886 - INFO - RNN Units: 128
+2024-11-29 17:34:52,887 - INFO - Dropout Rate: 0.1
+2024-11-29 17:34:52,888 - INFO - Max Features: 5000
+2024-11-29 17:34:52,901 - INFO - Model compiled.
+2024-11-29 17:35:01,735 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:35:01,736 - INFO - Using LSTM architecture.
+2024-11-29 17:35:01,736 - INFO - Embedding Dimension: 32
+2024-11-29 17:35:01,739 - INFO - RNN Units: 48
+2024-11-29 17:35:01,742 - INFO - Dropout Rate: 0.5
+2024-11-29 17:35:01,743 - INFO - Max Features: 5000
+2024-11-29 17:35:01,756 - INFO - Model compiled.
+2024-11-29 17:35:08,706 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:35:08,713 - INFO - Using LSTM architecture.
+2024-11-29 17:35:08,713 - INFO - Embedding Dimension: 128
+2024-11-29 17:35:08,716 - INFO - RNN Units: 80
+2024-11-29 17:35:08,717 - INFO - Dropout Rate: 0.5
+2024-11-29 17:35:08,718 - INFO - Max Features: 5000
+2024-11-29 17:35:08,731 - INFO - Model compiled.
+2024-11-29 17:35:18,433 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:35:18,436 - INFO - Using LSTM architecture.
+2024-11-29 17:35:18,439 - INFO - Embedding Dimension: 64
+2024-11-29 17:35:18,441 - INFO - RNN Units: 64
+2024-11-29 17:35:18,441 - INFO - Dropout Rate: 0.4
+2024-11-29 17:35:18,441 - INFO - Max Features: 5000
+2024-11-29 17:35:18,454 - INFO - Model compiled.
+2024-11-29 17:35:27,902 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:35:27,906 - INFO - Using LSTM architecture.
+2024-11-29 17:35:27,908 - INFO - Embedding Dimension: 64
+2024-11-29 17:35:27,910 - INFO - RNN Units: 64
+2024-11-29 17:35:27,910 - INFO - Dropout Rate: 0.4
+2024-11-29 17:35:27,910 - INFO - Max Features: 5000
+2024-11-29 17:35:27,924 - INFO - Model compiled.
+2024-11-29 17:35:38,548 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:35:38,558 - INFO - Using LSTM architecture.
+2024-11-29 17:35:38,560 - INFO - Embedding Dimension: 64
+2024-11-29 17:35:38,562 - INFO - RNN Units: 32
+2024-11-29 17:35:38,563 - INFO - Dropout Rate: 0.5
+2024-11-29 17:35:38,563 - INFO - Max Features: 5000
+2024-11-29 17:35:38,575 - INFO - Model compiled.
+2024-11-29 17:35:51,840 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:35:51,849 - INFO - Using LSTM architecture.
+2024-11-29 17:35:51,851 - INFO - Embedding Dimension: 32
+2024-11-29 17:35:51,852 - INFO - RNN Units: 48
+2024-11-29 17:35:51,854 - INFO - Dropout Rate: 0.1
+2024-11-29 17:35:51,854 - INFO - Max Features: 5000
+2024-11-29 17:35:51,868 - INFO - Model compiled.
+2024-11-29 17:36:05,275 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:36:05,287 - INFO - Using LSTM architecture.
+2024-11-29 17:36:05,289 - INFO - Embedding Dimension: 32
+2024-11-29 17:36:05,291 - INFO - RNN Units: 112
+2024-11-29 17:36:05,291 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:36:05,291 - INFO - Max Features: 5000
+2024-11-29 17:36:05,305 - INFO - Model compiled.
+2024-11-29 17:36:16,025 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:36:16,033 - INFO - Using LSTM architecture.
+2024-11-29 17:36:16,035 - INFO - Embedding Dimension: 64
+2024-11-29 17:36:16,037 - INFO - RNN Units: 32
+2024-11-29 17:36:16,039 - INFO - Dropout Rate: 0.5
+2024-11-29 17:36:16,039 - INFO - Max Features: 5000
+2024-11-29 17:36:16,051 - INFO - Model compiled.
+2024-11-29 17:36:51,038 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:36:51,049 - INFO - Using LSTM architecture.
+2024-11-29 17:36:51,051 - INFO - Embedding Dimension: 64
+2024-11-29 17:36:51,052 - INFO - RNN Units: 64
+2024-11-29 17:36:51,052 - INFO - Dropout Rate: 0.4
+2024-11-29 17:36:51,052 - INFO - Max Features: 5000
+2024-11-29 17:36:51,065 - INFO - Model compiled.
+2024-11-29 17:37:25,279 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:37:25,292 - INFO - Using LSTM architecture.
+2024-11-29 17:37:25,294 - INFO - Embedding Dimension: 64
+2024-11-29 17:37:25,295 - INFO - RNN Units: 48
+2024-11-29 17:37:25,295 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:37:25,295 - INFO - Max Features: 5000
+2024-11-29 17:37:25,308 - INFO - Model compiled.
+2024-11-29 17:37:41,675 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:37:41,683 - INFO - Using LSTM architecture.
+2024-11-29 17:37:41,685 - INFO - Embedding Dimension: 64
+2024-11-29 17:37:41,686 - INFO - RNN Units: 16
+2024-11-29 17:37:41,688 - INFO - Dropout Rate: 0.4
+2024-11-29 17:37:41,688 - INFO - Max Features: 5000
+2024-11-29 17:37:41,702 - INFO - Model compiled.
+2024-11-29 17:38:02,411 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:38:02,420 - INFO - Using LSTM architecture.
+2024-11-29 17:38:02,422 - INFO - Embedding Dimension: 32
+2024-11-29 17:38:02,423 - INFO - RNN Units: 96
+2024-11-29 17:38:02,424 - INFO - Dropout Rate: 0.1
+2024-11-29 17:38:02,424 - INFO - Max Features: 5000
+2024-11-29 17:38:02,438 - INFO - Model compiled.
+2024-11-29 17:38:22,123 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:38:22,131 - INFO - Using LSTM architecture.
+2024-11-29 17:38:22,133 - INFO - Embedding Dimension: 32
+2024-11-29 17:38:22,135 - INFO - RNN Units: 32
+2024-11-29 17:38:22,135 - INFO - Dropout Rate: 0.1
+2024-11-29 17:38:22,135 - INFO - Max Features: 5000
+2024-11-29 17:38:22,148 - INFO - Model compiled.
+2024-11-29 17:38:40,723 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:38:40,731 - INFO - Using LSTM architecture.
+2024-11-29 17:38:40,734 - INFO - Embedding Dimension: 256
+2024-11-29 17:38:40,736 - INFO - RNN Units: 112
+2024-11-29 17:38:40,736 - INFO - Dropout Rate: 0.2
+2024-11-29 17:38:40,736 - INFO - Max Features: 5000
+2024-11-29 17:38:40,749 - INFO - Model compiled.
+2024-11-29 17:39:02,734 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:39:02,744 - INFO - Using LSTM architecture.
+2024-11-29 17:39:02,745 - INFO - Embedding Dimension: 128
+2024-11-29 17:39:02,747 - INFO - RNN Units: 128
+2024-11-29 17:39:02,747 - INFO - Dropout Rate: 0.4
+2024-11-29 17:39:02,747 - INFO - Max Features: 5000
+2024-11-29 17:39:02,760 - INFO - Model compiled.
+2024-11-29 17:39:19,763 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:39:19,771 - INFO - Using LSTM architecture.
+2024-11-29 17:39:19,773 - INFO - Embedding Dimension: 64
+2024-11-29 17:39:19,775 - INFO - RNN Units: 48
+2024-11-29 17:39:19,776 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:39:19,776 - INFO - Max Features: 5000
+2024-11-29 17:39:19,789 - INFO - Model compiled.
+2024-11-29 17:39:54,389 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:39:54,393 - INFO - Using LSTM architecture.
+2024-11-29 17:39:54,395 - INFO - Embedding Dimension: 32
+2024-11-29 17:39:54,397 - INFO - RNN Units: 32
+2024-11-29 17:39:54,397 - INFO - Dropout Rate: 0.1
+2024-11-29 17:39:54,397 - INFO - Max Features: 5000
+2024-11-29 17:39:54,410 - INFO - Model compiled.
+2024-11-29 17:40:28,444 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:40:28,446 - INFO - Using LSTM architecture.
+2024-11-29 17:40:28,450 - INFO - Embedding Dimension: 128
+2024-11-29 17:40:28,452 - INFO - RNN Units: 64
+2024-11-29 17:40:28,453 - INFO - Dropout Rate: 0.1
+2024-11-29 17:40:28,453 - INFO - Max Features: 5000
+2024-11-29 17:40:28,465 - INFO - Model compiled.
+2024-11-29 17:41:05,331 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:41:05,340 - INFO - Using LSTM architecture.
+2024-11-29 17:41:05,342 - INFO - Embedding Dimension: 32
+2024-11-29 17:41:05,343 - INFO - RNN Units: 112
+2024-11-29 17:41:05,343 - INFO - Dropout Rate: 0.4
+2024-11-29 17:41:05,343 - INFO - Max Features: 5000
+2024-11-29 17:41:05,357 - INFO - Model compiled.
+2024-11-29 17:41:41,898 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:41:41,900 - INFO - Using LSTM architecture.
+2024-11-29 17:41:41,902 - INFO - Embedding Dimension: 32
+2024-11-29 17:41:41,904 - INFO - RNN Units: 96
+2024-11-29 17:41:41,906 - INFO - Dropout Rate: 0.2
+2024-11-29 17:41:41,906 - INFO - Max Features: 5000
+2024-11-29 17:41:41,919 - INFO - Model compiled.
+2024-11-29 17:42:25,095 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:42:25,105 - INFO - Using LSTM architecture.
+2024-11-29 17:42:25,106 - INFO - Embedding Dimension: 64
+2024-11-29 17:42:25,108 - INFO - RNN Units: 96
+2024-11-29 17:42:25,108 - INFO - Dropout Rate: 0.2
+2024-11-29 17:42:25,108 - INFO - Max Features: 5000
+2024-11-29 17:42:25,121 - INFO - Model compiled.
+2024-11-29 17:42:57,663 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:42:57,663 - INFO - Best hyperparameters found: {'embedding_dim': 64, 'rnn_units': 48, 'dropout_rate': 0.30000000000000004, 'tuner/epochs': 15, 'tuner/initial_epoch': 5, 'tuner/bracket': 1, 'tuner/round': 1, 'tuner/trial_id': '0018'}
+2024-11-29 17:42:57,663 - INFO - Saving tuner results.
+2024-11-29 17:42:57,664 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/LSTM/tuner_results_176_284_241129_171205.csv
+2024-11-29 17:42:57,664 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:42:57,664 - INFO - Configuring TensorFlow device.
+2024-11-29 17:42:57,664 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:42:57,664 - INFO - Epochs: 50
+2024-11-29 17:42:57,664 - INFO - Batch Size: 32
+2024-11-29 17:42:57,664 - INFO - Patience: 8
+2024-11-29 17:42:57,664 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:42:57,664 - INFO - Using LSTM architecture.
+2024-11-29 17:42:57,665 - INFO - Embedding Dimension: 64
+2024-11-29 17:42:57,665 - INFO - RNN Units: 48
+2024-11-29 17:42:57,665 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:42:57,665 - INFO - Max Features: 5000
+2024-11-29 17:42:57,671 - INFO - Model compiled.
+2024-11-29 17:42:57,671 - INFO - Model training started.
+2024-11-29 17:43:31,740 - INFO - Model training completed.
+2024-11-29 17:43:31,741 - INFO - Saving model.
+2024-11-29 17:43:31,763 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/LSTM.
+2024-11-29 17:43:31,788 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/LSTM/history_176_284_241129_171205.html.
+2024-11-29 17:43:31,788 - INFO - Saving history.
+2024-11-29 17:43:31,789 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/LSTM/history_176_284_241129_171205.json.
+2024-11-29 17:43:31,789 - INFO - Model evaluation on a test set.
+2024-11-29 17:43:33,585 - INFO - Final loss and accuracy:
+2024-11-29 17:43:33,585 - INFO - Train Loss: 0.0345, Train Accuracy: 0.9922
+2024-11-29 17:43:33,585 - INFO - Val Loss: 0.8745, Val Accuracy: 0.8184
+2024-11-29 17:43:33,585 - INFO - Test Loss: 0.4096, Test Accuracy: 0.8154
+2024-11-29 17:43:33,585 - INFO - Experiment completed for LSTM with length bucket 176-284. Time taken: 592.52 seconds.
+2024-11-29 17:43:33,585 - INFO - Starting experiment for length bucket 285-597 with LSTM.
+2024-11-29 17:43:33,585 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:43:33,585 - INFO - Configuring TensorFlow device.
+2024-11-29 17:43:33,586 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:43:33,586 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:43:33,586 - INFO - Hyperband Factor: 3
+2024-11-29 17:43:33,586 - INFO - Hyperband Iterations: 1
+2024-11-29 17:43:33,586 - INFO - Batch Size: 32
+2024-11-29 17:43:33,586 - INFO - Patience: 8
+2024-11-29 17:43:33,586 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:43:33,588 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:43:33,588 - INFO - Using LSTM architecture.
+2024-11-29 17:43:33,588 - INFO - Embedding Dimension: 32
+2024-11-29 17:43:33,588 - INFO - RNN Units: 16
+2024-11-29 17:43:33,588 - INFO - Dropout Rate: 0.1
+2024-11-29 17:43:33,588 - INFO - Max Features: 5000
+2024-11-29 17:43:33,595 - INFO - Model compiled.
+2024-11-29 17:43:33,832 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:43:33,834 - INFO - Using LSTM architecture.
+2024-11-29 17:43:33,836 - INFO - Embedding Dimension: 256
+2024-11-29 17:43:33,839 - INFO - RNN Units: 80
+2024-11-29 17:43:33,840 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:43:33,840 - INFO - Max Features: 5000
+2024-11-29 17:43:33,853 - INFO - Model compiled.
+2024-11-29 17:43:39,066 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:43:39,070 - INFO - Using LSTM architecture.
+2024-11-29 17:43:39,073 - INFO - Embedding Dimension: 64
+2024-11-29 17:43:39,074 - INFO - RNN Units: 32
+2024-11-29 17:43:39,075 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:43:39,075 - INFO - Max Features: 5000
+2024-11-29 17:43:39,089 - INFO - Model compiled.
+2024-11-29 17:43:46,816 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:43:46,824 - INFO - Using LSTM architecture.
+2024-11-29 17:43:46,826 - INFO - Embedding Dimension: 32
+2024-11-29 17:43:46,828 - INFO - RNN Units: 32
+2024-11-29 17:43:46,829 - INFO - Dropout Rate: 0.5
+2024-11-29 17:43:46,829 - INFO - Max Features: 5000
+2024-11-29 17:43:46,842 - INFO - Model compiled.
+2024-11-29 17:43:54,350 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:43:54,359 - INFO - Using LSTM architecture.
+2024-11-29 17:43:54,361 - INFO - Embedding Dimension: 32
+2024-11-29 17:43:54,362 - INFO - RNN Units: 80
+2024-11-29 17:43:54,363 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:43:54,363 - INFO - Max Features: 5000
+2024-11-29 17:43:54,377 - INFO - Model compiled.
+2024-11-29 17:44:02,379 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:02,384 - INFO - Using LSTM architecture.
+2024-11-29 17:44:02,386 - INFO - Embedding Dimension: 64
+2024-11-29 17:44:02,388 - INFO - RNN Units: 16
+2024-11-29 17:44:02,389 - INFO - Dropout Rate: 0.2
+2024-11-29 17:44:02,389 - INFO - Max Features: 5000
+2024-11-29 17:44:02,402 - INFO - Model compiled.
+2024-11-29 17:44:07,383 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:07,393 - INFO - Using LSTM architecture.
+2024-11-29 17:44:07,395 - INFO - Embedding Dimension: 64
+2024-11-29 17:44:07,397 - INFO - RNN Units: 48
+2024-11-29 17:44:07,398 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:44:07,398 - INFO - Max Features: 5000
+2024-11-29 17:44:07,411 - INFO - Model compiled.
+2024-11-29 17:44:15,242 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:15,250 - INFO - Using LSTM architecture.
+2024-11-29 17:44:15,252 - INFO - Embedding Dimension: 64
+2024-11-29 17:44:15,254 - INFO - RNN Units: 16
+2024-11-29 17:44:15,256 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:44:15,256 - INFO - Max Features: 5000
+2024-11-29 17:44:15,269 - INFO - Model compiled.
+2024-11-29 17:44:22,908 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:22,918 - INFO - Using LSTM architecture.
+2024-11-29 17:44:22,919 - INFO - Embedding Dimension: 256
+2024-11-29 17:44:22,921 - INFO - RNN Units: 112
+2024-11-29 17:44:22,921 - INFO - Dropout Rate: 0.1
+2024-11-29 17:44:22,921 - INFO - Max Features: 5000
+2024-11-29 17:44:22,933 - INFO - Model compiled.
+2024-11-29 17:44:31,087 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:31,095 - INFO - Using LSTM architecture.
+2024-11-29 17:44:31,097 - INFO - Embedding Dimension: 32
+2024-11-29 17:44:31,099 - INFO - RNN Units: 48
+2024-11-29 17:44:31,100 - INFO - Dropout Rate: 0.4
+2024-11-29 17:44:31,100 - INFO - Max Features: 5000
+2024-11-29 17:44:31,112 - INFO - Model compiled.
+2024-11-29 17:44:38,179 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:38,188 - INFO - Using LSTM architecture.
+2024-11-29 17:44:38,190 - INFO - Embedding Dimension: 128
+2024-11-29 17:44:38,192 - INFO - RNN Units: 32
+2024-11-29 17:44:38,193 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:44:38,193 - INFO - Max Features: 5000
+2024-11-29 17:44:38,207 - INFO - Model compiled.
+2024-11-29 17:44:45,893 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:45,901 - INFO - Using LSTM architecture.
+2024-11-29 17:44:45,903 - INFO - Embedding Dimension: 256
+2024-11-29 17:44:45,905 - INFO - RNN Units: 96
+2024-11-29 17:44:45,905 - INFO - Dropout Rate: 0.1
+2024-11-29 17:44:45,905 - INFO - Max Features: 5000
+2024-11-29 17:44:45,919 - INFO - Model compiled.
+2024-11-29 17:44:53,851 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:44:53,858 - INFO - Using LSTM architecture.
+2024-11-29 17:44:53,861 - INFO - Embedding Dimension: 32
+2024-11-29 17:44:53,862 - INFO - RNN Units: 64
+2024-11-29 17:44:53,863 - INFO - Dropout Rate: 0.5
+2024-11-29 17:44:53,863 - INFO - Max Features: 5000
+2024-11-29 17:44:53,876 - INFO - Model compiled.
+2024-11-29 17:45:01,554 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:45:01,562 - INFO - Using LSTM architecture.
+2024-11-29 17:45:01,564 - INFO - Embedding Dimension: 128
+2024-11-29 17:45:01,566 - INFO - RNN Units: 32
+2024-11-29 17:45:01,567 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:45:01,567 - INFO - Max Features: 5000
+2024-11-29 17:45:01,581 - INFO - Model compiled.
+2024-11-29 17:45:10,133 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:45:10,146 - INFO - Using LSTM architecture.
+2024-11-29 17:45:10,147 - INFO - Embedding Dimension: 32
+2024-11-29 17:45:10,149 - INFO - RNN Units: 48
+2024-11-29 17:45:10,151 - INFO - Dropout Rate: 0.4
+2024-11-29 17:45:10,152 - INFO - Max Features: 5000
+2024-11-29 17:45:10,165 - INFO - Model compiled.
+2024-11-29 17:45:21,178 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:45:21,191 - INFO - Using LSTM architecture.
+2024-11-29 17:45:21,192 - INFO - Embedding Dimension: 32
+2024-11-29 17:45:21,194 - INFO - RNN Units: 80
+2024-11-29 17:45:21,196 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:45:21,196 - INFO - Max Features: 5000
+2024-11-29 17:45:21,210 - INFO - Model compiled.
+2024-11-29 17:45:32,556 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:45:32,570 - INFO - Using LSTM architecture.
+2024-11-29 17:45:32,572 - INFO - Embedding Dimension: 64
+2024-11-29 17:45:32,574 - INFO - RNN Units: 32
+2024-11-29 17:45:32,574 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:45:32,574 - INFO - Max Features: 5000
+2024-11-29 17:45:32,588 - INFO - Model compiled.
+2024-11-29 17:45:41,048 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:45:41,056 - INFO - Using LSTM architecture.
+2024-11-29 17:45:41,058 - INFO - Embedding Dimension: 32
+2024-11-29 17:45:41,059 - INFO - RNN Units: 80
+2024-11-29 17:45:41,060 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:45:41,061 - INFO - Max Features: 5000
+2024-11-29 17:45:41,074 - INFO - Model compiled.
+2024-11-29 17:46:09,749 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:46:09,762 - INFO - Using LSTM architecture.
+2024-11-29 17:46:09,764 - INFO - Embedding Dimension: 32
+2024-11-29 17:46:09,766 - INFO - RNN Units: 48
+2024-11-29 17:46:09,767 - INFO - Dropout Rate: 0.4
+2024-11-29 17:46:09,767 - INFO - Max Features: 5000
+2024-11-29 17:46:09,782 - INFO - Model compiled.
+2024-11-29 17:46:37,707 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:46:37,722 - INFO - Using LSTM architecture.
+2024-11-29 17:46:37,723 - INFO - Embedding Dimension: 256
+2024-11-29 17:46:37,724 - INFO - RNN Units: 48
+2024-11-29 17:46:37,726 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:46:37,727 - INFO - Max Features: 5000
+2024-11-29 17:46:37,740 - INFO - Model compiled.
+2024-11-29 17:46:56,198 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:46:56,207 - INFO - Using LSTM architecture.
+2024-11-29 17:46:56,209 - INFO - Embedding Dimension: 128
+2024-11-29 17:46:56,210 - INFO - RNN Units: 112
+2024-11-29 17:46:56,210 - INFO - Dropout Rate: 0.1
+2024-11-29 17:46:56,210 - INFO - Max Features: 5000
+2024-11-29 17:46:56,224 - INFO - Model compiled.
+2024-11-29 17:47:11,548 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:47:11,557 - INFO - Using LSTM architecture.
+2024-11-29 17:47:11,559 - INFO - Embedding Dimension: 32
+2024-11-29 17:47:11,561 - INFO - RNN Units: 112
+2024-11-29 17:47:11,562 - INFO - Dropout Rate: 0.5
+2024-11-29 17:47:11,562 - INFO - Max Features: 5000
+2024-11-29 17:47:11,576 - INFO - Model compiled.
+2024-11-29 17:47:27,136 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:47:27,145 - INFO - Using LSTM architecture.
+2024-11-29 17:47:27,147 - INFO - Embedding Dimension: 256
+2024-11-29 17:47:27,148 - INFO - RNN Units: 48
+2024-11-29 17:47:27,149 - INFO - Dropout Rate: 0.5
+2024-11-29 17:47:27,149 - INFO - Max Features: 5000
+2024-11-29 17:47:27,162 - INFO - Model compiled.
+2024-11-29 17:47:43,075 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:47:43,083 - INFO - Using LSTM architecture.
+2024-11-29 17:47:43,084 - INFO - Embedding Dimension: 32
+2024-11-29 17:47:43,086 - INFO - RNN Units: 48
+2024-11-29 17:47:43,087 - INFO - Dropout Rate: 0.2
+2024-11-29 17:47:43,088 - INFO - Max Features: 5000
+2024-11-29 17:47:43,100 - INFO - Model compiled.
+2024-11-29 17:48:01,033 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:48:01,036 - INFO - Using LSTM architecture.
+2024-11-29 17:48:01,038 - INFO - Embedding Dimension: 32
+2024-11-29 17:48:01,041 - INFO - RNN Units: 16
+2024-11-29 17:48:01,041 - INFO - Dropout Rate: 0.4
+2024-11-29 17:48:01,041 - INFO - Max Features: 5000
+2024-11-29 17:48:01,055 - INFO - Model compiled.
+2024-11-29 17:48:15,897 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:48:15,905 - INFO - Using LSTM architecture.
+2024-11-29 17:48:15,907 - INFO - Embedding Dimension: 32
+2024-11-29 17:48:15,909 - INFO - RNN Units: 16
+2024-11-29 17:48:15,910 - INFO - Dropout Rate: 0.4
+2024-11-29 17:48:15,911 - INFO - Max Features: 5000
+2024-11-29 17:48:15,926 - INFO - Model compiled.
+2024-11-29 17:48:43,879 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:48:43,893 - INFO - Using LSTM architecture.
+2024-11-29 17:48:43,895 - INFO - Embedding Dimension: 32
+2024-11-29 17:48:43,897 - INFO - RNN Units: 48
+2024-11-29 17:48:43,898 - INFO - Dropout Rate: 0.2
+2024-11-29 17:48:43,898 - INFO - Max Features: 5000
+2024-11-29 17:48:43,911 - INFO - Model compiled.
+2024-11-29 17:49:12,597 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:49:12,611 - INFO - Using LSTM architecture.
+2024-11-29 17:49:12,613 - INFO - Embedding Dimension: 64
+2024-11-29 17:49:12,615 - INFO - RNN Units: 128
+2024-11-29 17:49:12,616 - INFO - Dropout Rate: 0.1
+2024-11-29 17:49:12,616 - INFO - Max Features: 5000
+2024-11-29 17:49:12,629 - INFO - Model compiled.
+2024-11-29 17:49:47,369 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:49:47,371 - INFO - Using LSTM architecture.
+2024-11-29 17:49:47,374 - INFO - Embedding Dimension: 64
+2024-11-29 17:49:47,377 - INFO - RNN Units: 48
+2024-11-29 17:49:47,378 - INFO - Dropout Rate: 0.2
+2024-11-29 17:49:47,378 - INFO - Max Features: 5000
+2024-11-29 17:49:47,392 - INFO - Model compiled.
+2024-11-29 17:50:22,854 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:50:22,854 - INFO - Using LSTM architecture.
+2024-11-29 17:50:22,857 - INFO - Embedding Dimension: 256
+2024-11-29 17:50:22,859 - INFO - RNN Units: 16
+2024-11-29 17:50:22,862 - INFO - Dropout Rate: 0.1
+2024-11-29 17:50:22,862 - INFO - Max Features: 5000
+2024-11-29 17:50:22,874 - INFO - Model compiled.
+2024-11-29 17:50:54,613 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:50:54,615 - INFO - Using LSTM architecture.
+2024-11-29 17:50:54,618 - INFO - Embedding Dimension: 32
+2024-11-29 17:50:54,620 - INFO - RNN Units: 80
+2024-11-29 17:50:54,622 - INFO - Dropout Rate: 0.5
+2024-11-29 17:50:54,622 - INFO - Max Features: 5000
+2024-11-29 17:50:54,636 - INFO - Model compiled.
+2024-11-29 17:51:27,927 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:51:27,927 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 80, 'dropout_rate': 0.30000000000000004, 'tuner/epochs': 5, 'tuner/initial_epoch': 2, 'tuner/bracket': 2, 'tuner/round': 1, 'tuner/trial_id': '0003'}
+2024-11-29 17:51:27,927 - INFO - Saving tuner results.
+2024-11-29 17:51:27,928 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/LSTM/tuner_results_285_597_241129_171205.csv
+2024-11-29 17:51:27,928 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:51:27,928 - INFO - Configuring TensorFlow device.
+2024-11-29 17:51:27,928 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:51:27,928 - INFO - Epochs: 50
+2024-11-29 17:51:27,928 - INFO - Batch Size: 32
+2024-11-29 17:51:27,928 - INFO - Patience: 8
+2024-11-29 17:51:27,928 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:51:27,928 - INFO - Using LSTM architecture.
+2024-11-29 17:51:27,928 - INFO - Embedding Dimension: 32
+2024-11-29 17:51:27,928 - INFO - RNN Units: 80
+2024-11-29 17:51:27,928 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:51:27,928 - INFO - Max Features: 5000
+2024-11-29 17:51:27,935 - INFO - Model compiled.
+2024-11-29 17:51:27,935 - INFO - Model training started.
+2024-11-29 17:52:06,995 - INFO - Model training completed.
+2024-11-29 17:52:06,995 - INFO - Saving model.
+2024-11-29 17:52:07,014 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/LSTM.
+2024-11-29 17:52:07,042 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/LSTM/history_285_597_241129_171205.html.
+2024-11-29 17:52:07,042 - INFO - Saving history.
+2024-11-29 17:52:07,042 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/LSTM/history_285_597_241129_171205.json.
+2024-11-29 17:52:07,042 - INFO - Model evaluation on a test set.
+2024-11-29 17:52:08,906 - INFO - Final loss and accuracy:
+2024-11-29 17:52:08,906 - INFO - Train Loss: 0.0341, Train Accuracy: 0.9913
+2024-11-29 17:52:08,907 - INFO - Val Loss: 0.8878, Val Accuracy: 0.7902
+2024-11-29 17:52:08,907 - INFO - Test Loss: 0.4778, Test Accuracy: 0.7788
+2024-11-29 17:52:08,907 - INFO - Experiment completed for LSTM with length bucket 285-597. Time taken: 515.32 seconds.
+2024-11-29 17:52:08,907 - INFO - Starting experiment for length bucket 598-2494 with LSTM.
+2024-11-29 17:52:08,907 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:52:08,907 - INFO - Configuring TensorFlow device.
+2024-11-29 17:52:08,907 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:52:08,907 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:52:08,907 - INFO - Hyperband Factor: 3
+2024-11-29 17:52:08,907 - INFO - Hyperband Iterations: 1
+2024-11-29 17:52:08,907 - INFO - Batch Size: 32
+2024-11-29 17:52:08,907 - INFO - Patience: 8
+2024-11-29 17:52:08,907 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:52:08,909 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:08,909 - INFO - Using LSTM architecture.
+2024-11-29 17:52:08,909 - INFO - Embedding Dimension: 32
+2024-11-29 17:52:08,909 - INFO - RNN Units: 16
+2024-11-29 17:52:08,909 - INFO - Dropout Rate: 0.1
+2024-11-29 17:52:08,909 - INFO - Max Features: 5000
+2024-11-29 17:52:08,915 - INFO - Model compiled.
+2024-11-29 17:52:09,141 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:09,143 - INFO - Using LSTM architecture.
+2024-11-29 17:52:09,144 - INFO - Embedding Dimension: 32
+2024-11-29 17:52:09,147 - INFO - RNN Units: 48
+2024-11-29 17:52:09,151 - INFO - Dropout Rate: 0.5
+2024-11-29 17:52:09,152 - INFO - Max Features: 5000
+2024-11-29 17:52:09,165 - INFO - Model compiled.
+2024-11-29 17:52:12,280 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:12,288 - INFO - Using LSTM architecture.
+2024-11-29 17:52:12,291 - INFO - Embedding Dimension: 128
+2024-11-29 17:52:12,293 - INFO - RNN Units: 96
+2024-11-29 17:52:12,295 - INFO - Dropout Rate: 0.4
+2024-11-29 17:52:12,295 - INFO - Max Features: 5000
+2024-11-29 17:52:12,311 - INFO - Model compiled.
+2024-11-29 17:52:15,554 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:15,562 - INFO - Using LSTM architecture.
+2024-11-29 17:52:15,565 - INFO - Embedding Dimension: 32
+2024-11-29 17:52:15,566 - INFO - RNN Units: 32
+2024-11-29 17:52:15,567 - INFO - Dropout Rate: 0.1
+2024-11-29 17:52:15,567 - INFO - Max Features: 5000
+2024-11-29 17:52:15,581 - INFO - Model compiled.
+2024-11-29 17:52:18,769 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:18,779 - INFO - Using LSTM architecture.
+2024-11-29 17:52:18,781 - INFO - Embedding Dimension: 32
+2024-11-29 17:52:18,782 - INFO - RNN Units: 48
+2024-11-29 17:52:18,783 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:52:18,783 - INFO - Max Features: 5000
+2024-11-29 17:52:18,796 - INFO - Model compiled.
+2024-11-29 17:52:21,929 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:21,932 - INFO - Using LSTM architecture.
+2024-11-29 17:52:21,935 - INFO - Embedding Dimension: 128
+2024-11-29 17:52:21,938 - INFO - RNN Units: 96
+2024-11-29 17:52:21,939 - INFO - Dropout Rate: 0.2
+2024-11-29 17:52:21,939 - INFO - Max Features: 5000
+2024-11-29 17:52:21,953 - INFO - Model compiled.
+2024-11-29 17:52:25,132 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:25,136 - INFO - Using LSTM architecture.
+2024-11-29 17:52:25,139 - INFO - Embedding Dimension: 64
+2024-11-29 17:52:25,141 - INFO - RNN Units: 96
+2024-11-29 17:52:25,143 - INFO - Dropout Rate: 0.1
+2024-11-29 17:52:25,143 - INFO - Max Features: 5000
+2024-11-29 17:52:25,156 - INFO - Model compiled.
+2024-11-29 17:52:28,292 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:28,301 - INFO - Using LSTM architecture.
+2024-11-29 17:52:28,303 - INFO - Embedding Dimension: 256
+2024-11-29 17:52:28,305 - INFO - RNN Units: 128
+2024-11-29 17:52:28,307 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:52:28,307 - INFO - Max Features: 5000
+2024-11-29 17:52:28,320 - INFO - Model compiled.
+2024-11-29 17:52:28,905 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:28,915 - INFO - Using LSTM architecture.
+2024-11-29 17:52:28,917 - INFO - Embedding Dimension: 256
+2024-11-29 17:52:28,918 - INFO - RNN Units: 64
+2024-11-29 17:52:28,919 - INFO - Dropout Rate: 0.5
+2024-11-29 17:52:28,919 - INFO - Max Features: 5000
+2024-11-29 17:52:28,932 - INFO - Model compiled.
+2024-11-29 17:52:32,207 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:32,216 - INFO - Using LSTM architecture.
+2024-11-29 17:52:32,218 - INFO - Embedding Dimension: 32
+2024-11-29 17:52:32,220 - INFO - RNN Units: 80
+2024-11-29 17:52:32,221 - INFO - Dropout Rate: 0.2
+2024-11-29 17:52:32,221 - INFO - Max Features: 5000
+2024-11-29 17:52:32,234 - INFO - Model compiled.
+2024-11-29 17:52:35,376 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:35,386 - INFO - Using LSTM architecture.
+2024-11-29 17:52:35,388 - INFO - Embedding Dimension: 64
+2024-11-29 17:52:35,389 - INFO - RNN Units: 16
+2024-11-29 17:52:35,390 - INFO - Dropout Rate: 0.5
+2024-11-29 17:52:35,390 - INFO - Max Features: 5000
+2024-11-29 17:52:35,404 - INFO - Model compiled.
+2024-11-29 17:52:38,422 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:38,431 - INFO - Using LSTM architecture.
+2024-11-29 17:52:38,433 - INFO - Embedding Dimension: 64
+2024-11-29 17:52:38,435 - INFO - RNN Units: 112
+2024-11-29 17:52:38,436 - INFO - Dropout Rate: 0.5
+2024-11-29 17:52:38,436 - INFO - Max Features: 5000
+2024-11-29 17:52:38,449 - INFO - Model compiled.
+2024-11-29 17:52:41,668 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:41,675 - INFO - Using LSTM architecture.
+2024-11-29 17:52:41,678 - INFO - Embedding Dimension: 32
+2024-11-29 17:52:41,680 - INFO - RNN Units: 64
+2024-11-29 17:52:41,681 - INFO - Dropout Rate: 0.5
+2024-11-29 17:52:41,681 - INFO - Max Features: 5000
+2024-11-29 17:52:41,699 - INFO - Model compiled.
+2024-11-29 17:52:44,682 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:44,691 - INFO - Using LSTM architecture.
+2024-11-29 17:52:44,693 - INFO - Embedding Dimension: 128
+2024-11-29 17:52:44,695 - INFO - RNN Units: 96
+2024-11-29 17:52:44,696 - INFO - Dropout Rate: 0.2
+2024-11-29 17:52:44,696 - INFO - Max Features: 5000
+2024-11-29 17:52:44,708 - INFO - Model compiled.
+2024-11-29 17:52:48,606 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:48,612 - INFO - Using LSTM architecture.
+2024-11-29 17:52:48,615 - INFO - Embedding Dimension: 64
+2024-11-29 17:52:48,616 - INFO - RNN Units: 96
+2024-11-29 17:52:48,617 - INFO - Dropout Rate: 0.1
+2024-11-29 17:52:48,617 - INFO - Max Features: 5000
+2024-11-29 17:52:48,630 - INFO - Model compiled.
+2024-11-29 17:52:52,578 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:52,580 - INFO - Using LSTM architecture.
+2024-11-29 17:52:52,583 - INFO - Embedding Dimension: 256
+2024-11-29 17:52:52,586 - INFO - RNN Units: 128
+2024-11-29 17:52:52,588 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:52:52,588 - INFO - Max Features: 5000
+2024-11-29 17:52:52,600 - INFO - Model compiled.
+2024-11-29 17:52:56,300 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:52:56,314 - INFO - Using LSTM architecture.
+2024-11-29 17:52:56,315 - INFO - Embedding Dimension: 256
+2024-11-29 17:52:56,317 - INFO - RNN Units: 64
+2024-11-29 17:52:56,319 - INFO - Dropout Rate: 0.5
+2024-11-29 17:52:56,319 - INFO - Max Features: 5000
+2024-11-29 17:52:56,332 - INFO - Model compiled.
+2024-11-29 17:53:00,121 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:00,134 - INFO - Using LSTM architecture.
+2024-11-29 17:53:00,136 - INFO - Embedding Dimension: 256
+2024-11-29 17:53:00,138 - INFO - RNN Units: 64
+2024-11-29 17:53:00,140 - INFO - Dropout Rate: 0.5
+2024-11-29 17:53:00,140 - INFO - Max Features: 5000
+2024-11-29 17:53:00,154 - INFO - Model compiled.
+2024-11-29 17:53:07,356 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:07,371 - INFO - Using LSTM architecture.
+2024-11-29 17:53:07,373 - INFO - Embedding Dimension: 64
+2024-11-29 17:53:07,375 - INFO - RNN Units: 96
+2024-11-29 17:53:07,376 - INFO - Dropout Rate: 0.1
+2024-11-29 17:53:07,376 - INFO - Max Features: 5000
+2024-11-29 17:53:07,389 - INFO - Model compiled.
+2024-11-29 17:53:16,842 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:16,855 - INFO - Using LSTM architecture.
+2024-11-29 17:53:16,857 - INFO - Embedding Dimension: 256
+2024-11-29 17:53:16,859 - INFO - RNN Units: 80
+2024-11-29 17:53:16,861 - INFO - Dropout Rate: 0.1
+2024-11-29 17:53:16,861 - INFO - Max Features: 5000
+2024-11-29 17:53:16,874 - INFO - Model compiled.
+2024-11-29 17:53:22,762 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:22,770 - INFO - Using LSTM architecture.
+2024-11-29 17:53:22,773 - INFO - Embedding Dimension: 32
+2024-11-29 17:53:22,774 - INFO - RNN Units: 112
+2024-11-29 17:53:22,776 - INFO - Dropout Rate: 0.2
+2024-11-29 17:53:22,776 - INFO - Max Features: 5000
+2024-11-29 17:53:22,788 - INFO - Model compiled.
+2024-11-29 17:53:28,764 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:28,772 - INFO - Using LSTM architecture.
+2024-11-29 17:53:28,775 - INFO - Embedding Dimension: 128
+2024-11-29 17:53:28,777 - INFO - RNN Units: 80
+2024-11-29 17:53:28,778 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:53:28,778 - INFO - Max Features: 5000
+2024-11-29 17:53:28,791 - INFO - Model compiled.
+2024-11-29 17:53:32,380 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:32,389 - INFO - Using LSTM architecture.
+2024-11-29 17:53:32,391 - INFO - Embedding Dimension: 64
+2024-11-29 17:53:32,392 - INFO - RNN Units: 64
+2024-11-29 17:53:32,393 - INFO - Dropout Rate: 0.4
+2024-11-29 17:53:32,393 - INFO - Max Features: 5000
+2024-11-29 17:53:32,407 - INFO - Model compiled.
+2024-11-29 17:53:38,237 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:38,242 - INFO - Using LSTM architecture.
+2024-11-29 17:53:38,243 - INFO - Embedding Dimension: 64
+2024-11-29 17:53:38,245 - INFO - RNN Units: 64
+2024-11-29 17:53:38,247 - INFO - Dropout Rate: 0.5
+2024-11-29 17:53:38,248 - INFO - Max Features: 5000
+2024-11-29 17:53:38,260 - INFO - Model compiled.
+2024-11-29 17:53:44,346 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:44,356 - INFO - Using LSTM architecture.
+2024-11-29 17:53:44,359 - INFO - Embedding Dimension: 32
+2024-11-29 17:53:44,361 - INFO - RNN Units: 32
+2024-11-29 17:53:44,362 - INFO - Dropout Rate: 0.2
+2024-11-29 17:53:44,362 - INFO - Max Features: 5000
+2024-11-29 17:53:44,375 - INFO - Model compiled.
+2024-11-29 17:53:50,221 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:50,225 - INFO - Using LSTM architecture.
+2024-11-29 17:53:50,227 - INFO - Embedding Dimension: 32
+2024-11-29 17:53:50,230 - INFO - RNN Units: 32
+2024-11-29 17:53:50,233 - INFO - Dropout Rate: 0.2
+2024-11-29 17:53:50,233 - INFO - Max Features: 5000
+2024-11-29 17:53:50,251 - INFO - Model compiled.
+2024-11-29 17:53:58,479 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:53:58,491 - INFO - Using LSTM architecture.
+2024-11-29 17:53:58,493 - INFO - Embedding Dimension: 64
+2024-11-29 17:53:58,495 - INFO - RNN Units: 64
+2024-11-29 17:53:58,496 - INFO - Dropout Rate: 0.5
+2024-11-29 17:53:58,496 - INFO - Max Features: 5000
+2024-11-29 17:53:58,514 - INFO - Model compiled.
+2024-11-29 17:54:05,319 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:05,332 - INFO - Using LSTM architecture.
+2024-11-29 17:54:05,334 - INFO - Embedding Dimension: 32
+2024-11-29 17:54:05,336 - INFO - RNN Units: 16
+2024-11-29 17:54:05,338 - INFO - Dropout Rate: 0.2
+2024-11-29 17:54:05,339 - INFO - Max Features: 5000
+2024-11-29 17:54:05,352 - INFO - Model compiled.
+2024-11-29 17:54:16,532 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:16,542 - INFO - Using LSTM architecture.
+2024-11-29 17:54:16,545 - INFO - Embedding Dimension: 128
+2024-11-29 17:54:16,547 - INFO - RNN Units: 128
+2024-11-29 17:54:16,547 - INFO - Dropout Rate: 0.2
+2024-11-29 17:54:16,547 - INFO - Max Features: 5000
+2024-11-29 17:54:16,560 - INFO - Model compiled.
+2024-11-29 17:54:25,968 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:25,977 - INFO - Using LSTM architecture.
+2024-11-29 17:54:25,979 - INFO - Embedding Dimension: 128
+2024-11-29 17:54:25,981 - INFO - RNN Units: 48
+2024-11-29 17:54:25,984 - INFO - Dropout Rate: 0.1
+2024-11-29 17:54:25,985 - INFO - Max Features: 5000
+2024-11-29 17:54:26,000 - INFO - Model compiled.
+2024-11-29 17:54:34,625 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:34,629 - INFO - Using LSTM architecture.
+2024-11-29 17:54:34,632 - INFO - Embedding Dimension: 32
+2024-11-29 17:54:34,634 - INFO - RNN Units: 80
+2024-11-29 17:54:34,635 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:54:34,635 - INFO - Max Features: 5000
+2024-11-29 17:54:34,648 - INFO - Model compiled.
+2024-11-29 17:54:46,455 - INFO - Hyperparameter tuning completed.
+2024-11-29 17:54:46,455 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 80, 'dropout_rate': 0.30000000000000004, 'tuner/epochs': 15, 'tuner/initial_epoch': 0, 'tuner/bracket': 0, 'tuner/round': 0}
+2024-11-29 17:54:46,455 - INFO - Saving tuner results.
+2024-11-29 17:54:46,456 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/LSTM/tuner_results_598_2494_241129_171205.csv
+2024-11-29 17:54:46,456 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 17:54:46,456 - INFO - Configuring TensorFlow device.
+2024-11-29 17:54:46,456 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:54:46,456 - INFO - Epochs: 50
+2024-11-29 17:54:46,456 - INFO - Batch Size: 32
+2024-11-29 17:54:46,457 - INFO - Patience: 8
+2024-11-29 17:54:46,457 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:46,457 - INFO - Using LSTM architecture.
+2024-11-29 17:54:46,457 - INFO - Embedding Dimension: 32
+2024-11-29 17:54:46,457 - INFO - RNN Units: 80
+2024-11-29 17:54:46,457 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:54:46,457 - INFO - Max Features: 5000
+2024-11-29 17:54:46,464 - INFO - Model compiled.
+2024-11-29 17:54:46,464 - INFO - Model training started.
+2024-11-29 17:54:58,604 - INFO - Model training completed.
+2024-11-29 17:54:58,605 - INFO - Saving model.
+2024-11-29 17:54:58,630 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/LSTM.
+2024-11-29 17:54:58,657 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/LSTM/history_598_2494_241129_171205.html.
+2024-11-29 17:54:58,657 - INFO - Saving history.
+2024-11-29 17:54:58,657 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/LSTM/history_598_2494_241129_171205.json.
+2024-11-29 17:54:58,657 - INFO - Model evaluation on a test set.
+2024-11-29 17:54:59,133 - INFO - Final loss and accuracy:
+2024-11-29 17:54:59,134 - INFO - Train Loss: 0.0321, Train Accuracy: 0.9930
+2024-11-29 17:54:59,134 - INFO - Val Loss: 1.1789, Val Accuracy: 0.6883
+2024-11-29 17:54:59,134 - INFO - Test Loss: 0.6031, Test Accuracy: 0.7122
+2024-11-29 17:54:59,134 - INFO - Experiment completed for LSTM with length bucket 598-2494. Time taken: 170.23 seconds.
+2024-11-29 17:54:59,134 - INFO - Starting experiment for length bucket 0-129 with GRU.
+2024-11-29 17:54:59,134 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:54:59,134 - INFO - Configuring TensorFlow device.
+2024-11-29 17:54:59,134 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 17:54:59,134 - INFO - Tuner Max Epochs: 15
+2024-11-29 17:54:59,134 - INFO - Hyperband Factor: 3
+2024-11-29 17:54:59,134 - INFO - Hyperband Iterations: 1
+2024-11-29 17:54:59,134 - INFO - Batch Size: 32
+2024-11-29 17:54:59,134 - INFO - Patience: 8
+2024-11-29 17:54:59,134 - INFO - Starting hyperparameter tuning.
+2024-11-29 17:54:59,136 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:59,136 - INFO - Using GRU architecture.
+2024-11-29 17:54:59,136 - INFO - Embedding Dimension: 32
+2024-11-29 17:54:59,136 - INFO - RNN Units: 16
+2024-11-29 17:54:59,136 - INFO - Dropout Rate: 0.1
+2024-11-29 17:54:59,136 - INFO - Max Features: 5000
+2024-11-29 17:54:59,142 - INFO - Model compiled.
+2024-11-29 17:54:59,363 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:54:59,366 - INFO - Using GRU architecture.
+2024-11-29 17:54:59,369 - INFO - Embedding Dimension: 128
+2024-11-29 17:54:59,371 - INFO - RNN Units: 16
+2024-11-29 17:54:59,374 - INFO - Dropout Rate: 0.1
+2024-11-29 17:54:59,374 - INFO - Max Features: 5000
+2024-11-29 17:54:59,389 - INFO - Model compiled.
+2024-11-29 17:55:06,006 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:06,008 - INFO - Using GRU architecture.
+2024-11-29 17:55:06,011 - INFO - Embedding Dimension: 128
+2024-11-29 17:55:06,013 - INFO - RNN Units: 80
+2024-11-29 17:55:06,015 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:55:06,015 - INFO - Max Features: 5000
+2024-11-29 17:55:06,029 - INFO - Model compiled.
+2024-11-29 17:55:15,587 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:15,589 - INFO - Using GRU architecture.
+2024-11-29 17:55:15,592 - INFO - Embedding Dimension: 64
+2024-11-29 17:55:15,594 - INFO - RNN Units: 128
+2024-11-29 17:55:15,596 - INFO - Dropout Rate: 0.2
+2024-11-29 17:55:15,596 - INFO - Max Features: 5000
+2024-11-29 17:55:15,608 - INFO - Model compiled.
+2024-11-29 17:55:24,763 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:24,776 - INFO - Using GRU architecture.
+2024-11-29 17:55:24,778 - INFO - Embedding Dimension: 128
+2024-11-29 17:55:24,780 - INFO - RNN Units: 32
+2024-11-29 17:55:24,781 - INFO - Dropout Rate: 0.1
+2024-11-29 17:55:24,782 - INFO - Max Features: 5000
+2024-11-29 17:55:24,795 - INFO - Model compiled.
+2024-11-29 17:55:31,593 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:31,607 - INFO - Using GRU architecture.
+2024-11-29 17:55:31,608 - INFO - Embedding Dimension: 128
+2024-11-29 17:55:31,610 - INFO - RNN Units: 80
+2024-11-29 17:55:31,612 - INFO - Dropout Rate: 0.4
+2024-11-29 17:55:31,612 - INFO - Max Features: 5000
+2024-11-29 17:55:31,625 - INFO - Model compiled.
+2024-11-29 17:55:40,751 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:40,763 - INFO - Using GRU architecture.
+2024-11-29 17:55:40,765 - INFO - Embedding Dimension: 32
+2024-11-29 17:55:40,767 - INFO - RNN Units: 96
+2024-11-29 17:55:40,768 - INFO - Dropout Rate: 0.4
+2024-11-29 17:55:40,769 - INFO - Max Features: 5000
+2024-11-29 17:55:40,782 - INFO - Model compiled.
+2024-11-29 17:55:49,844 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:49,848 - INFO - Using GRU architecture.
+2024-11-29 17:55:49,850 - INFO - Embedding Dimension: 32
+2024-11-29 17:55:49,853 - INFO - RNN Units: 16
+2024-11-29 17:55:49,854 - INFO - Dropout Rate: 0.5
+2024-11-29 17:55:49,854 - INFO - Max Features: 5000
+2024-11-29 17:55:49,869 - INFO - Model compiled.
+2024-11-29 17:55:58,771 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:55:58,773 - INFO - Using GRU architecture.
+2024-11-29 17:55:58,776 - INFO - Embedding Dimension: 64
+2024-11-29 17:55:58,778 - INFO - RNN Units: 64
+2024-11-29 17:55:58,780 - INFO - Dropout Rate: 0.1
+2024-11-29 17:55:58,780 - INFO - Max Features: 5000
+2024-11-29 17:55:58,793 - INFO - Model compiled.
+2024-11-29 17:56:05,332 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:56:05,333 - INFO - Using GRU architecture.
+2024-11-29 17:56:05,333 - INFO - Embedding Dimension: 256
+2024-11-29 17:56:05,335 - INFO - RNN Units: 96
+2024-11-29 17:56:05,337 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:56:05,340 - INFO - Max Features: 5000
+2024-11-29 17:56:05,355 - INFO - Model compiled.
+2024-11-29 17:56:14,798 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:56:14,812 - INFO - Using GRU architecture.
+2024-11-29 17:56:14,813 - INFO - Embedding Dimension: 256
+2024-11-29 17:56:14,815 - INFO - RNN Units: 48
+2024-11-29 17:56:14,817 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:56:14,818 - INFO - Max Features: 5000
+2024-11-29 17:56:14,833 - INFO - Model compiled.
+2024-11-29 17:56:24,261 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:56:24,263 - INFO - Using GRU architecture.
+2024-11-29 17:56:24,266 - INFO - Embedding Dimension: 32
+2024-11-29 17:56:24,268 - INFO - RNN Units: 96
+2024-11-29 17:56:24,270 - INFO - Dropout Rate: 0.2
+2024-11-29 17:56:24,270 - INFO - Max Features: 5000
+2024-11-29 17:56:24,284 - INFO - Model compiled.
+2024-11-29 17:56:30,486 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:56:30,487 - INFO - Using GRU architecture.
+2024-11-29 17:56:30,490 - INFO - Embedding Dimension: 256
+2024-11-29 17:56:30,493 - INFO - RNN Units: 80
+2024-11-29 17:56:30,495 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:56:30,496 - INFO - Max Features: 5000
+2024-11-29 17:56:30,510 - INFO - Model compiled.
+2024-11-29 17:56:39,915 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:56:39,917 - INFO - Using GRU architecture.
+2024-11-29 17:56:39,920 - INFO - Embedding Dimension: 256
+2024-11-29 17:56:39,923 - INFO - RNN Units: 80
+2024-11-29 17:56:39,924 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:56:39,924 - INFO - Max Features: 5000
+2024-11-29 17:56:39,937 - INFO - Model compiled.
+2024-11-29 17:56:52,076 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:56:52,083 - INFO - Using GRU architecture.
+2024-11-29 17:56:52,086 - INFO - Embedding Dimension: 32
+2024-11-29 17:56:52,088 - INFO - RNN Units: 96
+2024-11-29 17:56:52,090 - INFO - Dropout Rate: 0.4
+2024-11-29 17:56:52,090 - INFO - Max Features: 5000
+2024-11-29 17:56:52,105 - INFO - Model compiled.
+2024-11-29 17:57:01,900 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:57:01,904 - INFO - Using GRU architecture.
+2024-11-29 17:57:01,906 - INFO - Embedding Dimension: 256
+2024-11-29 17:57:01,909 - INFO - RNN Units: 96
+2024-11-29 17:57:01,910 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:57:01,910 - INFO - Max Features: 5000
+2024-11-29 17:57:01,929 - INFO - Model compiled.
+2024-11-29 17:57:14,991 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:57:14,993 - INFO - Using GRU architecture.
+2024-11-29 17:57:14,996 - INFO - Embedding Dimension: 64
+2024-11-29 17:57:14,998 - INFO - RNN Units: 64
+2024-11-29 17:57:15,000 - INFO - Dropout Rate: 0.1
+2024-11-29 17:57:15,000 - INFO - Max Features: 5000
+2024-11-29 17:57:15,013 - INFO - Model compiled.
+2024-11-29 17:57:27,754 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:57:27,755 - INFO - Using GRU architecture.
+2024-11-29 17:57:27,755 - INFO - Embedding Dimension: 256
+2024-11-29 17:57:27,757 - INFO - RNN Units: 80
+2024-11-29 17:57:27,760 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 17:57:27,762 - INFO - Max Features: 5000
+2024-11-29 17:57:27,777 - INFO - Model compiled.
+2024-11-29 17:57:56,719 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:57:56,721 - INFO - Using GRU architecture.
+2024-11-29 17:57:56,724 - INFO - Embedding Dimension: 64
+2024-11-29 17:57:56,727 - INFO - RNN Units: 64
+2024-11-29 17:57:56,728 - INFO - Dropout Rate: 0.1
+2024-11-29 17:57:56,729 - INFO - Max Features: 5000
+2024-11-29 17:57:56,741 - INFO - Model compiled.
+2024-11-29 17:58:29,543 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:58:29,544 - INFO - Using GRU architecture.
+2024-11-29 17:58:29,544 - INFO - Embedding Dimension: 64
+2024-11-29 17:58:29,547 - INFO - RNN Units: 80
+2024-11-29 17:58:29,549 - INFO - Dropout Rate: 0.1
+2024-11-29 17:58:29,552 - INFO - Max Features: 5000
+2024-11-29 17:58:29,565 - INFO - Model compiled.
+2024-11-29 17:58:50,361 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:58:50,364 - INFO - Using GRU architecture.
+2024-11-29 17:58:50,366 - INFO - Embedding Dimension: 128
+2024-11-29 17:58:50,369 - INFO - RNN Units: 80
+2024-11-29 17:58:50,371 - INFO - Dropout Rate: 0.2
+2024-11-29 17:58:50,371 - INFO - Max Features: 5000
+2024-11-29 17:58:50,385 - INFO - Model compiled.
+2024-11-29 17:59:09,524 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:59:09,528 - INFO - Using GRU architecture.
+2024-11-29 17:59:09,530 - INFO - Embedding Dimension: 32
+2024-11-29 17:59:09,533 - INFO - RNN Units: 64
+2024-11-29 17:59:09,534 - INFO - Dropout Rate: 0.1
+2024-11-29 17:59:09,534 - INFO - Max Features: 5000
+2024-11-29 17:59:09,548 - INFO - Model compiled.
+2024-11-29 17:59:28,530 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:59:28,532 - INFO - Using GRU architecture.
+2024-11-29 17:59:28,536 - INFO - Embedding Dimension: 256
+2024-11-29 17:59:28,539 - INFO - RNN Units: 128
+2024-11-29 17:59:28,542 - INFO - Dropout Rate: 0.1
+2024-11-29 17:59:28,542 - INFO - Max Features: 5000
+2024-11-29 17:59:28,559 - INFO - Model compiled.
+2024-11-29 17:59:50,176 - INFO - Building model for hyperparameter tuning.
+2024-11-29 17:59:50,176 - INFO - Using GRU architecture.
+2024-11-29 17:59:50,179 - INFO - Embedding Dimension: 32
+2024-11-29 17:59:50,182 - INFO - RNN Units: 16
+2024-11-29 17:59:50,184 - INFO - Dropout Rate: 0.2
+2024-11-29 17:59:50,185 - INFO - Max Features: 5000
+2024-11-29 17:59:50,198 - INFO - Model compiled.
+2024-11-29 18:00:08,284 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:00:08,297 - INFO - Using GRU architecture.
+2024-11-29 18:00:08,299 - INFO - Embedding Dimension: 64
+2024-11-29 18:00:08,301 - INFO - RNN Units: 128
+2024-11-29 18:00:08,302 - INFO - Dropout Rate: 0.1
+2024-11-29 18:00:08,304 - INFO - Max Features: 5000
+2024-11-29 18:00:08,318 - INFO - Model compiled.
+2024-11-29 18:00:26,688 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:00:26,702 - INFO - Using GRU architecture.
+2024-11-29 18:00:26,703 - INFO - Embedding Dimension: 64
+2024-11-29 18:00:26,705 - INFO - RNN Units: 80
+2024-11-29 18:00:26,707 - INFO - Dropout Rate: 0.1
+2024-11-29 18:00:26,708 - INFO - Max Features: 5000
+2024-11-29 18:00:26,723 - INFO - Model compiled.
+2024-11-29 18:01:00,065 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:01:00,079 - INFO - Using GRU architecture.
+2024-11-29 18:01:00,081 - INFO - Embedding Dimension: 256
+2024-11-29 18:01:00,083 - INFO - RNN Units: 128
+2024-11-29 18:01:00,085 - INFO - Dropout Rate: 0.1
+2024-11-29 18:01:00,085 - INFO - Max Features: 5000
+2024-11-29 18:01:00,099 - INFO - Model compiled.
+2024-11-29 18:01:37,960 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:01:37,973 - INFO - Using GRU architecture.
+2024-11-29 18:01:37,976 - INFO - Embedding Dimension: 256
+2024-11-29 18:01:37,977 - INFO - RNN Units: 16
+2024-11-29 18:01:37,979 - INFO - Dropout Rate: 0.5
+2024-11-29 18:01:37,980 - INFO - Max Features: 5000
+2024-11-29 18:01:37,996 - INFO - Model compiled.
+2024-11-29 18:02:14,858 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:02:14,871 - INFO - Using GRU architecture.
+2024-11-29 18:02:14,872 - INFO - Embedding Dimension: 128
+2024-11-29 18:02:14,875 - INFO - RNN Units: 32
+2024-11-29 18:02:14,877 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:02:14,878 - INFO - Max Features: 5000
+2024-11-29 18:02:14,892 - INFO - Model compiled.
+2024-11-29 18:02:52,571 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:02:52,583 - INFO - Using GRU architecture.
+2024-11-29 18:02:52,585 - INFO - Embedding Dimension: 64
+2024-11-29 18:02:52,587 - INFO - RNN Units: 64
+2024-11-29 18:02:52,589 - INFO - Dropout Rate: 0.2
+2024-11-29 18:02:52,589 - INFO - Max Features: 5000
+2024-11-29 18:02:52,606 - INFO - Model compiled.
+2024-11-29 18:03:30,643 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:03:30,656 - INFO - Using GRU architecture.
+2024-11-29 18:03:30,657 - INFO - Embedding Dimension: 256
+2024-11-29 18:03:30,659 - INFO - RNN Units: 96
+2024-11-29 18:03:30,662 - INFO - Dropout Rate: 0.5
+2024-11-29 18:03:30,663 - INFO - Max Features: 5000
+2024-11-29 18:03:30,678 - INFO - Model compiled.
+2024-11-29 18:04:09,532 - INFO - Hyperparameter tuning completed.
+2024-11-29 18:04:09,532 - INFO - Best hyperparameters found: {'embedding_dim': 64, 'rnn_units': 80, 'dropout_rate': 0.1, 'tuner/epochs': 15, 'tuner/initial_epoch': 5, 'tuner/bracket': 1, 'tuner/round': 1, 'tuner/trial_id': '0018'}
+2024-11-29 18:04:09,532 - INFO - Saving tuner results.
+2024-11-29 18:04:09,534 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/GRU/tuner_results_0_129_241129_171205.csv
+2024-11-29 18:04:09,534 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 18:04:09,534 - INFO - Configuring TensorFlow device.
+2024-11-29 18:04:09,534 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:04:09,534 - INFO - Epochs: 50
+2024-11-29 18:04:09,534 - INFO - Batch Size: 32
+2024-11-29 18:04:09,534 - INFO - Patience: 8
+2024-11-29 18:04:09,534 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:04:09,534 - INFO - Using GRU architecture.
+2024-11-29 18:04:09,535 - INFO - Embedding Dimension: 64
+2024-11-29 18:04:09,535 - INFO - RNN Units: 80
+2024-11-29 18:04:09,535 - INFO - Dropout Rate: 0.1
+2024-11-29 18:04:09,535 - INFO - Max Features: 5000
+2024-11-29 18:04:09,542 - INFO - Model compiled.
+2024-11-29 18:04:09,542 - INFO - Model training started.
+2024-11-29 18:04:54,273 - INFO - Model training completed.
+2024-11-29 18:04:54,273 - INFO - Saving model.
+2024-11-29 18:04:54,297 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/GRU.
+2024-11-29 18:04:54,323 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/GRU/history_0_129_241129_171205.html.
+2024-11-29 18:04:54,323 - INFO - Saving history.
+2024-11-29 18:04:54,323 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/GRU/history_0_129_241129_171205.json.
+2024-11-29 18:04:54,323 - INFO - Model evaluation on a test set.
+2024-11-29 18:04:54,384 - INFO - Final loss and accuracy:
+2024-11-29 18:04:54,384 - INFO - Train Loss: 0.0120, Train Accuracy: 0.9969
+2024-11-29 18:04:54,384 - INFO - Val Loss: 0.9851, Val Accuracy: 0.8207
+2024-11-29 18:04:54,384 - INFO - Test Loss: 0.4788, Test Accuracy: 0.8039
+2024-11-29 18:04:54,384 - INFO - Experiment completed for GRU with length bucket 0-129. Time taken: 595.25 seconds.
+2024-11-29 18:04:54,384 - INFO - Starting experiment for length bucket 129-175 with GRU.
+2024-11-29 18:04:54,384 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:04:54,384 - INFO - Configuring TensorFlow device.
+2024-11-29 18:04:54,384 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:04:54,384 - INFO - Tuner Max Epochs: 15
+2024-11-29 18:04:54,384 - INFO - Hyperband Factor: 3
+2024-11-29 18:04:54,385 - INFO - Hyperband Iterations: 1
+2024-11-29 18:04:54,385 - INFO - Batch Size: 32
+2024-11-29 18:04:54,385 - INFO - Patience: 8
+2024-11-29 18:04:54,385 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:04:54,386 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:04:54,386 - INFO - Using GRU architecture.
+2024-11-29 18:04:54,386 - INFO - Embedding Dimension: 32
+2024-11-29 18:04:54,386 - INFO - RNN Units: 16
+2024-11-29 18:04:54,386 - INFO - Dropout Rate: 0.1
+2024-11-29 18:04:54,386 - INFO - Max Features: 5000
+2024-11-29 18:04:54,393 - INFO - Model compiled.
+2024-11-29 18:04:54,613 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:04:54,616 - INFO - Using GRU architecture.
+2024-11-29 18:04:54,619 - INFO - Embedding Dimension: 256
+2024-11-29 18:04:54,622 - INFO - RNN Units: 32
+2024-11-29 18:04:54,625 - INFO - Dropout Rate: 0.2
+2024-11-29 18:04:54,625 - INFO - Max Features: 5000
+2024-11-29 18:04:54,645 - INFO - Model compiled.
+2024-11-29 18:05:03,653 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:03,654 - INFO - Using GRU architecture.
+2024-11-29 18:05:03,657 - INFO - Embedding Dimension: 256
+2024-11-29 18:05:03,659 - INFO - RNN Units: 112
+2024-11-29 18:05:03,662 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:05:03,663 - INFO - Max Features: 5000
+2024-11-29 18:05:03,680 - INFO - Model compiled.
+2024-11-29 18:05:12,539 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:12,547 - INFO - Using GRU architecture.
+2024-11-29 18:05:12,548 - INFO - Embedding Dimension: 32
+2024-11-29 18:05:12,550 - INFO - RNN Units: 16
+2024-11-29 18:05:12,552 - INFO - Dropout Rate: 0.2
+2024-11-29 18:05:12,553 - INFO - Max Features: 5000
+2024-11-29 18:05:12,567 - INFO - Model compiled.
+2024-11-29 18:05:21,251 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:21,258 - INFO - Using GRU architecture.
+2024-11-29 18:05:21,260 - INFO - Embedding Dimension: 256
+2024-11-29 18:05:21,262 - INFO - RNN Units: 64
+2024-11-29 18:05:21,264 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:05:21,266 - INFO - Max Features: 5000
+2024-11-29 18:05:21,280 - INFO - Model compiled.
+2024-11-29 18:05:27,344 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:27,351 - INFO - Using GRU architecture.
+2024-11-29 18:05:27,354 - INFO - Embedding Dimension: 256
+2024-11-29 18:05:27,356 - INFO - RNN Units: 128
+2024-11-29 18:05:27,358 - INFO - Dropout Rate: 0.5
+2024-11-29 18:05:27,359 - INFO - Max Features: 5000
+2024-11-29 18:05:27,372 - INFO - Model compiled.
+2024-11-29 18:05:35,693 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:35,702 - INFO - Using GRU architecture.
+2024-11-29 18:05:35,702 - INFO - Embedding Dimension: 128
+2024-11-29 18:05:35,705 - INFO - RNN Units: 80
+2024-11-29 18:05:35,708 - INFO - Dropout Rate: 0.4
+2024-11-29 18:05:35,711 - INFO - Max Features: 5000
+2024-11-29 18:05:35,728 - INFO - Model compiled.
+2024-11-29 18:05:44,556 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:44,565 - INFO - Using GRU architecture.
+2024-11-29 18:05:44,566 - INFO - Embedding Dimension: 32
+2024-11-29 18:05:44,569 - INFO - RNN Units: 16
+2024-11-29 18:05:44,571 - INFO - Dropout Rate: 0.1
+2024-11-29 18:05:44,574 - INFO - Max Features: 5000
+2024-11-29 18:05:44,594 - INFO - Model compiled.
+2024-11-29 18:05:53,412 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:53,419 - INFO - Using GRU architecture.
+2024-11-29 18:05:53,420 - INFO - Embedding Dimension: 256
+2024-11-29 18:05:53,423 - INFO - RNN Units: 16
+2024-11-29 18:05:53,425 - INFO - Dropout Rate: 0.1
+2024-11-29 18:05:53,427 - INFO - Max Features: 5000
+2024-11-29 18:05:53,441 - INFO - Model compiled.
+2024-11-29 18:05:59,905 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:05:59,913 - INFO - Using GRU architecture.
+2024-11-29 18:05:59,916 - INFO - Embedding Dimension: 256
+2024-11-29 18:05:59,918 - INFO - RNN Units: 80
+2024-11-29 18:05:59,920 - INFO - Dropout Rate: 0.2
+2024-11-29 18:05:59,921 - INFO - Max Features: 5000
+2024-11-29 18:05:59,934 - INFO - Model compiled.
+2024-11-29 18:06:08,667 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:06:08,675 - INFO - Using GRU architecture.
+2024-11-29 18:06:08,675 - INFO - Embedding Dimension: 32
+2024-11-29 18:06:08,678 - INFO - RNN Units: 112
+2024-11-29 18:06:08,680 - INFO - Dropout Rate: 0.5
+2024-11-29 18:06:08,683 - INFO - Max Features: 5000
+2024-11-29 18:06:08,702 - INFO - Model compiled.
+2024-11-29 18:06:17,601 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:06:17,609 - INFO - Using GRU architecture.
+2024-11-29 18:06:17,611 - INFO - Embedding Dimension: 32
+2024-11-29 18:06:17,613 - INFO - RNN Units: 96
+2024-11-29 18:06:17,615 - INFO - Dropout Rate: 0.4
+2024-11-29 18:06:17,617 - INFO - Max Features: 5000
+2024-11-29 18:06:17,632 - INFO - Model compiled.
+2024-11-29 18:06:23,881 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:06:23,884 - INFO - Using GRU architecture.
+2024-11-29 18:06:23,885 - INFO - Embedding Dimension: 64
+2024-11-29 18:06:23,886 - INFO - RNN Units: 16
+2024-11-29 18:06:23,889 - INFO - Dropout Rate: 0.2
+2024-11-29 18:06:23,891 - INFO - Max Features: 5000
+2024-11-29 18:06:23,906 - INFO - Model compiled.
+2024-11-29 18:06:32,651 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:06:32,659 - INFO - Using GRU architecture.
+2024-11-29 18:06:32,659 - INFO - Embedding Dimension: 256
+2024-11-29 18:06:32,660 - INFO - RNN Units: 80
+2024-11-29 18:06:32,662 - INFO - Dropout Rate: 0.2
+2024-11-29 18:06:32,664 - INFO - Max Features: 5000
+2024-11-29 18:06:32,679 - INFO - Model compiled.
+2024-11-29 18:06:45,026 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:06:45,034 - INFO - Using GRU architecture.
+2024-11-29 18:06:45,034 - INFO - Embedding Dimension: 128
+2024-11-29 18:06:45,036 - INFO - RNN Units: 80
+2024-11-29 18:06:45,038 - INFO - Dropout Rate: 0.4
+2024-11-29 18:06:45,039 - INFO - Max Features: 5000
+2024-11-29 18:06:45,055 - INFO - Model compiled.
+2024-11-29 18:06:54,918 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:06:54,925 - INFO - Using GRU architecture.
+2024-11-29 18:06:54,925 - INFO - Embedding Dimension: 256
+2024-11-29 18:06:54,927 - INFO - RNN Units: 64
+2024-11-29 18:06:54,930 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:06:54,931 - INFO - Max Features: 5000
+2024-11-29 18:06:54,945 - INFO - Model compiled.
+2024-11-29 18:07:07,329 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:07:07,335 - INFO - Using GRU architecture.
+2024-11-29 18:07:07,336 - INFO - Embedding Dimension: 32
+2024-11-29 18:07:07,337 - INFO - RNN Units: 16
+2024-11-29 18:07:07,340 - INFO - Dropout Rate: 0.2
+2024-11-29 18:07:07,341 - INFO - Max Features: 5000
+2024-11-29 18:07:07,358 - INFO - Model compiled.
+2024-11-29 18:07:19,832 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:07:19,838 - INFO - Using GRU architecture.
+2024-11-29 18:07:19,838 - INFO - Embedding Dimension: 32
+2024-11-29 18:07:19,840 - INFO - RNN Units: 16
+2024-11-29 18:07:19,842 - INFO - Dropout Rate: 0.2
+2024-11-29 18:07:19,844 - INFO - Max Features: 5000
+2024-11-29 18:07:19,858 - INFO - Model compiled.
+2024-11-29 18:07:52,127 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:07:52,134 - INFO - Using GRU architecture.
+2024-11-29 18:07:52,134 - INFO - Embedding Dimension: 256
+2024-11-29 18:07:52,136 - INFO - RNN Units: 64
+2024-11-29 18:07:52,138 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:07:52,140 - INFO - Max Features: 5000
+2024-11-29 18:07:52,156 - INFO - Model compiled.
+2024-11-29 18:08:21,961 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:08:21,973 - INFO - Using GRU architecture.
+2024-11-29 18:08:21,973 - INFO - Embedding Dimension: 256
+2024-11-29 18:08:21,976 - INFO - RNN Units: 32
+2024-11-29 18:08:21,978 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:08:21,980 - INFO - Max Features: 5000
+2024-11-29 18:08:21,995 - INFO - Model compiled.
+2024-11-29 18:08:41,573 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:08:41,585 - INFO - Using GRU architecture.
+2024-11-29 18:08:41,586 - INFO - Embedding Dimension: 32
+2024-11-29 18:08:41,588 - INFO - RNN Units: 16
+2024-11-29 18:08:41,590 - INFO - Dropout Rate: 0.4
+2024-11-29 18:08:41,592 - INFO - Max Features: 5000
+2024-11-29 18:08:41,605 - INFO - Model compiled.
+2024-11-29 18:08:58,980 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:08:58,989 - INFO - Using GRU architecture.
+2024-11-29 18:08:58,990 - INFO - Embedding Dimension: 256
+2024-11-29 18:08:58,993 - INFO - RNN Units: 48
+2024-11-29 18:08:58,995 - INFO - Dropout Rate: 0.4
+2024-11-29 18:08:58,997 - INFO - Max Features: 5000
+2024-11-29 18:08:59,011 - INFO - Model compiled.
+2024-11-29 18:09:18,388 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:09:18,400 - INFO - Using GRU architecture.
+2024-11-29 18:09:18,402 - INFO - Embedding Dimension: 32
+2024-11-29 18:09:18,404 - INFO - RNN Units: 80
+2024-11-29 18:09:18,406 - INFO - Dropout Rate: 0.1
+2024-11-29 18:09:18,408 - INFO - Max Features: 5000
+2024-11-29 18:09:18,421 - INFO - Model compiled.
+2024-11-29 18:09:35,106 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:09:35,118 - INFO - Using GRU architecture.
+2024-11-29 18:09:35,120 - INFO - Embedding Dimension: 256
+2024-11-29 18:09:35,123 - INFO - RNN Units: 96
+2024-11-29 18:09:35,125 - INFO - Dropout Rate: 0.4
+2024-11-29 18:09:35,127 - INFO - Max Features: 5000
+2024-11-29 18:09:35,141 - INFO - Model compiled.
+2024-11-29 18:09:52,307 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:09:52,320 - INFO - Using GRU architecture.
+2024-11-29 18:09:52,320 - INFO - Embedding Dimension: 128
+2024-11-29 18:09:52,322 - INFO - RNN Units: 64
+2024-11-29 18:09:52,324 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:09:52,326 - INFO - Max Features: 5000
+2024-11-29 18:09:52,340 - INFO - Model compiled.
+2024-11-29 18:10:12,184 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:10:12,185 - INFO - Using GRU architecture.
+2024-11-29 18:10:12,185 - INFO - Embedding Dimension: 256
+2024-11-29 18:10:12,188 - INFO - RNN Units: 32
+2024-11-29 18:10:12,191 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:10:12,193 - INFO - Max Features: 5000
+2024-11-29 18:10:12,207 - INFO - Model compiled.
+2024-11-29 18:10:44,623 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:10:44,635 - INFO - Using GRU architecture.
+2024-11-29 18:10:44,636 - INFO - Embedding Dimension: 32
+2024-11-29 18:10:44,636 - INFO - RNN Units: 16
+2024-11-29 18:10:44,638 - INFO - Dropout Rate: 0.4
+2024-11-29 18:10:44,640 - INFO - Max Features: 5000
+2024-11-29 18:10:44,658 - INFO - Model compiled.
+2024-11-29 18:11:16,730 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:11:16,742 - INFO - Using GRU architecture.
+2024-11-29 18:11:16,743 - INFO - Embedding Dimension: 256
+2024-11-29 18:11:16,745 - INFO - RNN Units: 96
+2024-11-29 18:11:16,747 - INFO - Dropout Rate: 0.2
+2024-11-29 18:11:16,749 - INFO - Max Features: 5000
+2024-11-29 18:11:16,765 - INFO - Model compiled.
+2024-11-29 18:11:50,624 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:11:50,634 - INFO - Using GRU architecture.
+2024-11-29 18:11:50,637 - INFO - Embedding Dimension: 64
+2024-11-29 18:11:50,637 - INFO - RNN Units: 112
+2024-11-29 18:11:50,639 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:11:50,641 - INFO - Max Features: 5000
+2024-11-29 18:11:50,657 - INFO - Model compiled.
+2024-11-29 18:12:33,200 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:12:33,213 - INFO - Using GRU architecture.
+2024-11-29 18:12:33,214 - INFO - Embedding Dimension: 128
+2024-11-29 18:12:33,217 - INFO - RNN Units: 16
+2024-11-29 18:12:33,219 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:12:33,221 - INFO - Max Features: 5000
+2024-11-29 18:12:33,236 - INFO - Model compiled.
+2024-11-29 18:13:07,233 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:13:07,234 - INFO - Using GRU architecture.
+2024-11-29 18:13:07,237 - INFO - Embedding Dimension: 128
+2024-11-29 18:13:07,240 - INFO - RNN Units: 112
+2024-11-29 18:13:07,243 - INFO - Dropout Rate: 0.1
+2024-11-29 18:13:07,244 - INFO - Max Features: 5000
+2024-11-29 18:13:07,261 - INFO - Model compiled.
+2024-11-29 18:13:45,855 - INFO - Hyperparameter tuning completed.
+2024-11-29 18:13:45,856 - INFO - Best hyperparameters found: {'embedding_dim': 256, 'rnn_units': 96, 'dropout_rate': 0.2, 'tuner/epochs': 15, 'tuner/initial_epoch': 0, 'tuner/bracket': 0, 'tuner/round': 0}
+2024-11-29 18:13:45,856 - INFO - Saving tuner results.
+2024-11-29 18:13:45,857 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/GRU/tuner_results_129_175_241129_171205.csv
+2024-11-29 18:13:45,857 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 18:13:45,857 - INFO - Configuring TensorFlow device.
+2024-11-29 18:13:45,857 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:13:45,857 - INFO - Epochs: 50
+2024-11-29 18:13:45,857 - INFO - Batch Size: 32
+2024-11-29 18:13:45,857 - INFO - Patience: 8
+2024-11-29 18:13:45,857 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:13:45,857 - INFO - Using GRU architecture.
+2024-11-29 18:13:45,857 - INFO - Embedding Dimension: 256
+2024-11-29 18:13:45,857 - INFO - RNN Units: 96
+2024-11-29 18:13:45,857 - INFO - Dropout Rate: 0.2
+2024-11-29 18:13:45,857 - INFO - Max Features: 5000
+2024-11-29 18:13:45,864 - INFO - Model compiled.
+2024-11-29 18:13:45,864 - INFO - Model training started.
+2024-11-29 18:14:22,572 - INFO - Model training completed.
+2024-11-29 18:14:22,572 - INFO - Saving model.
+2024-11-29 18:14:22,614 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/GRU.
+2024-11-29 18:14:22,638 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/GRU/history_129_175_241129_171205.html.
+2024-11-29 18:14:22,638 - INFO - Saving history.
+2024-11-29 18:14:22,638 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/GRU/history_129_175_241129_171205.json.
+2024-11-29 18:14:22,638 - INFO - Model evaluation on a test set.
+2024-11-29 18:14:24,930 - INFO - Final loss and accuracy:
+2024-11-29 18:14:24,931 - INFO - Train Loss: 0.0191, Train Accuracy: 0.9945
+2024-11-29 18:14:24,931 - INFO - Val Loss: 0.9950, Val Accuracy: 0.8032
+2024-11-29 18:14:24,931 - INFO - Test Loss: 0.4230, Test Accuracy: 0.8169
+2024-11-29 18:14:24,931 - INFO - Experiment completed for GRU with length bucket 129-175. Time taken: 570.55 seconds.
+2024-11-29 18:14:24,931 - INFO - Starting experiment for length bucket 176-284 with GRU.
+2024-11-29 18:14:24,931 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:14:24,931 - INFO - Configuring TensorFlow device.
+2024-11-29 18:14:24,931 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:14:24,931 - INFO - Tuner Max Epochs: 15
+2024-11-29 18:14:24,931 - INFO - Hyperband Factor: 3
+2024-11-29 18:14:24,931 - INFO - Hyperband Iterations: 1
+2024-11-29 18:14:24,931 - INFO - Batch Size: 32
+2024-11-29 18:14:24,931 - INFO - Patience: 8
+2024-11-29 18:14:24,931 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:14:24,933 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:14:24,933 - INFO - Using GRU architecture.
+2024-11-29 18:14:24,933 - INFO - Embedding Dimension: 32
+2024-11-29 18:14:24,933 - INFO - RNN Units: 16
+2024-11-29 18:14:24,933 - INFO - Dropout Rate: 0.1
+2024-11-29 18:14:24,933 - INFO - Max Features: 5000
+2024-11-29 18:14:24,939 - INFO - Model compiled.
+2024-11-29 18:14:25,172 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:14:25,173 - INFO - Using GRU architecture.
+2024-11-29 18:14:25,176 - INFO - Embedding Dimension: 128
+2024-11-29 18:14:25,179 - INFO - RNN Units: 64
+2024-11-29 18:14:25,181 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:14:25,184 - INFO - Max Features: 5000
+2024-11-29 18:14:25,197 - INFO - Model compiled.
+2024-11-29 18:14:34,458 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:14:34,462 - INFO - Using GRU architecture.
+2024-11-29 18:14:34,465 - INFO - Embedding Dimension: 32
+2024-11-29 18:14:34,467 - INFO - RNN Units: 32
+2024-11-29 18:14:34,470 - INFO - Dropout Rate: 0.4
+2024-11-29 18:14:34,470 - INFO - Max Features: 5000
+2024-11-29 18:14:34,483 - INFO - Model compiled.
+2024-11-29 18:14:43,730 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:14:43,746 - INFO - Using GRU architecture.
+2024-11-29 18:14:43,748 - INFO - Embedding Dimension: 128
+2024-11-29 18:14:43,750 - INFO - RNN Units: 48
+2024-11-29 18:14:43,752 - INFO - Dropout Rate: 0.5
+2024-11-29 18:14:43,752 - INFO - Max Features: 5000
+2024-11-29 18:14:43,765 - INFO - Model compiled.
+2024-11-29 18:14:50,897 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:14:50,913 - INFO - Using GRU architecture.
+2024-11-29 18:14:50,915 - INFO - Embedding Dimension: 128
+2024-11-29 18:14:50,917 - INFO - RNN Units: 96
+2024-11-29 18:14:50,918 - INFO - Dropout Rate: 0.1
+2024-11-29 18:14:50,918 - INFO - Max Features: 5000
+2024-11-29 18:14:50,932 - INFO - Model compiled.
+2024-11-29 18:15:00,379 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:00,388 - INFO - Using GRU architecture.
+2024-11-29 18:15:00,390 - INFO - Embedding Dimension: 128
+2024-11-29 18:15:00,393 - INFO - RNN Units: 80
+2024-11-29 18:15:00,394 - INFO - Dropout Rate: 0.1
+2024-11-29 18:15:00,396 - INFO - Max Features: 5000
+2024-11-29 18:15:00,411 - INFO - Model compiled.
+2024-11-29 18:15:09,854 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:09,864 - INFO - Using GRU architecture.
+2024-11-29 18:15:09,867 - INFO - Embedding Dimension: 32
+2024-11-29 18:15:09,868 - INFO - RNN Units: 96
+2024-11-29 18:15:09,870 - INFO - Dropout Rate: 0.2
+2024-11-29 18:15:09,870 - INFO - Max Features: 5000
+2024-11-29 18:15:09,883 - INFO - Model compiled.
+2024-11-29 18:15:19,436 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:19,451 - INFO - Using GRU architecture.
+2024-11-29 18:15:19,453 - INFO - Embedding Dimension: 32
+2024-11-29 18:15:19,455 - INFO - RNN Units: 128
+2024-11-29 18:15:19,457 - INFO - Dropout Rate: 0.1
+2024-11-29 18:15:19,458 - INFO - Max Features: 5000
+2024-11-29 18:15:19,473 - INFO - Model compiled.
+2024-11-29 18:15:27,028 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:27,043 - INFO - Using GRU architecture.
+2024-11-29 18:15:27,045 - INFO - Embedding Dimension: 32
+2024-11-29 18:15:27,047 - INFO - RNN Units: 16
+2024-11-29 18:15:27,049 - INFO - Dropout Rate: 0.4
+2024-11-29 18:15:27,051 - INFO - Max Features: 5000
+2024-11-29 18:15:27,064 - INFO - Model compiled.
+2024-11-29 18:15:36,106 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:36,122 - INFO - Using GRU architecture.
+2024-11-29 18:15:36,124 - INFO - Embedding Dimension: 256
+2024-11-29 18:15:36,127 - INFO - RNN Units: 80
+2024-11-29 18:15:36,130 - INFO - Dropout Rate: 0.1
+2024-11-29 18:15:36,132 - INFO - Max Features: 5000
+2024-11-29 18:15:36,153 - INFO - Model compiled.
+2024-11-29 18:15:45,559 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:45,564 - INFO - Using GRU architecture.
+2024-11-29 18:15:45,566 - INFO - Embedding Dimension: 32
+2024-11-29 18:15:45,569 - INFO - RNN Units: 16
+2024-11-29 18:15:45,571 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:15:45,572 - INFO - Max Features: 5000
+2024-11-29 18:15:45,585 - INFO - Model compiled.
+2024-11-29 18:15:52,344 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:15:52,359 - INFO - Using GRU architecture.
+2024-11-29 18:15:52,361 - INFO - Embedding Dimension: 32
+2024-11-29 18:15:52,363 - INFO - RNN Units: 32
+2024-11-29 18:15:52,365 - INFO - Dropout Rate: 0.5
+2024-11-29 18:15:52,367 - INFO - Max Features: 5000
+2024-11-29 18:15:52,380 - INFO - Model compiled.
+2024-11-29 18:16:01,683 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:16:01,699 - INFO - Using GRU architecture.
+2024-11-29 18:16:01,699 - INFO - Embedding Dimension: 64
+2024-11-29 18:16:01,702 - INFO - RNN Units: 96
+2024-11-29 18:16:01,703 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:16:01,705 - INFO - Max Features: 5000
+2024-11-29 18:16:01,721 - INFO - Model compiled.
+2024-11-29 18:16:11,141 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:16:11,158 - INFO - Using GRU architecture.
+2024-11-29 18:16:11,161 - INFO - Embedding Dimension: 32
+2024-11-29 18:16:11,164 - INFO - RNN Units: 96
+2024-11-29 18:16:11,165 - INFO - Dropout Rate: 0.2
+2024-11-29 18:16:11,165 - INFO - Max Features: 5000
+2024-11-29 18:16:11,182 - INFO - Model compiled.
+2024-11-29 18:16:22,018 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:16:22,021 - INFO - Using GRU architecture.
+2024-11-29 18:16:22,024 - INFO - Embedding Dimension: 128
+2024-11-29 18:16:22,026 - INFO - RNN Units: 64
+2024-11-29 18:16:22,029 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:16:22,030 - INFO - Max Features: 5000
+2024-11-29 18:16:22,044 - INFO - Model compiled.
+2024-11-29 18:16:35,496 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:16:35,498 - INFO - Using GRU architecture.
+2024-11-29 18:16:35,500 - INFO - Embedding Dimension: 32
+2024-11-29 18:16:35,503 - INFO - RNN Units: 32
+2024-11-29 18:16:35,506 - INFO - Dropout Rate: 0.5
+2024-11-29 18:16:35,507 - INFO - Max Features: 5000
+2024-11-29 18:16:35,522 - INFO - Model compiled.
+2024-11-29 18:16:48,542 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:16:48,556 - INFO - Using GRU architecture.
+2024-11-29 18:16:48,556 - INFO - Embedding Dimension: 32
+2024-11-29 18:16:48,559 - INFO - RNN Units: 16
+2024-11-29 18:16:48,561 - INFO - Dropout Rate: 0.4
+2024-11-29 18:16:48,562 - INFO - Max Features: 5000
+2024-11-29 18:16:48,578 - INFO - Model compiled.
+2024-11-29 18:16:59,372 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:16:59,385 - INFO - Using GRU architecture.
+2024-11-29 18:16:59,388 - INFO - Embedding Dimension: 32
+2024-11-29 18:16:59,389 - INFO - RNN Units: 96
+2024-11-29 18:16:59,391 - INFO - Dropout Rate: 0.2
+2024-11-29 18:16:59,392 - INFO - Max Features: 5000
+2024-11-29 18:16:59,407 - INFO - Model compiled.
+2024-11-29 18:17:33,921 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:17:33,922 - INFO - Using GRU architecture.
+2024-11-29 18:17:33,925 - INFO - Embedding Dimension: 128
+2024-11-29 18:17:33,928 - INFO - RNN Units: 64
+2024-11-29 18:17:33,931 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:17:33,931 - INFO - Max Features: 5000
+2024-11-29 18:17:33,949 - INFO - Model compiled.
+2024-11-29 18:18:05,958 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:18:05,972 - INFO - Using GRU architecture.
+2024-11-29 18:18:05,974 - INFO - Embedding Dimension: 32
+2024-11-29 18:18:05,976 - INFO - RNN Units: 128
+2024-11-29 18:18:05,978 - INFO - Dropout Rate: 0.5
+2024-11-29 18:18:05,978 - INFO - Max Features: 5000
+2024-11-29 18:18:05,995 - INFO - Model compiled.
+2024-11-29 18:18:25,252 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:18:25,268 - INFO - Using GRU architecture.
+2024-11-29 18:18:25,271 - INFO - Embedding Dimension: 64
+2024-11-29 18:18:25,273 - INFO - RNN Units: 16
+2024-11-29 18:18:25,275 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:18:25,277 - INFO - Max Features: 5000
+2024-11-29 18:18:25,293 - INFO - Model compiled.
+2024-11-29 18:18:46,324 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:18:46,340 - INFO - Using GRU architecture.
+2024-11-29 18:18:46,343 - INFO - Embedding Dimension: 32
+2024-11-29 18:18:46,345 - INFO - RNN Units: 48
+2024-11-29 18:18:46,347 - INFO - Dropout Rate: 0.5
+2024-11-29 18:18:46,347 - INFO - Max Features: 5000
+2024-11-29 18:18:46,362 - INFO - Model compiled.
+2024-11-29 18:19:05,645 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:19:05,660 - INFO - Using GRU architecture.
+2024-11-29 18:19:05,662 - INFO - Embedding Dimension: 128
+2024-11-29 18:19:05,664 - INFO - RNN Units: 128
+2024-11-29 18:19:05,666 - INFO - Dropout Rate: 0.5
+2024-11-29 18:19:05,667 - INFO - Max Features: 5000
+2024-11-29 18:19:05,682 - INFO - Model compiled.
+2024-11-29 18:19:25,024 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:19:25,027 - INFO - Using GRU architecture.
+2024-11-29 18:19:25,027 - INFO - Embedding Dimension: 32
+2024-11-29 18:19:25,031 - INFO - RNN Units: 16
+2024-11-29 18:19:25,033 - INFO - Dropout Rate: 0.5
+2024-11-29 18:19:25,036 - INFO - Max Features: 5000
+2024-11-29 18:19:25,053 - INFO - Model compiled.
+2024-11-29 18:19:47,443 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:19:47,458 - INFO - Using GRU architecture.
+2024-11-29 18:19:47,459 - INFO - Embedding Dimension: 128
+2024-11-29 18:19:47,461 - INFO - RNN Units: 80
+2024-11-29 18:19:47,462 - INFO - Dropout Rate: 0.5
+2024-11-29 18:19:47,464 - INFO - Max Features: 5000
+2024-11-29 18:19:47,477 - INFO - Model compiled.
+2024-11-29 18:20:04,828 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:20:04,836 - INFO - Using GRU architecture.
+2024-11-29 18:20:04,839 - INFO - Embedding Dimension: 32
+2024-11-29 18:20:04,841 - INFO - RNN Units: 48
+2024-11-29 18:20:04,843 - INFO - Dropout Rate: 0.5
+2024-11-29 18:20:04,845 - INFO - Max Features: 5000
+2024-11-29 18:20:04,859 - INFO - Model compiled.
+2024-11-29 18:20:40,667 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:20:40,683 - INFO - Using GRU architecture.
+2024-11-29 18:20:40,685 - INFO - Embedding Dimension: 32
+2024-11-29 18:20:40,687 - INFO - RNN Units: 128
+2024-11-29 18:20:40,688 - INFO - Dropout Rate: 0.5
+2024-11-29 18:20:40,689 - INFO - Max Features: 5000
+2024-11-29 18:20:40,703 - INFO - Model compiled.
+2024-11-29 18:21:10,988 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:21:11,002 - INFO - Using GRU architecture.
+2024-11-29 18:21:11,005 - INFO - Embedding Dimension: 128
+2024-11-29 18:21:11,007 - INFO - RNN Units: 64
+2024-11-29 18:21:11,009 - INFO - Dropout Rate: 0.5
+2024-11-29 18:21:11,010 - INFO - Max Features: 5000
+2024-11-29 18:21:11,027 - INFO - Model compiled.
+2024-11-29 18:21:51,537 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:21:51,539 - INFO - Using GRU architecture.
+2024-11-29 18:21:51,542 - INFO - Embedding Dimension: 32
+2024-11-29 18:21:51,544 - INFO - RNN Units: 48
+2024-11-29 18:21:51,547 - INFO - Dropout Rate: 0.1
+2024-11-29 18:21:51,548 - INFO - Max Features: 5000
+2024-11-29 18:21:51,563 - INFO - Model compiled.
+2024-11-29 18:22:31,443 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:22:31,458 - INFO - Using GRU architecture.
+2024-11-29 18:22:31,460 - INFO - Embedding Dimension: 64
+2024-11-29 18:22:31,462 - INFO - RNN Units: 80
+2024-11-29 18:22:31,464 - INFO - Dropout Rate: 0.5
+2024-11-29 18:22:31,466 - INFO - Max Features: 5000
+2024-11-29 18:22:31,479 - INFO - Model compiled.
+2024-11-29 18:23:13,526 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:23:13,535 - INFO - Using GRU architecture.
+2024-11-29 18:23:13,538 - INFO - Embedding Dimension: 64
+2024-11-29 18:23:13,541 - INFO - RNN Units: 128
+2024-11-29 18:23:13,544 - INFO - Dropout Rate: 0.2
+2024-11-29 18:23:13,545 - INFO - Max Features: 5000
+2024-11-29 18:23:13,563 - INFO - Model compiled.
+2024-11-29 18:23:53,449 - INFO - Hyperparameter tuning completed.
+2024-11-29 18:23:53,449 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 96, 'dropout_rate': 0.2, 'tuner/epochs': 2, 'tuner/initial_epoch': 0, 'tuner/bracket': 2, 'tuner/round': 0}
+2024-11-29 18:23:53,449 - INFO - Saving tuner results.
+2024-11-29 18:23:53,450 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/GRU/tuner_results_176_284_241129_171205.csv
+2024-11-29 18:23:53,450 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 18:23:53,450 - INFO - Configuring TensorFlow device.
+2024-11-29 18:23:53,451 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:23:53,451 - INFO - Epochs: 50
+2024-11-29 18:23:53,451 - INFO - Batch Size: 32
+2024-11-29 18:23:53,451 - INFO - Patience: 8
+2024-11-29 18:23:53,451 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:23:53,451 - INFO - Using GRU architecture.
+2024-11-29 18:23:53,451 - INFO - Embedding Dimension: 32
+2024-11-29 18:23:53,451 - INFO - RNN Units: 96
+2024-11-29 18:23:53,451 - INFO - Dropout Rate: 0.2
+2024-11-29 18:23:53,451 - INFO - Max Features: 5000
+2024-11-29 18:23:53,458 - INFO - Model compiled.
+2024-11-29 18:23:53,458 - INFO - Model training started.
+2024-11-29 18:24:26,456 - INFO - Model training completed.
+2024-11-29 18:24:26,456 - INFO - Saving model.
+2024-11-29 18:24:26,476 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/GRU.
+2024-11-29 18:24:26,502 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/GRU/history_176_284_241129_171205.html.
+2024-11-29 18:24:26,502 - INFO - Saving history.
+2024-11-29 18:24:26,502 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/GRU/history_176_284_241129_171205.json.
+2024-11-29 18:24:26,502 - INFO - Model evaluation on a test set.
+2024-11-29 18:24:28,380 - INFO - Final loss and accuracy:
+2024-11-29 18:24:28,381 - INFO - Train Loss: 0.0360, Train Accuracy: 0.9907
+2024-11-29 18:24:28,381 - INFO - Val Loss: 0.9624, Val Accuracy: 0.7947
+2024-11-29 18:24:28,381 - INFO - Test Loss: 0.4461, Test Accuracy: 0.8086
+2024-11-29 18:24:28,381 - INFO - Experiment completed for GRU with length bucket 176-284. Time taken: 603.45 seconds.
+2024-11-29 18:24:28,381 - INFO - Starting experiment for length bucket 285-597 with GRU.
+2024-11-29 18:24:28,381 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:24:28,381 - INFO - Configuring TensorFlow device.
+2024-11-29 18:24:28,381 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:24:28,381 - INFO - Tuner Max Epochs: 15
+2024-11-29 18:24:28,381 - INFO - Hyperband Factor: 3
+2024-11-29 18:24:28,381 - INFO - Hyperband Iterations: 1
+2024-11-29 18:24:28,381 - INFO - Batch Size: 32
+2024-11-29 18:24:28,381 - INFO - Patience: 8
+2024-11-29 18:24:28,381 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:24:28,388 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:24:28,388 - INFO - Using GRU architecture.
+2024-11-29 18:24:28,388 - INFO - Embedding Dimension: 32
+2024-11-29 18:24:28,388 - INFO - RNN Units: 16
+2024-11-29 18:24:28,388 - INFO - Dropout Rate: 0.1
+2024-11-29 18:24:28,388 - INFO - Max Features: 5000
+2024-11-29 18:24:28,394 - INFO - Model compiled.
+2024-11-29 18:24:28,623 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:24:28,624 - INFO - Using GRU architecture.
+2024-11-29 18:24:28,627 - INFO - Embedding Dimension: 256
+2024-11-29 18:24:28,630 - INFO - RNN Units: 112
+2024-11-29 18:24:28,632 - INFO - Dropout Rate: 0.2
+2024-11-29 18:24:28,635 - INFO - Max Features: 5000
+2024-11-29 18:24:28,652 - INFO - Model compiled.
+2024-11-29 18:24:36,580 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:24:36,583 - INFO - Using GRU architecture.
+2024-11-29 18:24:36,586 - INFO - Embedding Dimension: 32
+2024-11-29 18:24:36,588 - INFO - RNN Units: 128
+2024-11-29 18:24:36,591 - INFO - Dropout Rate: 0.5
+2024-11-29 18:24:36,592 - INFO - Max Features: 5000
+2024-11-29 18:24:36,606 - INFO - Model compiled.
+2024-11-29 18:24:44,879 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:24:44,888 - INFO - Using GRU architecture.
+2024-11-29 18:24:44,891 - INFO - Embedding Dimension: 64
+2024-11-29 18:24:44,893 - INFO - RNN Units: 112
+2024-11-29 18:24:44,895 - INFO - Dropout Rate: 0.2
+2024-11-29 18:24:44,896 - INFO - Max Features: 5000
+2024-11-29 18:24:44,909 - INFO - Model compiled.
+2024-11-29 18:24:50,134 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:24:50,146 - INFO - Using GRU architecture.
+2024-11-29 18:24:50,149 - INFO - Embedding Dimension: 128
+2024-11-29 18:24:50,151 - INFO - RNN Units: 32
+2024-11-29 18:24:50,153 - INFO - Dropout Rate: 0.5
+2024-11-29 18:24:50,154 - INFO - Max Features: 5000
+2024-11-29 18:24:50,182 - INFO - Model compiled.
+2024-11-29 18:24:58,264 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:24:58,273 - INFO - Using GRU architecture.
+2024-11-29 18:24:58,277 - INFO - Embedding Dimension: 64
+2024-11-29 18:24:58,280 - INFO - RNN Units: 112
+2024-11-29 18:24:58,284 - INFO - Dropout Rate: 0.4
+2024-11-29 18:24:58,284 - INFO - Max Features: 5000
+2024-11-29 18:24:58,309 - INFO - Model compiled.
+2024-11-29 18:25:06,358 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:06,372 - INFO - Using GRU architecture.
+2024-11-29 18:25:06,374 - INFO - Embedding Dimension: 256
+2024-11-29 18:25:06,376 - INFO - RNN Units: 64
+2024-11-29 18:25:06,378 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:25:06,380 - INFO - Max Features: 5000
+2024-11-29 18:25:06,394 - INFO - Model compiled.
+2024-11-29 18:25:14,544 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:14,559 - INFO - Using GRU architecture.
+2024-11-29 18:25:14,562 - INFO - Embedding Dimension: 256
+2024-11-29 18:25:14,564 - INFO - RNN Units: 80
+2024-11-29 18:25:14,566 - INFO - Dropout Rate: 0.4
+2024-11-29 18:25:14,567 - INFO - Max Features: 5000
+2024-11-29 18:25:14,581 - INFO - Model compiled.
+2024-11-29 18:25:20,413 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:20,421 - INFO - Using GRU architecture.
+2024-11-29 18:25:20,424 - INFO - Embedding Dimension: 256
+2024-11-29 18:25:20,426 - INFO - RNN Units: 48
+2024-11-29 18:25:20,429 - INFO - Dropout Rate: 0.1
+2024-11-29 18:25:20,430 - INFO - Max Features: 5000
+2024-11-29 18:25:20,443 - INFO - Model compiled.
+2024-11-29 18:25:28,545 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:28,560 - INFO - Using GRU architecture.
+2024-11-29 18:25:28,563 - INFO - Embedding Dimension: 128
+2024-11-29 18:25:28,565 - INFO - RNN Units: 128
+2024-11-29 18:25:28,567 - INFO - Dropout Rate: 0.5
+2024-11-29 18:25:28,569 - INFO - Max Features: 5000
+2024-11-29 18:25:28,586 - INFO - Model compiled.
+2024-11-29 18:25:36,694 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:36,697 - INFO - Using GRU architecture.
+2024-11-29 18:25:36,697 - INFO - Embedding Dimension: 256
+2024-11-29 18:25:36,700 - INFO - RNN Units: 32
+2024-11-29 18:25:36,703 - INFO - Dropout Rate: 0.5
+2024-11-29 18:25:36,705 - INFO - Max Features: 5000
+2024-11-29 18:25:36,723 - INFO - Model compiled.
+2024-11-29 18:25:44,958 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:44,971 - INFO - Using GRU architecture.
+2024-11-29 18:25:44,974 - INFO - Embedding Dimension: 32
+2024-11-29 18:25:44,976 - INFO - RNN Units: 128
+2024-11-29 18:25:44,978 - INFO - Dropout Rate: 0.1
+2024-11-29 18:25:44,980 - INFO - Max Features: 5000
+2024-11-29 18:25:44,994 - INFO - Model compiled.
+2024-11-29 18:25:50,693 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:50,702 - INFO - Using GRU architecture.
+2024-11-29 18:25:50,704 - INFO - Embedding Dimension: 256
+2024-11-29 18:25:50,706 - INFO - RNN Units: 64
+2024-11-29 18:25:50,707 - INFO - Dropout Rate: 0.1
+2024-11-29 18:25:50,708 - INFO - Max Features: 5000
+2024-11-29 18:25:50,726 - INFO - Model compiled.
+2024-11-29 18:25:59,016 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:25:59,031 - INFO - Using GRU architecture.
+2024-11-29 18:25:59,033 - INFO - Embedding Dimension: 32
+2024-11-29 18:25:59,035 - INFO - RNN Units: 128
+2024-11-29 18:25:59,037 - INFO - Dropout Rate: 0.1
+2024-11-29 18:25:59,039 - INFO - Max Features: 5000
+2024-11-29 18:25:59,053 - INFO - Model compiled.
+2024-11-29 18:26:10,026 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:26:10,039 - INFO - Using GRU architecture.
+2024-11-29 18:26:10,041 - INFO - Embedding Dimension: 64
+2024-11-29 18:26:10,043 - INFO - RNN Units: 112
+2024-11-29 18:26:10,045 - INFO - Dropout Rate: 0.4
+2024-11-29 18:26:10,046 - INFO - Max Features: 5000
+2024-11-29 18:26:10,061 - INFO - Model compiled.
+2024-11-29 18:26:18,172 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:26:18,188 - INFO - Using GRU architecture.
+2024-11-29 18:26:18,190 - INFO - Embedding Dimension: 256
+2024-11-29 18:26:18,192 - INFO - RNN Units: 112
+2024-11-29 18:26:18,194 - INFO - Dropout Rate: 0.2
+2024-11-29 18:26:18,194 - INFO - Max Features: 5000
+2024-11-29 18:26:18,211 - INFO - Model compiled.
+2024-11-29 18:26:29,669 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:26:29,685 - INFO - Using GRU architecture.
+2024-11-29 18:26:29,687 - INFO - Embedding Dimension: 128
+2024-11-29 18:26:29,689 - INFO - RNN Units: 32
+2024-11-29 18:26:29,690 - INFO - Dropout Rate: 0.5
+2024-11-29 18:26:29,690 - INFO - Max Features: 5000
+2024-11-29 18:26:29,705 - INFO - Model compiled.
+2024-11-29 18:26:41,227 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:26:41,242 - INFO - Using GRU architecture.
+2024-11-29 18:26:41,244 - INFO - Embedding Dimension: 32
+2024-11-29 18:26:41,246 - INFO - RNN Units: 128
+2024-11-29 18:26:41,248 - INFO - Dropout Rate: 0.1
+2024-11-29 18:26:41,248 - INFO - Max Features: 5000
+2024-11-29 18:26:41,263 - INFO - Model compiled.
+2024-11-29 18:27:09,752 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:27:09,753 - INFO - Using GRU architecture.
+2024-11-29 18:27:09,756 - INFO - Embedding Dimension: 128
+2024-11-29 18:27:09,759 - INFO - RNN Units: 32
+2024-11-29 18:27:09,762 - INFO - Dropout Rate: 0.5
+2024-11-29 18:27:09,765 - INFO - Max Features: 5000
+2024-11-29 18:27:09,781 - INFO - Model compiled.
+2024-11-29 18:27:39,200 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:27:39,215 - INFO - Using GRU architecture.
+2024-11-29 18:27:39,217 - INFO - Embedding Dimension: 256
+2024-11-29 18:27:39,219 - INFO - RNN Units: 112
+2024-11-29 18:27:39,221 - INFO - Dropout Rate: 0.4
+2024-11-29 18:27:39,222 - INFO - Max Features: 5000
+2024-11-29 18:27:39,240 - INFO - Model compiled.
+2024-11-29 18:27:55,203 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:27:55,219 - INFO - Using GRU architecture.
+2024-11-29 18:27:55,221 - INFO - Embedding Dimension: 128
+2024-11-29 18:27:55,223 - INFO - RNN Units: 64
+2024-11-29 18:27:55,225 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:27:55,227 - INFO - Max Features: 5000
+2024-11-29 18:27:55,240 - INFO - Model compiled.
+2024-11-29 18:28:10,708 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:28:10,723 - INFO - Using GRU architecture.
+2024-11-29 18:28:10,725 - INFO - Embedding Dimension: 64
+2024-11-29 18:28:10,727 - INFO - RNN Units: 48
+2024-11-29 18:28:10,729 - INFO - Dropout Rate: 0.5
+2024-11-29 18:28:10,731 - INFO - Max Features: 5000
+2024-11-29 18:28:10,746 - INFO - Model compiled.
+2024-11-29 18:28:25,777 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:28:25,792 - INFO - Using GRU architecture.
+2024-11-29 18:28:25,794 - INFO - Embedding Dimension: 128
+2024-11-29 18:28:25,796 - INFO - RNN Units: 32
+2024-11-29 18:28:25,798 - INFO - Dropout Rate: 0.4
+2024-11-29 18:28:25,800 - INFO - Max Features: 5000
+2024-11-29 18:28:25,814 - INFO - Model compiled.
+2024-11-29 18:28:43,908 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:28:43,924 - INFO - Using GRU architecture.
+2024-11-29 18:28:43,926 - INFO - Embedding Dimension: 128
+2024-11-29 18:28:43,929 - INFO - RNN Units: 16
+2024-11-29 18:28:43,932 - INFO - Dropout Rate: 0.2
+2024-11-29 18:28:43,935 - INFO - Max Features: 5000
+2024-11-29 18:28:43,955 - INFO - Model compiled.
+2024-11-29 18:29:00,062 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:29:00,072 - INFO - Using GRU architecture.
+2024-11-29 18:29:00,074 - INFO - Embedding Dimension: 64
+2024-11-29 18:29:00,077 - INFO - RNN Units: 64
+2024-11-29 18:29:00,079 - INFO - Dropout Rate: 0.1
+2024-11-29 18:29:00,079 - INFO - Max Features: 5000
+2024-11-29 18:29:00,095 - INFO - Model compiled.
+2024-11-29 18:29:15,045 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:29:15,059 - INFO - Using GRU architecture.
+2024-11-29 18:29:15,060 - INFO - Embedding Dimension: 64
+2024-11-29 18:29:15,063 - INFO - RNN Units: 64
+2024-11-29 18:29:15,065 - INFO - Dropout Rate: 0.1
+2024-11-29 18:29:15,068 - INFO - Max Features: 5000
+2024-11-29 18:29:15,084 - INFO - Model compiled.
+2024-11-29 18:29:45,783 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:29:45,797 - INFO - Using GRU architecture.
+2024-11-29 18:29:45,797 - INFO - Embedding Dimension: 128
+2024-11-29 18:29:45,799 - INFO - RNN Units: 64
+2024-11-29 18:29:45,801 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:29:45,803 - INFO - Max Features: 5000
+2024-11-29 18:29:45,819 - INFO - Model compiled.
+2024-11-29 18:30:13,851 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:30:13,866 - INFO - Using GRU architecture.
+2024-11-29 18:30:13,868 - INFO - Embedding Dimension: 32
+2024-11-29 18:30:13,870 - INFO - RNN Units: 80
+2024-11-29 18:30:13,871 - INFO - Dropout Rate: 0.1
+2024-11-29 18:30:13,872 - INFO - Max Features: 5000
+2024-11-29 18:30:13,886 - INFO - Model compiled.
+2024-11-29 18:30:44,836 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:30:44,839 - INFO - Using GRU architecture.
+2024-11-29 18:30:44,842 - INFO - Embedding Dimension: 32
+2024-11-29 18:30:44,844 - INFO - RNN Units: 16
+2024-11-29 18:30:44,847 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:30:44,849 - INFO - Max Features: 5000
+2024-11-29 18:30:44,864 - INFO - Model compiled.
+2024-11-29 18:31:20,579 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:31:20,593 - INFO - Using GRU architecture.
+2024-11-29 18:31:20,595 - INFO - Embedding Dimension: 128
+2024-11-29 18:31:20,597 - INFO - RNN Units: 128
+2024-11-29 18:31:20,599 - INFO - Dropout Rate: 0.4
+2024-11-29 18:31:20,602 - INFO - Max Features: 5000
+2024-11-29 18:31:20,617 - INFO - Model compiled.
+2024-11-29 18:31:52,090 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:31:52,090 - INFO - Using GRU architecture.
+2024-11-29 18:31:52,093 - INFO - Embedding Dimension: 64
+2024-11-29 18:31:52,096 - INFO - RNN Units: 128
+2024-11-29 18:31:52,099 - INFO - Dropout Rate: 0.5
+2024-11-29 18:31:52,102 - INFO - Max Features: 5000
+2024-11-29 18:31:52,119 - INFO - Model compiled.
+2024-11-29 18:32:25,619 - INFO - Hyperparameter tuning completed.
+2024-11-29 18:32:25,619 - INFO - Best hyperparameters found: {'embedding_dim': 32, 'rnn_units': 128, 'dropout_rate': 0.1, 'tuner/epochs': 15, 'tuner/initial_epoch': 5, 'tuner/bracket': 2, 'tuner/round': 2, 'tuner/trial_id': '0012'}
+2024-11-29 18:32:25,619 - INFO - Saving tuner results.
+2024-11-29 18:32:25,620 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/GRU/tuner_results_285_597_241129_171205.csv
+2024-11-29 18:32:25,620 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 18:32:25,620 - INFO - Configuring TensorFlow device.
+2024-11-29 18:32:25,620 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:32:25,620 - INFO - Epochs: 50
+2024-11-29 18:32:25,620 - INFO - Batch Size: 32
+2024-11-29 18:32:25,621 - INFO - Patience: 8
+2024-11-29 18:32:25,621 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:32:25,621 - INFO - Using GRU architecture.
+2024-11-29 18:32:25,621 - INFO - Embedding Dimension: 32
+2024-11-29 18:32:25,621 - INFO - RNN Units: 128
+2024-11-29 18:32:25,621 - INFO - Dropout Rate: 0.1
+2024-11-29 18:32:25,621 - INFO - Max Features: 5000
+2024-11-29 18:32:25,628 - INFO - Model compiled.
+2024-11-29 18:32:25,628 - INFO - Model training started.
+2024-11-29 18:32:53,964 - INFO - Model training completed.
+2024-11-29 18:32:53,964 - INFO - Saving model.
+2024-11-29 18:32:53,983 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/GRU.
+2024-11-29 18:32:54,008 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/GRU/history_285_597_241129_171205.html.
+2024-11-29 18:32:54,008 - INFO - Saving history.
+2024-11-29 18:32:54,008 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/GRU/history_285_597_241129_171205.json.
+2024-11-29 18:32:54,008 - INFO - Model evaluation on a test set.
+2024-11-29 18:32:55,562 - INFO - Final loss and accuracy:
+2024-11-29 18:32:55,563 - INFO - Train Loss: 0.0215, Train Accuracy: 0.9943
+2024-11-29 18:32:55,563 - INFO - Val Loss: 0.9464, Val Accuracy: 0.7706
+2024-11-29 18:32:55,563 - INFO - Test Loss: 0.4856, Test Accuracy: 0.7739
+2024-11-29 18:32:55,563 - INFO - Experiment completed for GRU with length bucket 285-597. Time taken: 507.18 seconds.
+2024-11-29 18:32:55,563 - INFO - Starting experiment for length bucket 598-2494 with GRU.
+2024-11-29 18:32:55,563 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:32:55,563 - INFO - Configuring TensorFlow device.
+2024-11-29 18:32:55,563 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:32:55,563 - INFO - Tuner Max Epochs: 15
+2024-11-29 18:32:55,563 - INFO - Hyperband Factor: 3
+2024-11-29 18:32:55,563 - INFO - Hyperband Iterations: 1
+2024-11-29 18:32:55,563 - INFO - Batch Size: 32
+2024-11-29 18:32:55,563 - INFO - Patience: 8
+2024-11-29 18:32:55,563 - INFO - Starting hyperparameter tuning.
+2024-11-29 18:32:55,564 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:32:55,565 - INFO - Using GRU architecture.
+2024-11-29 18:32:55,565 - INFO - Embedding Dimension: 32
+2024-11-29 18:32:55,565 - INFO - RNN Units: 16
+2024-11-29 18:32:55,565 - INFO - Dropout Rate: 0.1
+2024-11-29 18:32:55,565 - INFO - Max Features: 5000
+2024-11-29 18:32:55,571 - INFO - Model compiled.
+2024-11-29 18:32:55,804 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:32:55,805 - INFO - Using GRU architecture.
+2024-11-29 18:32:55,808 - INFO - Embedding Dimension: 64
+2024-11-29 18:32:55,810 - INFO - RNN Units: 48
+2024-11-29 18:32:55,813 - INFO - Dropout Rate: 0.4
+2024-11-29 18:32:55,815 - INFO - Max Features: 5000
+2024-11-29 18:32:55,831 - INFO - Model compiled.
+2024-11-29 18:32:58,943 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:32:58,945 - INFO - Using GRU architecture.
+2024-11-29 18:32:58,948 - INFO - Embedding Dimension: 32
+2024-11-29 18:32:58,951 - INFO - RNN Units: 48
+2024-11-29 18:32:58,954 - INFO - Dropout Rate: 0.5
+2024-11-29 18:32:58,956 - INFO - Max Features: 5000
+2024-11-29 18:32:58,974 - INFO - Model compiled.
+2024-11-29 18:33:02,078 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:02,082 - INFO - Using GRU architecture.
+2024-11-29 18:33:02,085 - INFO - Embedding Dimension: 256
+2024-11-29 18:33:02,087 - INFO - RNN Units: 112
+2024-11-29 18:33:02,090 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:33:02,090 - INFO - Max Features: 5000
+2024-11-29 18:33:02,106 - INFO - Model compiled.
+2024-11-29 18:33:05,448 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:05,450 - INFO - Using GRU architecture.
+2024-11-29 18:33:05,453 - INFO - Embedding Dimension: 32
+2024-11-29 18:33:05,457 - INFO - RNN Units: 16
+2024-11-29 18:33:05,460 - INFO - Dropout Rate: 0.4
+2024-11-29 18:33:05,462 - INFO - Max Features: 5000
+2024-11-29 18:33:05,478 - INFO - Model compiled.
+2024-11-29 18:33:08,640 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:08,642 - INFO - Using GRU architecture.
+2024-11-29 18:33:08,645 - INFO - Embedding Dimension: 256
+2024-11-29 18:33:08,648 - INFO - RNN Units: 32
+2024-11-29 18:33:08,650 - INFO - Dropout Rate: 0.5
+2024-11-29 18:33:08,652 - INFO - Max Features: 5000
+2024-11-29 18:33:08,668 - INFO - Model compiled.
+2024-11-29 18:33:09,533 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:09,534 - INFO - Using GRU architecture.
+2024-11-29 18:33:09,537 - INFO - Embedding Dimension: 128
+2024-11-29 18:33:09,540 - INFO - RNN Units: 32
+2024-11-29 18:33:09,543 - INFO - Dropout Rate: 0.2
+2024-11-29 18:33:09,546 - INFO - Max Features: 5000
+2024-11-29 18:33:09,558 - INFO - Model compiled.
+2024-11-29 18:33:12,693 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:12,695 - INFO - Using GRU architecture.
+2024-11-29 18:33:12,698 - INFO - Embedding Dimension: 64
+2024-11-29 18:33:12,701 - INFO - RNN Units: 48
+2024-11-29 18:33:12,703 - INFO - Dropout Rate: 0.1
+2024-11-29 18:33:12,705 - INFO - Max Features: 5000
+2024-11-29 18:33:12,718 - INFO - Model compiled.
+2024-11-29 18:33:15,811 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:15,814 - INFO - Using GRU architecture.
+2024-11-29 18:33:15,817 - INFO - Embedding Dimension: 128
+2024-11-29 18:33:15,819 - INFO - RNN Units: 96
+2024-11-29 18:33:15,822 - INFO - Dropout Rate: 0.2
+2024-11-29 18:33:15,824 - INFO - Max Features: 5000
+2024-11-29 18:33:15,842 - INFO - Model compiled.
+2024-11-29 18:33:18,982 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:18,992 - INFO - Using GRU architecture.
+2024-11-29 18:33:18,995 - INFO - Embedding Dimension: 128
+2024-11-29 18:33:18,997 - INFO - RNN Units: 96
+2024-11-29 18:33:18,999 - INFO - Dropout Rate: 0.5
+2024-11-29 18:33:19,000 - INFO - Max Features: 5000
+2024-11-29 18:33:19,013 - INFO - Model compiled.
+2024-11-29 18:33:22,260 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:22,266 - INFO - Using GRU architecture.
+2024-11-29 18:33:22,269 - INFO - Embedding Dimension: 256
+2024-11-29 18:33:22,272 - INFO - RNN Units: 16
+2024-11-29 18:33:22,275 - INFO - Dropout Rate: 0.5
+2024-11-29 18:33:22,276 - INFO - Max Features: 5000
+2024-11-29 18:33:22,288 - INFO - Model compiled.
+2024-11-29 18:33:25,592 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:25,602 - INFO - Using GRU architecture.
+2024-11-29 18:33:25,605 - INFO - Embedding Dimension: 64
+2024-11-29 18:33:25,607 - INFO - RNN Units: 96
+2024-11-29 18:33:25,609 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:33:25,610 - INFO - Max Features: 5000
+2024-11-29 18:33:25,623 - INFO - Model compiled.
+2024-11-29 18:33:28,705 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:28,713 - INFO - Using GRU architecture.
+2024-11-29 18:33:28,716 - INFO - Embedding Dimension: 64
+2024-11-29 18:33:28,718 - INFO - RNN Units: 32
+2024-11-29 18:33:28,720 - INFO - Dropout Rate: 0.2
+2024-11-29 18:33:28,721 - INFO - Max Features: 5000
+2024-11-29 18:33:28,737 - INFO - Model compiled.
+2024-11-29 18:33:31,902 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:31,903 - INFO - Using GRU architecture.
+2024-11-29 18:33:31,906 - INFO - Embedding Dimension: 256
+2024-11-29 18:33:31,909 - INFO - RNN Units: 112
+2024-11-29 18:33:31,912 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:33:31,914 - INFO - Max Features: 5000
+2024-11-29 18:33:31,929 - INFO - Model compiled.
+2024-11-29 18:33:35,993 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:35,995 - INFO - Using GRU architecture.
+2024-11-29 18:33:35,998 - INFO - Embedding Dimension: 128
+2024-11-29 18:33:36,001 - INFO - RNN Units: 96
+2024-11-29 18:33:36,003 - INFO - Dropout Rate: 0.2
+2024-11-29 18:33:36,005 - INFO - Max Features: 5000
+2024-11-29 18:33:36,019 - INFO - Model compiled.
+2024-11-29 18:33:40,032 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:40,047 - INFO - Using GRU architecture.
+2024-11-29 18:33:40,049 - INFO - Embedding Dimension: 64
+2024-11-29 18:33:40,052 - INFO - RNN Units: 96
+2024-11-29 18:33:40,054 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:33:40,056 - INFO - Max Features: 5000
+2024-11-29 18:33:40,071 - INFO - Model compiled.
+2024-11-29 18:33:41,498 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:41,514 - INFO - Using GRU architecture.
+2024-11-29 18:33:41,516 - INFO - Embedding Dimension: 256
+2024-11-29 18:33:41,518 - INFO - RNN Units: 32
+2024-11-29 18:33:41,520 - INFO - Dropout Rate: 0.5
+2024-11-29 18:33:41,521 - INFO - Max Features: 5000
+2024-11-29 18:33:41,536 - INFO - Model compiled.
+2024-11-29 18:33:45,620 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:45,634 - INFO - Using GRU architecture.
+2024-11-29 18:33:45,637 - INFO - Embedding Dimension: 64
+2024-11-29 18:33:45,639 - INFO - RNN Units: 96
+2024-11-29 18:33:45,641 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:33:45,642 - INFO - Max Features: 5000
+2024-11-29 18:33:45,657 - INFO - Model compiled.
+2024-11-29 18:33:55,079 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:33:55,095 - INFO - Using GRU architecture.
+2024-11-29 18:33:55,097 - INFO - Embedding Dimension: 256
+2024-11-29 18:33:55,100 - INFO - RNN Units: 112
+2024-11-29 18:33:55,102 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:33:55,104 - INFO - Max Features: 5000
+2024-11-29 18:33:55,123 - INFO - Model compiled.
+2024-11-29 18:34:04,685 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:04,696 - INFO - Using GRU architecture.
+2024-11-29 18:34:04,699 - INFO - Embedding Dimension: 256
+2024-11-29 18:34:04,701 - INFO - RNN Units: 48
+2024-11-29 18:34:04,702 - INFO - Dropout Rate: 0.5
+2024-11-29 18:34:04,705 - INFO - Max Features: 5000
+2024-11-29 18:34:04,721 - INFO - Model compiled.
+2024-11-29 18:34:10,800 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:10,804 - INFO - Using GRU architecture.
+2024-11-29 18:34:10,807 - INFO - Embedding Dimension: 64
+2024-11-29 18:34:10,810 - INFO - RNN Units: 128
+2024-11-29 18:34:10,813 - INFO - Dropout Rate: 0.4
+2024-11-29 18:34:10,814 - INFO - Max Features: 5000
+2024-11-29 18:34:10,831 - INFO - Model compiled.
+2024-11-29 18:34:14,177 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:14,180 - INFO - Using GRU architecture.
+2024-11-29 18:34:14,183 - INFO - Embedding Dimension: 128
+2024-11-29 18:34:14,186 - INFO - RNN Units: 128
+2024-11-29 18:34:14,189 - INFO - Dropout Rate: 0.5
+2024-11-29 18:34:14,190 - INFO - Max Features: 5000
+2024-11-29 18:34:14,205 - INFO - Model compiled.
+2024-11-29 18:34:20,146 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:20,147 - INFO - Using GRU architecture.
+2024-11-29 18:34:20,147 - INFO - Embedding Dimension: 256
+2024-11-29 18:34:20,150 - INFO - RNN Units: 128
+2024-11-29 18:34:20,153 - INFO - Dropout Rate: 0.4
+2024-11-29 18:34:20,156 - INFO - Max Features: 5000
+2024-11-29 18:34:20,177 - INFO - Model compiled.
+2024-11-29 18:34:26,407 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:26,410 - INFO - Using GRU architecture.
+2024-11-29 18:34:26,412 - INFO - Embedding Dimension: 128
+2024-11-29 18:34:26,415 - INFO - RNN Units: 16
+2024-11-29 18:34:26,418 - INFO - Dropout Rate: 0.4
+2024-11-29 18:34:26,420 - INFO - Max Features: 5000
+2024-11-29 18:34:26,433 - INFO - Model compiled.
+2024-11-29 18:34:32,257 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:32,258 - INFO - Using GRU architecture.
+2024-11-29 18:34:32,260 - INFO - Embedding Dimension: 256
+2024-11-29 18:34:32,263 - INFO - RNN Units: 64
+2024-11-29 18:34:32,265 - INFO - Dropout Rate: 0.4
+2024-11-29 18:34:32,268 - INFO - Max Features: 5000
+2024-11-29 18:34:32,284 - INFO - Model compiled.
+2024-11-29 18:34:38,165 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:38,167 - INFO - Using GRU architecture.
+2024-11-29 18:34:38,170 - INFO - Embedding Dimension: 128
+2024-11-29 18:34:38,173 - INFO - RNN Units: 16
+2024-11-29 18:34:38,175 - INFO - Dropout Rate: 0.4
+2024-11-29 18:34:38,177 - INFO - Max Features: 5000
+2024-11-29 18:34:38,196 - INFO - Model compiled.
+2024-11-29 18:34:45,412 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:45,413 - INFO - Using GRU architecture.
+2024-11-29 18:34:45,416 - INFO - Embedding Dimension: 128
+2024-11-29 18:34:45,419 - INFO - RNN Units: 128
+2024-11-29 18:34:45,421 - INFO - Dropout Rate: 0.5
+2024-11-29 18:34:45,424 - INFO - Max Features: 5000
+2024-11-29 18:34:45,438 - INFO - Model compiled.
+2024-11-29 18:34:54,938 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:34:54,939 - INFO - Using GRU architecture.
+2024-11-29 18:34:54,940 - INFO - Embedding Dimension: 32
+2024-11-29 18:34:54,943 - INFO - RNN Units: 128
+2024-11-29 18:34:54,945 - INFO - Dropout Rate: 0.4
+2024-11-29 18:34:54,948 - INFO - Max Features: 5000
+2024-11-29 18:34:54,964 - INFO - Model compiled.
+2024-11-29 18:35:07,278 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:35:07,279 - INFO - Using GRU architecture.
+2024-11-29 18:35:07,282 - INFO - Embedding Dimension: 128
+2024-11-29 18:35:07,284 - INFO - RNN Units: 32
+2024-11-29 18:35:07,287 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:35:07,289 - INFO - Max Features: 5000
+2024-11-29 18:35:07,306 - INFO - Model compiled.
+2024-11-29 18:35:18,326 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:35:18,326 - INFO - Using GRU architecture.
+2024-11-29 18:35:18,330 - INFO - Embedding Dimension: 128
+2024-11-29 18:35:18,333 - INFO - RNN Units: 16
+2024-11-29 18:35:18,335 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:35:18,338 - INFO - Max Features: 5000
+2024-11-29 18:35:18,353 - INFO - Model compiled.
+2024-11-29 18:35:26,052 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:35:26,054 - INFO - Using GRU architecture.
+2024-11-29 18:35:26,057 - INFO - Embedding Dimension: 128
+2024-11-29 18:35:26,060 - INFO - RNN Units: 48
+2024-11-29 18:35:26,063 - INFO - Dropout Rate: 0.5
+2024-11-29 18:35:26,064 - INFO - Max Features: 5000
+2024-11-29 18:35:26,084 - INFO - Model compiled.
+2024-11-29 18:35:37,555 - INFO - Hyperparameter tuning completed.
+2024-11-29 18:35:37,555 - INFO - Best hyperparameters found: {'embedding_dim': 64, 'rnn_units': 96, 'dropout_rate': 0.30000000000000004, 'tuner/epochs': 5, 'tuner/initial_epoch': 2, 'tuner/bracket': 2, 'tuner/round': 1, 'tuner/trial_id': '0010'}
+2024-11-29 18:35:37,555 - INFO - Saving tuner results.
+2024-11-29 18:35:37,556 - INFO - Tuner results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/tuner_results/GRU/tuner_results_598_2494_241129_171205.csv
+2024-11-29 18:35:37,556 - INFO - Retraining model with the best hyperparameters.
+2024-11-29 18:35:37,556 - INFO - Configuring TensorFlow device.
+2024-11-29 18:35:37,556 - INFO - GPUs detected and configured: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-11-29 18:35:37,556 - INFO - Epochs: 50
+2024-11-29 18:35:37,556 - INFO - Batch Size: 32
+2024-11-29 18:35:37,556 - INFO - Patience: 8
+2024-11-29 18:35:37,556 - INFO - Building model for hyperparameter tuning.
+2024-11-29 18:35:37,556 - INFO - Using GRU architecture.
+2024-11-29 18:35:37,556 - INFO - Embedding Dimension: 64
+2024-11-29 18:35:37,556 - INFO - RNN Units: 96
+2024-11-29 18:35:37,556 - INFO - Dropout Rate: 0.30000000000000004
+2024-11-29 18:35:37,556 - INFO - Max Features: 5000
+2024-11-29 18:35:37,563 - INFO - Model compiled.
+2024-11-29 18:35:37,563 - INFO - Model training started.
+2024-11-29 18:35:48,254 - INFO - Model training completed.
+2024-11-29 18:35:48,254 - INFO - Saving model.
+2024-11-29 18:35:48,277 - INFO - Model saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/model/GRU.
+2024-11-29 18:35:48,300 - INFO - History plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/plots/GRU/history_598_2494_241129_171205.html.
+2024-11-29 18:35:48,300 - INFO - Saving history.
+2024-11-29 18:35:48,300 - INFO - History saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/history/GRU/history_598_2494_241129_171205.json.
+2024-11-29 18:35:48,300 - INFO - Model evaluation on a test set.
+2024-11-29 18:35:48,819 - INFO - Final loss and accuracy:
+2024-11-29 18:35:48,819 - INFO - Train Loss: 0.0020, Train Accuracy: 1.0000
+2024-11-29 18:35:48,819 - INFO - Val Loss: 1.4974, Val Accuracy: 0.6472
+2024-11-29 18:35:48,819 - INFO - Test Loss: 0.6332, Test Accuracy: 0.6321
+2024-11-29 18:35:48,819 - INFO - Experiment completed for GRU with length bucket 598-2494. Time taken: 173.26 seconds.
+2024-11-29 18:35:48,819 - INFO - All experiments completed. Total time: 5022.90 seconds.
+2024-11-29 18:35:48,819 - INFO - Saving results.
+2024-11-29 18:35:48,866 - INFO - Results:    architecture  ...                               best_hyperparameters
+0    VanillaRNN  ...  {'embedding_dim': 64, 'rnn_units': 48, 'dropou...
+1    VanillaRNN  ...  {'embedding_dim': 64, 'rnn_units': 32, 'dropou...
+2    VanillaRNN  ...  {'embedding_dim': 32, 'rnn_units': 112, 'dropo...
+3    VanillaRNN  ...  {'embedding_dim': 64, 'rnn_units': 16, 'dropou...
+4    VanillaRNN  ...  {'embedding_dim': 32, 'rnn_units': 96, 'dropou...
+5          LSTM  ...  {'embedding_dim': 32, 'rnn_units': 96, 'dropou...
+6          LSTM  ...  {'embedding_dim': 128, 'rnn_units': 48, 'dropo...
+7          LSTM  ...  {'embedding_dim': 64, 'rnn_units': 48, 'dropou...
+8          LSTM  ...  {'embedding_dim': 32, 'rnn_units': 80, 'dropou...
+9          LSTM  ...  {'embedding_dim': 32, 'rnn_units': 80, 'dropou...
+10          GRU  ...  {'embedding_dim': 64, 'rnn_units': 80, 'dropou...
+11          GRU  ...  {'embedding_dim': 256, 'rnn_units': 96, 'dropo...
+12          GRU  ...  {'embedding_dim': 32, 'rnn_units': 96, 'dropou...
+13          GRU  ...  {'embedding_dim': 32, 'rnn_units': 128, 'dropo...
+14          GRU  ...  {'embedding_dim': 64, 'rnn_units': 96, 'dropou...
+
+[15 rows x 10 columns]
+2024-11-29 18:35:48,866 - INFO - Saving all results.
+2024-11-29 18:35:48,867 - INFO - Results saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/final_stats/length_bucket_results_241129_171205.csv.
+2024-11-29 18:35:48,867 - INFO - Results saved.
+2024-11-29 18:35:48,867 - INFO - Plotting results.
+2024-11-29 18:35:48,906 - INFO - Toggleable metrics plot saved to /home/anton/projects/data_science/deep_learning/rnn/hands_on_keras/artifacts/final_stats/all_metrics_241129_171205.html.
+2024-11-29 18:35:48,906 - INFO - Results plotted.
+2024-11-29 18:35:48,906 - INFO - Pipeline completed.
