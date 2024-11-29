@@ -23,12 +23,28 @@ logger = setup_logger()
 def main():
     """Main function to automate experiments across length buckets."""
 
-    logger.info("Starting pipeline.")
-    start_time = time.time()
+    try:
+        logger.info("Starting pipeline.")
+        start_time = time.time()
 
-    x_train, y_train, x_test, y_test = load_dataset()
+        x_train, y_train, x_test, y_test = load_dataset()
 
-    length_buckets = compute_length_buckets(x_train, x_test)
+        length_buckets = compute_length_buckets(x_train, x_test)
+
+        preprocessed_data = dict()
+        for min_len, max_len in length_buckets:
+            preprocessed_data[(min_len, max_len)] = preprocess_data(
+                x_train,
+                y_train,
+                x_test,
+                y_test,
+                min_len,
+                max_len,
+                Config.MAX_FEATURES,
+            )
+    except Exception as e:
+        logger.error(f"Data loading and preprocessing failed: {e}")
+        return
 
     results = []
 
@@ -36,7 +52,6 @@ def main():
     for arch in architectures:
         Config.ARCHITECTURE = arch
         for min_len, max_len in length_buckets:
-
             logger.info(f"Starting experiment for length bucket {min_len}-{max_len} with {arch}.")
             Config.MIN_LEN = min_len
             Config.MAX_LEN = max_len
@@ -44,15 +59,9 @@ def main():
             experiment_start_time = time.time()
 
             try:
-                (x_train, y_train), (x_val, y_val), (x_test, y_test) = preprocess_data(
-                    x_train,
-                    y_train,
-                    x_test,
-                    y_test,
-                    Config.MIN_LEN,
-                    Config.MAX_LEN,
-                    Config.MAX_FEATURES,
-                )
+                (x_train, y_train), (x_val, y_val), (x_test, y_test) = preprocessed_data[
+                    (min_len, max_len)
+                ]
 
                 best_hps = tune_hyperparameters(x_train, y_train, x_val, y_val)
 
