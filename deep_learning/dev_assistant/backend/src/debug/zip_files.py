@@ -4,11 +4,20 @@ from pathlib import Path
 
 def zip_files(output_path, files_to_zip):
     """
-    Zips specified files into a single archive.
+    Create a ZIP archive from the specified list of files.
 
     Args:
-        output_path (str): Path to the output ZIP file.
-        files_to_zip (list): List of file paths to include in the ZIP.
+        output_path (str or Path): The path where the ZIP file will be created.
+        files_to_zip (list of str or Path): A list of file paths to include in the ZIP.
+
+    Raises:
+        ValueError: If the `files_to_zip` list is empty.
+        Exception: For any other unexpected error during zipping.
+
+    Notes:
+        - This function resolves all file paths to absolute paths.
+        - Missing files are skipped, and a message is printed for each missing file.
+        - The ZIP file will be created even if some files are missing, as long as at least one valid file is found.
     """
     try:
         if not files_to_zip:
