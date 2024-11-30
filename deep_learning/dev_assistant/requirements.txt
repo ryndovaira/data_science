@@ -1,3 +1,6 @@
+pydantic
 fastapi
 uvicorn
-pydantic
+langchain
+openai
+python-multipart
