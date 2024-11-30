@@ -1,4 +1,3 @@
-import os
 import zipfile
 from pathlib import Path
 
@@ -11,15 +10,21 @@ def zip_files(output_path, files_to_zip):
         output_path (str): Path to the output ZIP file.
         files_to_zip (list): List of file paths to include in the ZIP.
     """
-    with zipfile.ZipFile(output_path, "w") as zipf:
-        for file in files_to_zip:
-            abs_path = Path(file).resolve()
-            if abs_path.exists():
-                zipf.write(abs_path, abs_path.name)
-                print(f"Added: {abs_path}")
-            else:
-                print(f"File not found: {abs_path}")
-    print(f"ZIP created: {output_path}")
+    try:
+        if not files_to_zip:
+            raise ValueError("No files to zip.")
+
+        with zipfile.ZipFile(output_path, "w") as zipf:
+            for file in files_to_zip:
+                abs_path = Path(file).resolve()
+                if abs_path.exists():
+                    zipf.write(abs_path, abs_path.name)
+                    print(f"Added: {abs_path}")
+                else:
+                    print(f"File not found: {abs_path}")
+        print(f"ZIP created: {output_path}")
+    except Exception as e:
+        print(f"Error creating ZIP: {e}")
 
 
 if __name__ == "__main__":
