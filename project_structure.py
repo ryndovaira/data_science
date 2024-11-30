@@ -23,9 +23,16 @@ def generate_tree_structure(directory, prefix=""):
     for index, entry in enumerate(entries):
         entry_path = os.path.join(directory, entry)
         connector = "└── " if index == len(entries) - 1 else "├── "
-        if os.path.isfile(entry_path) and not entry.startswith("."):  # Exclude hidden files
+        if os.path.isfile(entry_path):  # and not entry.startswith("."):  # Exclude hidden files
             tree.append(f"{prefix}{connector}{entry}")
-        elif os.path.isdir(entry_path) and not entry.startswith("."):  # Exclude hidden directories
+        elif (
+            os.path.isdir(entry_path)
+            and not entry.startswith("__pycache__")
+            and not entry.startswith(".git")
+            and not entry.startswith(".idea")
+            and not entry.startswith(".virtual_documents")
+            and not entry.startswith(".ipynb_checkpoints")
+        ):  # and not entry.startswith("."):  # Exclude hidden directories
             tree.append(f"{prefix}{connector}{entry}/")
             tree.extend(
                 generate_tree_structure(
