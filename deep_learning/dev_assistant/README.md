@@ -10,7 +10,6 @@ This project aims to create an IntelliJ-based plugin (compatible with PyCharm, W
 1. [Overview](#overview)
 2. [Project Structure](#project-structure)
 3. [Requirements](#requirements)
-   - [Installation](#installation)
 4. [Usage](#usage)
    - [Plugin Workflow](#plugin-workflow)
    - [Uploading Directories](#uploading-directories)
@@ -38,47 +37,37 @@ This plugin aims to integrate seamlessly into the IntelliJ environment, offering
 
 ## Project Structure
 
-All development for the plugin takes place in the `intellij_ai_assistant/` directory:
+This project is part of a larger repository with multiple components. The relevant structure for this plugin is as follows:
 
 ```
 deep_learning/
-├── intellij_ai_assistant/
-│   ├── README.md             # Plugin-specific documentation
-│   ├── __init__.py           # Initialization file for the plugin
-│   ├── config/               # Configuration files
-│   ├── src/                  # Core plugin source code (Kotlin/Python)
-│   ├── resources/            # Plugin resources (e.g., icons, templates)
-│   └── tests/                # Unit tests for plugin functionality
+├── dev_assistant/
+│   ├── README.md                 # Documentation for this part of the project
+│   ├── __init__.py               # Initialization file
+│   ├── backend/                  # Backend logic (Python, FastAPI)
+│   │   └── __init__.py           # Initialization file for backend
+│   ├── environment.yml           # Conda environment file for Python dependencies
+│   ├── plugin/                   # IntelliJ plugin logic (Kotlin)
+│   └── requirements.txt          # Python dependencies
 ```
 
-Other directories under `deep_learning/` are unrelated to this project.
+> **Note**: Other directories under `deep_learning/` are unrelated to this project.
 
 ---
 
 ## Requirements
 
-Ensure you have the following dependencies and tools installed:
+### Backend
+- Python 3.10+
+- FastAPI
+- LangChain
+- ChatGPT API
+- ASGI Server: Uvicorn
 
-- **Programming Language**: Kotlin (or Python if feasible)
-- **Framework**: LangChain
-- **ChatGPT API**: Enabled for large-context responses
-- **ASGI Server**: Uvicorn for running FastAPI applications
-- IntelliJ IDEA or compatible JetBrains IDEs
-
-### Installation
-
-To set up the project:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/<your-repo>/intellij-plugin.git
-   ```
-
-2. Install backend dependencies:
-   ```bash
-   pip install fastapi uvicorn langchain
-   ```
-
-3. Open the project in IntelliJ IDEA.
+### Frontend (Plugin)
+- IntelliJ IDEA Community Edition (or Professional)
+- Kotlin
+- IntelliJ Platform SDK
 
 ---
 
@@ -101,8 +90,11 @@ To set up the project:
      - Code Quality and Style Analysis.
      - Auto-generation of `README.md` files.
 
-5. **Receive Insights**:
-   - The plugin communicates with a server that uses ChatGPT API to process selected files and deliver insights.
+5. **Send to Backend**:
+   - The plugin sends selected files or compressed directories to the backend API for processing.
+
+6. **Receive Insights**:
+   - The backend communicates results back to the IDE via the plugin.
 
 ### Uploading Directories
 
