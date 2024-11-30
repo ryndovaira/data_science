@@ -13,10 +13,12 @@ This project aims to create an IntelliJ-based plugin (compatible with PyCharm, W
    - [Installation](#installation)
 4. [Usage](#usage)
    - [Plugin Workflow](#plugin-workflow)
+   - [Uploading Directories](#uploading-directories)
 5. [Features](#features)
-6. [Future Work](#future-work)
-7. [Contributing](#contributing)
-8. [About the Author](#about-the-author)
+6. [Best Practices for File Uploads](#best-practices-for-file-uploads)
+7. [Future Work](#future-work)
+8. [Contributing](#contributing)
+9. [About the Author](#about-the-author)
 
 ---
 
@@ -60,6 +62,7 @@ Ensure you have the following dependencies and tools installed:
 - **Programming Language**: Kotlin (or Python if feasible)
 - **Framework**: LangChain
 - **ChatGPT API**: Enabled for large-context responses
+- **ASGI Server**: Uvicorn for running FastAPI applications
 - IntelliJ IDEA or compatible JetBrains IDEs
 
 ### Installation
@@ -70,7 +73,10 @@ To set up the project:
    git clone https://github.com/<your-repo>/intellij-plugin.git
    ```
 
-2. Install dependencies (for Kotlin or Python, as applicable).
+2. Install backend dependencies:
+   ```bash
+   pip install fastapi uvicorn langchain
+   ```
 
 3. Open the project in IntelliJ IDEA.
 
@@ -98,6 +104,23 @@ To set up the project:
 5. **Receive Insights**:
    - The plugin communicates with a server that uses ChatGPT API to process selected files and deliver insights.
 
+### Uploading Directories
+
+For projects with multiple files or directories, compress them into a `.zip` or `.tar` file before uploading.
+
+#### Upload Example (FastAPI Endpoint)
+1. Compress the directory on the client side:
+   ```bash
+   zip -r project.zip /path/to/project
+   ```
+
+2. Send the compressed file to the API:
+   ```bash
+   curl -X POST "http://127.0.0.1:8000/upload-zip/" -F "file=@project.zip"
+   ```
+
+3. The backend extracts and processes the contents.
+
 ---
 
 ## Features
@@ -113,6 +136,25 @@ To set up the project:
 
 - **ChatGPT API Integration**:
   - Provides large-context responses to deliver high-quality insights.
+
+---
+
+## Best Practices for File Uploads
+
+1. **Use Compression for Directories**:
+   - Upload directories as `.zip` or `.tar` archives to preserve structure and reduce network overhead.
+
+2. **Set Reasonable Size Limits**:
+   - Limit upload sizes to avoid overwhelming the server (e.g., 50 MB).
+
+3. **Validate Archive Contents**:
+   - Check for allowed file types and structures before processing.
+
+4. **Handle Errors Gracefully**:
+   - Notify users of issues such as corrupted files or unsupported formats.
+
+5. **Asynchronous Processing**:
+   - Use asynchronous extraction and processing to ensure responsiveness.
 
 ---
 
