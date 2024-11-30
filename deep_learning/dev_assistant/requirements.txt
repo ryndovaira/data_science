@@ -4,3 +4,5 @@ uvicorn
 langchain
 openai
 python-multipart
+python-dotenv
+langchain_community
