@@ -1,13 +1,11 @@
-from openai import OpenAI
-from logging_config import setup_logger
 from pathlib import Path
 import zipfile
+from logging_config import setup_logger
 from config import OPENAI_API_KEY, OPENAI_PROJECT_ID
+from pydantic_models import ErrorResponse
+from openai import OpenAI
 
 logger = setup_logger(__name__)
-
-# Initialize OpenAI client
-client = OpenAI(api_key=OPENAI_API_KEY, project=OPENAI_PROJECT_ID)
 
 # Define assistance options
 ASSISTANCE_OPTIONS = {
@@ -19,79 +17,130 @@ ASSISTANCE_OPTIONS = {
     "suggest_improvements": "Suggest improvements for this code to enhance readability, maintainability, and efficiency.",
 }
 
+# Supported file types for validation
+SUPPORTED_FILE_TYPES = [".zip"]
 
-async def process_and_analyze_file(file, assistance_type=None, save_to_disk=False):
+
+# Dependency injection for OpenAI client
+def get_openai_client():
+    return OpenAI(api_key=OPENAI_API_KEY, project=OPENAI_PROJECT_ID)
+
+
+# Decorator for centralized error handling
+def handle_errors(func):
+    async def wrapper(*args, **kwargs):
+        try:
+            return await func(*args, **kwargs)
+        except ValueError as ve:
+            logger.error(f"Validation Error: {ve}")
+            return ErrorResponse(error=str(ve), success=False).dict()
+        except Exception as e:
+            logger.error(f"Unexpected Error: {e}")
+            return ErrorResponse(
+                error="An unexpected error occurred.", details=str(e), success=False
+            ).dict()
+
+    return wrapper
+
+
+# Function to validate file and assistance type
+async def validate_file(file, assistance_type):
+    if assistance_type not in ASSISTANCE_OPTIONS:
+        raise ValueError(f"Invalid assistance type: {assistance_type}")
+
+    if not any(file.filename.endswith(ext) for ext in SUPPORTED_FILE_TYPES):
+        raise ValueError(
+            f"Unsupported file type. Only the following are supported: {SUPPORTED_FILE_TYPES}"
+        )
+
+    file_content = await file.read()
+    if not file_content:
+        raise ValueError("Uploaded file is empty.")
+
+    return file_content
+
+
+# Function to extract ZIP contents
+async def extract_zip(file):
     try:
-        logger.info(f"Starting analysis for file: {file.filename}")
+        with zipfile.ZipFile(file.file, "r") as zip_ref:
+            file_contents = {
+                file_name: zip_ref.read(file_name).decode("utf-8")
+                for file_name in zip_ref.namelist()
+            }
+            project_structure = "\n".join([f"- {name}" for name in file_contents.keys()])
+            combined_files = "\n\n".join(
+                [f"### {name}\n\n{content}" for name, content in file_contents.items()]
+            )
+        return project_structure, combined_files
+    except Exception as e:
+        raise ValueError(f"Error extracting ZIP file: {e}")
 
-        # Validate assistance type
-        if assistance_type and assistance_type not in ASSISTANCE_OPTIONS:
-            raise ValueError(f"Invalid assistance type: {assistance_type}")
 
-        # Read file content
-        file_content = await file.read()
-        logger.info(f"Read {len(file_content)} bytes from the file.")
+# Function to prepare messages for OpenAI API
+async def prepare_messages(assistance_type, project_structure, combined_files):
+    return [
+        {"role": "system", "content": "You are a helpful assistant for developers."},
+        {
+            "role": "user",
+            "content": (
+                f"Assistance Type: {assistance_type}\n\n"
+                f"Project Structure:\n{project_structure}\n\n"
+                f"Files:\n{combined_files}\n\n"
+                f"{ASSISTANCE_OPTIONS.get(assistance_type, 'No specific assistance requested.')}"
+            ),
+        },
+    ]
 
-        # Optionally save file to disk
-        if save_to_disk:
-            temp_dir = Path(__file__).resolve().parents[2] / "debug"
-            temp_dir.mkdir(exist_ok=True)
-            temp_file_path = temp_dir / file.filename
-            with open(temp_file_path, "wb") as temp_file:
-                temp_file.write(file_content)
-            logger.info(f"File saved to {temp_file_path}")
 
-        # Handle ZIP extraction
-        project_structure = ""
-        combined_files = ""
-        if file.filename.endswith(".zip"):
-            with zipfile.ZipFile(file.file, "r") as zip_ref:
-                file_contents = {
-                    file_name: zip_ref.read(file_name).decode("utf-8")
-                    for file_name in zip_ref.namelist()
-                }
-                project_structure = "\n".join([f"- {name}" for name in file_contents.keys()])
-                combined_files = "\n\n".join(
-                    [f"### {name}\n\n{content}" for name, content in file_contents.items()]
-                )
-            logger.info(f"Extracted project structure:\n{project_structure}")
-
-        # Prepare ChatGPT messages
-        messages = [
-            {"role": "system", "content": "You are a helpful assistant for developers."},
-            {
-                "role": "user",
-                "content": (
-                    f"Assistance Type: {assistance_type}\n\n"
-                    f"Project Structure:\n{project_structure}\n\n"
-                    f"Files:\n{combined_files}\n\n"
-                    f"{ASSISTANCE_OPTIONS.get(assistance_type, 'No specific assistance requested.')}"
-                ),
-            },
-        ]
-
-        # Call OpenAI API
+# Function to call OpenAI API
+async def call_openai_api(client, messages):
+    try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages,
             max_tokens=5,
             temperature=0.7,
         )
-
-        # Parse response
-        result = response.choices[0].message.content.strip()
-        logger.info(f"OpenAI response: {result}")
-
-        return {
-            "filename": file.filename,
-            "analysis": {"summary": result},  # Ensure 'analysis' is a dictionary
-            "success": True,
-        }
-
+        return response.choices[0].message.content.strip()
     except Exception as e:
-        logger.error(f"Error processing file {file.filename}: {e}")
-        return {
-            "error": "An error occurred during processing.",
-            "details": str(e),
-            "success": False,
-        }
+        logger.error(f"OpenAI API Error: {e}")
+        raise ValueError("An error occurred while communicating with the OpenAI API.")
+
+
+# Main function to process and analyze the file
+@handle_errors
+async def process_and_analyze_file(file, assistance_type=None, save_to_disk=False, client=None):
+    logger.info(f"Starting analysis for file: {file.filename}")
+
+    # Use dependency injection for the OpenAI client
+    client = client or get_openai_client()
+
+    # Validate the file and assistance type
+    file_content = await validate_file(file, assistance_type)
+
+    # Optionally save file to disk
+    if save_to_disk:
+        temp_dir = Path(__file__).resolve().parents[2] / "debug"
+        temp_dir.mkdir(exist_ok=True)
+        temp_file_path = temp_dir / file.filename
+        with open(temp_file_path, "wb") as temp_file:
+            temp_file.write(file_content)
+        logger.info(f"File saved to {temp_file_path}")
+
+    # Extract project structure and file contents from ZIP
+    project_structure, combined_files = await extract_zip(file)
+
+    # Prepare messages for the OpenAI API
+    messages = await prepare_messages(assistance_type, project_structure, combined_files)
+
+    # Call the OpenAI API
+    result = await call_openai_api(client, messages)
+
+    logger.info(f"OpenAI response: {result}")
+
+    return {
+        "filename": file.filename,
+        "analysis": {"summary": result},
+        "success": True,
+    }
