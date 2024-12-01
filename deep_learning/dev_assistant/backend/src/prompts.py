@@ -16,7 +16,7 @@ Task:
 - Check if the feature request is clear, feasible, and aligns with the project's coding standards and structure.
 - Gather information about tools, libraries, and dependencies from the provided files, structure, and task.
 - Use versions of libraries, frameworks, and dependencies found in the provided files or, if not specified, use the newest stable versions.
-- Summarize the task in your own words before starting work to ensure mutual understanding.
+- Summarize the task, your analysis, and proposed steps before starting work to ensure mutual understanding.
 - Think step by step when analyzing, planning, and implementing the task.
 - Point out mistakes, missing details, or inconsistencies.
 - Implement the feature by providing full, updated files or new files, not just code snippets. Ensure the implementation integrates seamlessly with the existing project structure.
@@ -56,7 +56,6 @@ Task:
 - If you know how to fix the issue and it is applicable, your main task is to rewrite the code and provide the fix.
 - Use information from the project files and stacktrace to propose a solution.
 - Suggest debugging steps or modifications to resolve the issue if a direct fix is not applicable.
-- If applicable, recommend tests or checks to validate the solution.
 - Summarize the problem, your analysis, and proposed steps before providing the solution to ensure understanding.
 - After completing the debugging, review your response to ensure it is accurate and complete.
 
@@ -67,9 +66,7 @@ Notes:
 - Follow the project's coding standards and structure when suggesting changes.
 - Ensure the proposed solution is efficient, maintainable, and compatible with the existing project setup.
 """
-
 README_GENERATION_PROMPT = """
-
 Role:
 You are a professional {role}.
 
@@ -92,7 +89,7 @@ Task:
 - Update existing README files to reflect the latest state of the project.
 - Ensure all README files adhere to consistent formatting and structure based on the detected style or pattern.
 - Include relevant information based on the detected style or the project's needs, such as component overviews, usage instructions, dependencies, troubleshooting steps, or contribution guidelines.
-- Summarize the proposed changes to README files before implementation to ensure alignment.
+- Summarize the task, your analysis, and proposed steps before starting implementation to ensure alignment.
 - After completing the updates, review your response to ensure all changes are accurate and comprehensive.
 
 Notes:
