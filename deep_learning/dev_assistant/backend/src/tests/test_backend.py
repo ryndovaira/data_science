@@ -1,7 +1,9 @@
-import pytest
-from fastapi.testclient import TestClient
-from main import app
 from pathlib import Path
+import pytest
+import zipfile
+from fastapi.testclient import TestClient
+
+from main import app
 
 client = TestClient(app)
 
@@ -41,3 +43,22 @@ def test_analyze_debug_zip_save_to_disk(debug_zip_file):
     assert json_data["success"] is True, "Response should indicate success"
     assert "analysis" in json_data, "Response JSON should contain 'analysis'"
     assert json_data["filename"] == "debug_files.zip", "Filename should match"
+
+
+@pytest.fixture
+def multi_file_zip(tmp_path):
+    zip_path = tmp_path / "multi_file.zip"
+    with zipfile.ZipFile(zip_path, "w") as zipf:
+        zipf.writestr("main.py", "def main():\n    print('Hello, World!')")
+        zipf.writestr("utils.py", "def util():\n    return True")
+        zipf.writestr("tests/test_backend.py", "def test_backend():\n    assert True")
+    return zip_path
+
+
+def test_analyze_multi_file_zip(multi_file_zip):
+    with open(multi_file_zip, "rb") as f:
+        response = client.post(
+            "/analyze/", files={"file": f}, params={"assistance_type": "code_review"}
+        )
+    assert response.status_code == 200, "Expected status code 200"
+    assert "analysis" in response.json(), "Response JSON should contain 'analysis'"
