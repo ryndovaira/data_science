@@ -46,3 +46,16 @@ OPENAI_TEMPERATURE = get_env_var(
 OPENAI_MAX_TOKENS = get_env_var(
     "OPENAI_MAX_TOKENS", cast=int, error_message="OPENAI_MAX_TOKENS must be a valid integer."
 )
+
+USE_REAL_OPENAI_API = (
+    get_env_var(
+        "USE_REAL_OPENAI_API",
+        cast=lambda x: x.lower() in ["true", "1", "yes"],  # Proper boolean casting
+        required=False,
+        error_message="USE_REAL_OPENAI_API must be a boolean.",
+    )
+    or False
+)
+
+# Dummy response for testing
+DUMMY_RESPONSE = "This is a dummy response for testing purposes."

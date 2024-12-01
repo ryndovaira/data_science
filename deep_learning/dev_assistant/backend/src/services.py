@@ -7,6 +7,8 @@ from config import (
     OPENAI_MODEL,
     OPENAI_TEMPERATURE,
     OPENAI_MAX_TOKENS,
+    USE_REAL_OPENAI_API,
+    DUMMY_RESPONSE,
 )
 from pydantic_models import ErrorResponse
 from openai import OpenAI
@@ -99,19 +101,23 @@ async def prepare_messages(assistance_type, project_structure, combined_files):
     ]
 
 
-# Function to call OpenAI API
+# Function to call OpenAI API or return dummy data
 async def call_openai_api(client, messages):
-    try:
-        response = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=messages,
-            max_tokens=OPENAI_MAX_TOKENS,
-            temperature=OPENAI_TEMPERATURE,
-        )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        logger.error(f"OpenAI API Error: {e}")
-        raise ValueError("An error occurred while communicating with the OpenAI API.")
+    if USE_REAL_OPENAI_API:
+        try:
+            response = client.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=messages,
+                max_tokens=OPENAI_MAX_TOKENS,
+                temperature=OPENAI_TEMPERATURE,
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            logger.error(f"OpenAI API Error: {e}")
+            raise ValueError("An error occurred while communicating with the OpenAI API.")
+    else:
+        logger.info("Using mock data (testing mode) instead of calling the OpenAI API.")
+        return DUMMY_RESPONSE
 
 
 # Main function to process and analyze the file
@@ -130,9 +136,13 @@ async def process_and_analyze_file(file, assistance_type=None, save_to_disk=Fals
         temp_dir = Path(__file__).resolve().parents[2] / "debug"
         temp_dir.mkdir(exist_ok=True)
         temp_file_path = temp_dir / file.filename
-        with open(temp_file_path, "wb") as temp_file:
-            temp_file.write(file_content)
-        logger.info(f"File saved to {temp_file_path}")
+        try:
+            with open(temp_file_path, "wb") as temp_file:
+                temp_file.write(file_content)
+            logger.info(f"File saved to {temp_file_path}")
+        except Exception as e:
+            logger.error(f"Error saving file to disk: {e}")
+            raise
 
     # Extract project structure and file contents from ZIP
     project_structure, combined_files = await extract_zip(file)

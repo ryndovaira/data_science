@@ -2,7 +2,7 @@ from pathlib import Path
 import pytest
 import zipfile
 from fastapi.testclient import TestClient
-
+from config import USE_REAL_OPENAI_API, DUMMY_RESPONSE
 from main import app
 
 client = TestClient(app)
@@ -15,7 +15,9 @@ def debug_zip_file():
     """
     zip_path = Path(__file__).resolve().parents[1] / "debug" / "debug_files.zip"
     if not zip_path.exists():
-        raise FileNotFoundError(f"Debug zip file not found at {zip_path}")
+        raise FileNotFoundError(
+            f"Debug zip file not found at {zip_path}. Please ensure the file exists or create it using `zip_files.py`."
+        )
     return zip_path
 
 
@@ -25,13 +27,20 @@ def test_analyze_debug_zip_in_memory(debug_zip_file):
     """
     with open(debug_zip_file, "rb") as f:
         response = client.post(
-            "/analyze/", files={"file": f}, params={"assistance_type": "code_review"}
+            "/analyze/",
+            files={"file": f},
+            params={"assistance_type": "code_review"},
         )
     assert response.status_code == 200, "Expected status code 200"
     json_data = response.json()
     assert json_data["success"] is True, "Response should indicate success"
     assert "analysis" in json_data, "Response JSON should contain 'analysis'"
     assert json_data["filename"] == "debug_files.zip", "Filename should match"
+
+    if not USE_REAL_OPENAI_API:
+        assert (
+            json_data["analysis"]["summary"] == DUMMY_RESPONSE
+        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
 
 
 def test_analyze_debug_zip_save_to_disk(debug_zip_file):
@@ -49,6 +58,11 @@ def test_analyze_debug_zip_save_to_disk(debug_zip_file):
     assert json_data["success"] is True, "Response should indicate success"
     assert "analysis" in json_data, "Response JSON should contain 'analysis'"
     assert json_data["filename"] == "debug_files.zip", "Filename should match"
+
+    if not USE_REAL_OPENAI_API:
+        assert (
+            json_data["analysis"]["summary"] == DUMMY_RESPONSE
+        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
 
 
 @pytest.fixture
@@ -70,10 +84,17 @@ def test_analyze_multi_file_zip(multi_file_zip):
     """
     with open(multi_file_zip, "rb") as f:
         response = client.post(
-            "/analyze/", files={"file": f}, params={"assistance_type": "code_review"}
+            "/analyze/",
+            files={"file": f},
+            params={"assistance_type": "code_review"},
         )
     assert response.status_code == 200, "Expected status code 200"
     json_data = response.json()
     assert json_data["success"] is True, "Response should indicate success"
     assert "analysis" in json_data, "Response JSON should contain 'analysis'"
     assert json_data["filename"] == "multi_file.zip", "Filename should match"
+
+    if not USE_REAL_OPENAI_API:
+        assert (
+            json_data["analysis"]["summary"] == DUMMY_RESPONSE
+        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
