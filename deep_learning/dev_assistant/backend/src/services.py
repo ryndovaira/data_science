@@ -1,7 +1,13 @@
 from pathlib import Path
 import zipfile
 from logging_config import setup_logger
-from config import OPENAI_API_KEY, OPENAI_PROJECT_ID
+from config import (
+    OPENAI_API_KEY,
+    OPENAI_PROJECT_ID,
+    OPENAI_MODEL,
+    OPENAI_TEMPERATURE,
+    OPENAI_MAX_TOKENS,
+)
 from pydantic_models import ErrorResponse
 from openai import OpenAI
 
@@ -97,10 +103,10 @@ async def prepare_messages(assistance_type, project_structure, combined_files):
 async def call_openai_api(client, messages):
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=OPENAI_MODEL,
             messages=messages,
-            max_tokens=5,
-            temperature=0.7,
+            max_tokens=OPENAI_MAX_TOKENS,
+            temperature=OPENAI_TEMPERATURE,
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
