@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 from logging_config import setup_logger
 from services import process_and_analyze_file
@@ -23,6 +24,7 @@ async def startup_event():
 )
 async def analyze_file(
     file: UploadFile = File(...),
+    project_structure_file: UploadFile = File(...),
     save_to_disk: bool = False,
     assistance_type: str = Query(..., description="Type of developer assistance requested"),
 ):
@@ -45,8 +47,10 @@ async def analyze_file(
                 detail="Only .zip files are supported.",
             )
 
-        # Process the file
-        result = await process_and_analyze_file(file, assistance_type, save_to_disk=save_to_disk)
+        # Process the files
+        result = await process_and_analyze_file(
+            file, project_structure_file, assistance_type, save_to_disk=save_to_disk
+        )
         if not result.get("success"):
             raise HTTPException(
                 status_code=500,

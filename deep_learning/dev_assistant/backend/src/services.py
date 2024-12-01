@@ -124,7 +124,9 @@ async def call_openai_api(client, messages):
 
 # Main function to process and analyze the file
 @handle_errors
-async def process_and_analyze_file(file, assistance_type=None, save_to_disk=False, client=None):
+async def process_and_analyze_file(
+    file, project_structure_file=None, assistance_type=None, save_to_disk=False, client=None
+):
     logger.info(f"Starting analysis for file: {file.filename}")
 
     # Use dependency injection for the OpenAI client
@@ -146,11 +148,26 @@ async def process_and_analyze_file(file, assistance_type=None, save_to_disk=Fals
             logger.error(f"Error saving file to disk: {e}")
             raise
 
+    # Process the project_structure_file
+    project_structure_content = ""
+    if project_structure_file:
+        try:
+            project_structure_content = (await project_structure_file.read()).decode("utf-8")
+            logger.info(f"Processed project structure file: {project_structure_file.filename}")
+        except Exception as e:
+            logger.error(f"Error reading project structure file: {e}")
+            raise ValueError("Error processing the project structure file.")
+
     # Extract project structure and file contents from ZIP
     project_structure, combined_files = await extract_zip(file)
 
+    # Include additional project structure content
+    full_project_structure = (
+        f"{project_structure}\n\n### Additional Project Structure\n\n{project_structure_content}"
+    )
+
     # Prepare messages for the OpenAI API
-    messages = await prepare_messages(assistance_type, project_structure, combined_files)
+    messages = await prepare_messages(assistance_type, full_project_structure, combined_files)
 
     # Call the OpenAI API
     result = await call_openai_api(client, messages)

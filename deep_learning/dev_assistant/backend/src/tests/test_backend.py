@@ -1,9 +1,10 @@
-from pathlib import Path
 import pytest
-import zipfile
 from fastapi.testclient import TestClient
-from config import USE_REAL_OPENAI_API, DUMMY_RESPONSE
-from main import app
+from pathlib import Path
+
+from src.config import USE_REAL_OPENAI_API, DUMMY_RESPONSE
+from src.debug.zip_files import zip_files
+from src.main import app
 
 client = TestClient(app)
 
@@ -21,48 +22,27 @@ def debug_zip_file():
     return zip_path
 
 
-def test_analyze_debug_zip_in_memory(debug_zip_file):
+@pytest.fixture
+def project_structure_content():
     """
-    Test the `/analyze/` endpoint with in-memory processing.
+    Fixture providing the mandatory project structure content.
     """
-    with open(debug_zip_file, "rb") as f:
-        response = client.post(
-            "/analyze/",
-            files={"file": f},
-            params={"assistance_type": "code_review"},
-        )
-    assert response.status_code == 200, "Expected status code 200"
-    json_data = response.json()
-    assert json_data["success"] is True, "Response should indicate success"
-    assert "analysis" in json_data, "Response JSON should contain 'analysis'"
-    assert json_data["filename"] == "debug_files.zip", "Filename should match"
-
-    if not USE_REAL_OPENAI_API:
-        assert (
-            json_data["analysis"]["summary"] == DUMMY_RESPONSE
-        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
-
-
-def test_analyze_debug_zip_save_to_disk(debug_zip_file):
+    return """
+    hands_on_keras/
+    ├── README.md
+    ├── __init__.py
+    ├── artifacts/
+    │   ├── final_stats/
+    │   │   ├── all_metrics_example.html
+    │   │   └── length_bucket_results_example.csv
+    │   ├── logs/
+    │   │   ├── log_example.log
+    │   │   └── log_example.txt
+    │   └── plots/
+    │       └── EDA/
+    ├── config.py
+    └── main.py
     """
-    Test the `/analyze/` endpoint with saving to disk enabled.
-    """
-    with open(debug_zip_file, "rb") as f:
-        response = client.post(
-            "/analyze/",
-            files={"file": f},
-            params={"assistance_type": "code_review", "save_to_disk": "true"},
-        )
-    assert response.status_code == 200, "Expected status code 200"
-    json_data = response.json()
-    assert json_data["success"] is True, "Response should indicate success"
-    assert "analysis" in json_data, "Response JSON should contain 'analysis'"
-    assert json_data["filename"] == "debug_files.zip", "Filename should match"
-
-    if not USE_REAL_OPENAI_API:
-        assert (
-            json_data["analysis"]["summary"] == DUMMY_RESPONSE
-        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
 
 
 @pytest.fixture
@@ -71,23 +51,97 @@ def multi_file_zip(tmp_path):
     Fixture to create a ZIP file with multiple files for testing.
     """
     zip_path = tmp_path / "multi_file.zip"
-    with zipfile.ZipFile(zip_path, "w") as zipf:
-        zipf.writestr("main.py", "def main():\n    print('Hello, World!')")
-        zipf.writestr("utils.py", "def util():\n    return True")
-        zipf.writestr("tests/test_backend.py", "def test_backend():\n    assert True")
+    files_to_zip = [
+        tmp_path / "main.py",
+        tmp_path / "utils.py",
+        tmp_path / "tests/test_backend.py",
+    ]
+    # Create dummy files
+    for file_path in files_to_zip:
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(file_path, "w") as f:
+            f.write(f"def dummy_func():\n    pass  # {file_path.name}")
+
+    zip_files(zip_path, files_to_zip)
     return zip_path
 
 
-def test_analyze_multi_file_zip(multi_file_zip):
+# Helper function
+def make_request(
+    zip_file, project_structure_content, assistance_type="code_review", save_to_disk=False
+):
+    """
+    Helper function to make a POST request to the /analyze/ endpoint.
+
+    Args:
+        zip_file: The main ZIP file to upload.
+        project_structure_content: The content of project_structure.md.
+        assistance_type (str): Type of developer assistance requested.
+        save_to_disk (bool): Whether to enable saving to disk.
+
+    Returns:
+        Response object from the API.
+    """
+    return client.post(
+        "/analyze/",
+        files={
+            "file": zip_file,
+            "project_structure_file": (
+                "project_structure.md",
+                project_structure_content,
+                "text/markdown",
+            ),
+        },
+        params={"assistance_type": assistance_type, "save_to_disk": str(save_to_disk).lower()},
+    )
+
+
+# Tests
+def test_analyze_debug_zip_in_memory(debug_zip_file, project_structure_content):
+    """
+    Test the `/analyze/` endpoint with in-memory processing and a mandatory project structure file.
+    """
+    with open(debug_zip_file, "rb") as zip_f:
+        response = make_request(zip_f, project_structure_content)
+
+    assert response.status_code == 200, "Expected status code 200"
+    json_data = response.json()
+    assert json_data["success"] is True, "Response should indicate success"
+    assert "analysis" in json_data, "Response JSON should contain 'analysis'"
+    assert json_data["filename"] == "debug_files.zip", "Filename should match"
+
+    if not USE_REAL_OPENAI_API:
+        assert (
+            json_data["analysis"]["summary"] == DUMMY_RESPONSE
+        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
+
+
+def test_analyze_debug_zip_save_to_disk(debug_zip_file, project_structure_content):
+    """
+    Test the `/analyze/` endpoint with saving to disk enabled.
+    """
+    with open(debug_zip_file, "rb") as zip_f:
+        response = make_request(zip_f, project_structure_content, save_to_disk=True)
+
+    assert response.status_code == 200, "Expected status code 200"
+    json_data = response.json()
+    assert json_data["success"] is True, "Response should indicate success"
+    assert "analysis" in json_data, "Response JSON should contain 'analysis'"
+    assert json_data["filename"] == "debug_files.zip", "Filename should match"
+
+    if not USE_REAL_OPENAI_API:
+        assert (
+            json_data["analysis"]["summary"] == DUMMY_RESPONSE
+        ), "Expected dummy response when USE_REAL_OPENAI_API is False"
+
+
+def test_analyze_multi_file_zip(multi_file_zip, project_structure_content):
     """
     Test the `/analyze/` endpoint with a multi-file ZIP.
     """
-    with open(multi_file_zip, "rb") as f:
-        response = client.post(
-            "/analyze/",
-            files={"file": f},
-            params={"assistance_type": "code_review"},
-        )
+    with open(multi_file_zip, "rb") as zip_f:
+        response = make_request(zip_f, project_structure_content)
+
     assert response.status_code == 200, "Expected status code 200"
     json_data = response.json()
     assert json_data["success"] is True, "Response should indicate success"
@@ -98,6 +152,25 @@ def test_analyze_multi_file_zip(multi_file_zip):
         assert (
             json_data["analysis"]["summary"] == DUMMY_RESPONSE
         ), "Expected dummy response when USE_REAL_OPENAI_API is False"
+
+
+def test_missing_project_structure(debug_zip_file):
+    """
+    Test that the API returns a 422 error if project_structure.md is missing.
+    """
+    with open(debug_zip_file, "rb") as zip_f:
+        response = client.post(
+            "/analyze/",
+            files={"file": zip_f},
+            params={"assistance_type": "code_review"},
+        )
+    assert response.status_code == 422, "Expected status code 422 for missing project_structure.md"
+    json_data = response.json()
+    assert "detail" in json_data, "Response should contain a detailed error message"
+    assert any(
+        "project_structure_file" in error.get("loc", []) for error in json_data.get("detail", [])
+    ), "Expected error indicating missing project_structure_file"
+
 
 def test_invalid_zip_file(tmp_path, project_structure_content):
     """
