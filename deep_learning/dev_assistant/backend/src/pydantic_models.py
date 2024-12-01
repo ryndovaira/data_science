@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 
 
 class AnalysisResponse(BaseModel):
     filename: str
-    analysis: Dict
+    analysis: Dict[str, Any]  # Adjusted to accept any valid dictionary structure
     success: bool
 
 
