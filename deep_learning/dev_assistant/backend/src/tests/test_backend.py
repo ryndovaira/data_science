@@ -98,3 +98,20 @@ def test_analyze_multi_file_zip(multi_file_zip):
         assert (
             json_data["analysis"]["summary"] == DUMMY_RESPONSE
         ), "Expected dummy response when USE_REAL_OPENAI_API is False"
+
+def test_invalid_zip_file(tmp_path, project_structure_content):
+    """
+    Test that the API returns a 400 error if an invalid ZIP file is uploaded.
+    """
+    invalid_zip = tmp_path / "invalid.zip"
+    invalid_zip.write_text("This is not a valid zip file.")
+
+    with open(invalid_zip, "rb") as zip_f:
+        response = make_request(zip_f, project_structure_content)
+
+    assert response.status_code == 400, "Expected status code 400 for invalid ZIP"
+    json_data = response.json()
+    assert "detail" in json_data, "Response should contain a detailed error message"
+    assert (
+        json_data["detail"] == "Invalid ZIP file uploaded. Please provide a valid ZIP file."
+    ), "Expected error message for invalid ZIP"

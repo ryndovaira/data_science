@@ -81,6 +81,8 @@ async def extract_zip(file):
                 [f"### {name}\n\n{content}" for name, content in file_contents.items()]
             )
         return project_structure, combined_files
+    except zipfile.BadZipFile:
+        raise ValueError("Invalid ZIP file uploaded. Please provide a valid ZIP file.")
     except Exception as e:
         raise ValueError(f"Error extracting ZIP file: {e}")
 

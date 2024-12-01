@@ -54,12 +54,15 @@ async def analyze_file(
             )
 
         return result
+    except ValueError as e:
+        logger.warning(f"Validation Error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
     except HTTPException as e:
         logger.warning(f"HTTPException: {e.detail}")
         raise
     except Exception as e:
-        logger.error(f"Unexpected error processing file {file.filename}: {e}")
+        logger.error(f"Unexpected error processing files: {e}")
         raise HTTPException(
             status_code=500,
-            detail="An internal error occurred while processing the file.",
+            detail="An internal error occurred while processing the files.",
         )
