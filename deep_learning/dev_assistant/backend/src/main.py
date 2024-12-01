@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 from logging_config import setup_logger
 from services import process_and_analyze_file
 from pydantic_models import AnalysisResponse, ErrorResponse
@@ -21,25 +21,32 @@ async def startup_event():
         500: {"model": ErrorResponse},
     },
 )
-async def analyze_file(file: UploadFile = File(...), save_to_disk: bool = False):
+async def analyze_file(
+    file: UploadFile = File(...),
+    save_to_disk: bool = False,
+    assistance_type: str = Query(..., description="Type of developer assistance requested"),
+):
     """
     Endpoint to handle file uploads and perform analysis.
 
     Args:
         file (UploadFile): The uploaded file.
         save_to_disk (bool): Optional; Whether to save the file to disk before processing.
+        assistance_type (str): The type of developer assistance requested.
 
     Returns:
         AnalysisResponse: The analysis result.
     """
     try:
+        # Validate the file type
         if not file.filename.endswith(".zip"):
             raise HTTPException(
                 status_code=400,
                 detail="Only .zip files are supported.",
             )
 
-        result = await process_and_analyze_file(file, save_to_disk=save_to_disk)
+        # Process the file
+        result = await process_and_analyze_file(file, assistance_type, save_to_disk=save_to_disk)
         if not result.get("success"):
             raise HTTPException(
                 status_code=500,
