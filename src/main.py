@@ -6,7 +6,7 @@ model tuning, training, and evaluation.
 import time
 import pandas as pd
 from tuner import tune_hyperparameters, retrain_with_best_hps
-from data_preprocessing import (
+from src.data_preprocessing import (
     compute_length_buckets,
     preprocess_data,
     load_dataset,
@@ -14,7 +14,7 @@ from data_preprocessing import (
 from logger import setup_logger
 from plotter import plot_all_results
 from saver import save_all_results
-from config import Config
+from src.config import Config
 
 # Setup logger
 logger = setup_logger()

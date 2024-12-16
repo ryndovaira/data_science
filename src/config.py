@@ -29,7 +29,7 @@ class Config:
 
     # Artifact directories
     LOG_DIR = "logs"
-    ARTIFACTS_DIR = "artifacts"
+    ARTIFACTS_DIR = "../artifacts"
     MODEL_DIR = "model"
     PLOT_DIR = "plots"
     HISTORY_DIR = "history"

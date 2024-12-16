@@ -1,7 +1,7 @@
 import logging
 import os
 
-from config import Config
+from src.config import Config
 
 # Get the existing logger configured in main.py
 logger = logging.getLogger()

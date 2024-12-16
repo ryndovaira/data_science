@@ -1,7 +1,7 @@
 import logging
 import os
 
-from config import Config
+from src.config import Config
 from utils import get_artifacts_dir
 
 

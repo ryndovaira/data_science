@@ -5,7 +5,7 @@ import logging
 import pandas as pd
 from keras_tuner.src.backend.io import tf
 
-from config import Config
+from src.config import Config
 from utils import get_artifacts_arch_dir, get_artifacts_dir
 
 # Get the existing logger configured in main.py

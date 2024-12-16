@@ -5,7 +5,7 @@ import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-from config import Config
+from src.config import Config
 from utils import get_artifacts_arch_dir, get_artifacts_dir
 
 # Get the existing logger configured in main.py

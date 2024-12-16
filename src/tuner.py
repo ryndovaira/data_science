@@ -5,10 +5,10 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLRO
 from tensorflow.keras.layers import GRU, LSTM, SimpleRNN, Embedding, Dense, Dropout
 from tensorflow.keras.models import Sequential
 
-from config import Config
+from src.config import Config
 from utils import checkpoint_path, get_artifacts_arch_dir
-from logger import setup_logger
-from plotter import plot_history
+from src.logger import setup_logger
+from src.plotter import plot_history
 from saver import save_model, save_history, save_tuner_results
 
 # Setup logger
